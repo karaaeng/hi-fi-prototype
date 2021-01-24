@@ -26,11 +26,11 @@ export default function App() {
         </View>
       </View>
       <View style = {styles.buttonBar}>
-        <Image style = {styles.button} source={Images.rewind} />
-        <Image style = {styles.button} source={Images.nope} />
-        <Image style = {styles.button} source={Images.boost} />
-        <Image style = {styles.button} source={Images.like} />
-        <Image style = {styles.button} source={Images.superLike} />
+        <Image style = {styles.buttonSecondTier} source={Images.rewind} />
+        <Image style = {styles.buttonFirstTier} source={Images.nope} />
+        <Image style = {styles.buttonSecondTier} source={Images.boost} />
+        <Image style = {styles.buttonFirstTier} source={Images.like} />
+        <Image style = {styles.buttonSecondTier} source={Images.superLike} />
       </View>
     </View>
   );
@@ -100,12 +100,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly', 
     margin: Dimensions.get('window').width * .025
   }, 
-  button: {
+  buttonFirstTier: {
+    width: Dimensions.get('window').width * .1,
+    height: Dimensions.get('window').height * .1,
+    resizeMode: 'contain', 
+    backgroundColor: 'white', 
+    borderRadius: Dimensions.get('window').height * .1 * 0.5,
+  },
+  buttonSecondTier: {
     width: Dimensions.get('window').width * .1,
     height: Dimensions.get('window').height * .05,
     resizeMode: 'contain', 
     backgroundColor: 'white', 
-    justifyContent: 'center', 
     borderRadius: Dimensions.get('window').height * .05 * 0.5
   },
 });
