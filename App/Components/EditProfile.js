@@ -1,35 +1,34 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { Images, Profiles } from './App/Themes';
+import { Images, Profiles } from '../Themes';
 import { Dimensions } from 'react-native';
-import NavigationBar from './App/Components/NavigationBar'
-import ButtonBar from './App/Components/ButtonBar'
-import EditProfile from './App/Components/EditProfile'
 
-export default function App() {
-  const haroldProfile = Profiles.harold;
-  const [profileImage] = useState(haroldProfile.image);
-  const [name] = useState(haroldProfile.name);
-  const [age] = useState(haroldProfile.age);
-  const [occupation] = useState(haroldProfile.occupation);
+export default class EditProfile extends React.Component {
+  constructor(props){
+    super(props);
 
-  return (
-    <View style={styles.container}>
-      <NavigationBar/>
-      <EditProfile profile = {haroldProfile} image = {profileImage}/>
-      
-      <ButtonBar/>
+    //See what props our StarWarsCard renders with
+    console.log(JSON.stringify(props));
+  }
+
+  render() {
+
+    return (      
+      <View style = {styles.profile}>
+        <View style = {styles.profileCard}>
+        <Image style={styles.profilePicture} source={this.props.image} />
+
+        <View style = {styles.profileText}>
+          <Text style={ { fontWeight: 'bold', fontSize: 25 } }>{this.props.profile.name}, {this.props.profile.age} </Text>
+          <Text style={ { color: 'grey', fontSize: 15 } }>{this.props.profile.occupation}</Text>
+        </View>
+      </View>
     </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'aliceblue',
-  },
-
   profile:{
     flex: 1, 
     //flexDirection: 'column', 
@@ -51,7 +50,8 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * .9,
     height: Dimensions.get('window').width * .9,
     alignSelf: 'center', 
-  
+    backgroundColor: 'white', 
+    borderRadius: Dimensions.get('window').height * .05 * 0.5,
     resizeMode: 'contain'
   }, 
   profileText: {
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     padding: 10,
     alignContent: 'flex-start',
     alignItems: 'flex-start'
-  }, 
-
+  }
+  
 });
