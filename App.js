@@ -18,7 +18,7 @@ export default function App() {
       <NavigationBar/>
       <EditProfile profile = {haroldProfile} image = {profileImage}/>
       
-      <ButtonBar/>
+      <ButtonBar profile = {haroldProfile}/>
     </View>
   );
 }

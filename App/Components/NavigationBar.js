@@ -15,9 +15,8 @@ export default class NavigationBar extends React.Component {
 
     return (
       <View style = {styles.navigationBar}>
-        <Image style = {styles.navigationBarChat} source={Images.settings} />
-        <Image style = {styles.navigationBarLogo} source = {Images.logo} />
-        <Image style = {styles.navigationBarSettings} source={Images.chat} />
+        <Image style = {styles.navigationBarChat} source={Images.chat} />
+        <Image style = {styles.navigationBarSettings} source={Images.settings} />
       </View>
     );
   }
@@ -37,17 +36,12 @@ const styles = StyleSheet.create({
     height: Platform.OS === 'ios' ? 44 : 56,
     width: Dimensions.get('window').width * .2,
     resizeMode: 'contain', 
-    tintColor: '#C5C5C5'
+    tintColor: '#4A4A4A'
   }, 
   navigationBarSettings: {
     height: Platform.OS === 'ios' ? 44 : 56,
     width: Dimensions.get('window').width * .2,
     resizeMode: 'contain', 
-    tintColor: '#C5C5C5'
-  },
-  navigationBarLogo: {
-    height: Platform.OS === 'ios' ? 44 : 56,
-    width: Dimensions.get('window').width * .4,
-    resizeMode: 'contain', 
+    tintColor: '#4A4A4A'
   }
 });

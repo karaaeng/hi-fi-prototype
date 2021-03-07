@@ -5,21 +5,70 @@ import { Dimensions } from 'react-native';
 
 export default class ButtonBar extends React.Component {
   constructor(props){
+    // this.handleProfileClick = this.handleProfileClick.bind(this);
+    // this.handleChatClick = this.handleChatClick.bind(this);
+    // this.handleNotificationsClick = this.handleNotificationsClick.bind(this);
+    // this.handleFriendFeedClick = this.handleFriendFeedClick.bind(this);
     super(props);
-
+    // this.state = {selected: props.selected};
     //See what props our StarWarsCard renders with
     console.log(JSON.stringify(props));
+    console.log('state', JSON.stringify(this.state));
+  }
+
+
+  // handleFriendFeedClick(){
+  //   this.setState({selected: 'friendfeed'});
+  // }
+  // handleProfileClick(){
+  //   this.setState({selected: 'profile'});
+  // }
+  // handleChatClick(){
+  //   this.setState({selected: 'chat'});
+  // }
+  // handleNotificationsClick(){
+  //   this.setState({selected: 'notifications'});
+  // }
+  connections(props){
+    if (props.selected === 'connections'){
+      return (<Image style = {styles.buttonFirstTier} source={Images.connectionsselected} />);
+    } else{
+      return (<Image style = {styles.buttonFirstTier} source={Images.connections} />);
+    }
+  }
+
+  profile(props){
+    if (props.selected === 'profile'){
+      return (<Image style = {styles.buttonFirstTier} source={Images.profileselected} />);
+    } else{
+      return (<Image style = {styles.buttonFirstTier} source={Images.profile} />);
+    }
+  }
+
+  chat(props){
+    if (props.selected === 'chat'){
+      return (<Image style = {styles.buttonFirstTier} source={Images.chatselected} />);
+    } else{
+      return (<Image style = {styles.buttonFirstTier} source={Images.chat} />);
+    }
+  }
+
+  home(props){
+    if (props.selected === 'notifications'){
+      return (<Image style = {styles.buttonFirstTier} source={Images.homeselected} />);
+    } else{
+      return (<Image style = {styles.buttonFirstTier} source={Images.home} />);
+    }
   }
 
   render() {
 
     return (
     <View style = {styles.buttonBar}>
-        <Image style = {styles.buttonSecondTier} source={Images.rewind} />
-        <Image style = {styles.buttonFirstTier} source={Images.nope} />
-        <Image style = {styles.buttonSecondTier} source={Images.boost} />
-        <Image style = {styles.buttonFirstTier} source={Images.like} />
-        <Image style = {styles.buttonSecondTier} source={Images.superLike} />
+        {this.home(this.props.profile)}
+        {this.chat(this.props.profile)}
+        {this.connections(this.props.profile)}
+        {this.profile(this.props.profile)}
     </View>
     );
   }
@@ -30,21 +79,14 @@ const styles = StyleSheet.create({
     marginBottom: 100, 
     flexDirection: 'row',
     justifyContent: 'space-evenly', 
-    margin: Dimensions.get('window').width * .025
+    margin: Dimensions.get('window').width * .02
   }, 
   buttonFirstTier: {
-    width: Dimensions.get('window').width * .15,
-    height: Dimensions.get('window').width * .15,
-    resizeMode: 'contain', 
-    backgroundColor: 'white', 
+    width: Dimensions.get('window').width * .22,
+    height: Dimensions.get('window').width * .22,
+    resizeMode: 'contain',
     borderRadius: Dimensions.get('window').height * .1 * 0.5,
   },
-  buttonSecondTier: {
-    width: Dimensions.get('window').width * .1,
-    height: Dimensions.get('window').width * .1,
-    resizeMode: 'contain', 
-    backgroundColor: 'white', 
-    borderRadius: Dimensions.get('window').height * .05 * 0.5
-  }
+
   
 });

@@ -6,21 +6,68 @@ import { Dimensions } from 'react-native';
 export default class EditProfile extends React.Component {
   constructor(props){
     super(props);
-
     //See what props our StarWarsCard renders with
     console.log(JSON.stringify(props));
+    
   }
 
-  render() {
+  statusIcon(props) {
+    if (props.status ==="available"){
+      return( <Image style = {styles.status} source = {Images.available}/>);
+    } else if (props.status ==="on hold"){
+      return (<Image style = {styles.status} source = {Images.onhold}/>);
+    } else{
+      return(<Image style = {styles.status} source = {Images.open}/>);
+    }
+    
+  }
 
+  location(props){
+     return (
+      <View style = {styles.informationText}> 
+      <Text style={ styles.category}>location </Text> 
+      <Text style={ styles.theirInfo}>{props.location} </Text> 
+      </View>
+     );
+  }
+  pronouns(props){
+    return (
+      <View style = {styles.informationText}> 
+      <Text style={ styles.category}>pronouns </Text> 
+      <Text style={ styles.theirInfo}>{props.pronouns} </Text> 
+      </View>
+     );
+  }
+
+  interests(props){
+      return (
+      <View style = {styles.informationText}> 
+      <Text style={ styles.category}>interests </Text> 
+      <Text style={ styles.theirInfo}>{props.interests} </Text> 
+      </View>
+     );  }
+
+  render() {
+    const fake = "available";
+    let status; 
+    
     return (      
       <View style = {styles.profile}>
         <View style = {styles.profileCard}>
-        <Image style={styles.profilePicture} source={this.props.image} />
+        
+        <Image style={styles.profilePicture} source={this.props.image}/>
+        
 
         <View style = {styles.profileText}>
-          <Text style={ { fontWeight: 'bold', fontSize: 25 } }>{this.props.profile.name}, {this.props.profile.age} </Text>
-          <Text style={ { color: 'grey', fontSize: 15 } }>{this.props.profile.occupation}</Text>
+        <View style = {styles.profileNameAndStatus}>
+         <Text style={ styles.name }>{this.props.profile.name} {this.props.status}</Text>
+        {this.statusIcon(this.props.profile)}
+        </View>
+        <View style = {styles.information}>
+         {this.location(this.props.profile)}         
+         {this.pronouns(this.props.profile)}
+         {this.interests(this.props.profile)}
+          </View>
         </View>
       </View>
     </View>
@@ -29,36 +76,54 @@ export default class EditProfile extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  name: { 
+    fontWeight: 'bold', 
+    fontSize: 25, 
+    alignSelf: 'center' 
+  }, 
+  category: {
+    color: '#FED254', 
+    fontSize: 15
+  },
+  theirInfo: {
+    fontSize: 15, 
+    color: '#4A4A4A'
+  },
+  informationText:{
+    flexDirection: 'row'
+  },
+  information: {
+    alignSelf: 'center',
+    alignContent: 'flex-start'
+  },
   profile:{
     flex: 1, 
     //flexDirection: 'column', 
   }, 
-  profileCard: {
-    
-    //alignItems: 'center', 
-    justifyContent: 'flex-start', 
-    //width: Dimensions.get('window').width * .9,
-    borderWidth: 2,
-    borderColor: '#C5C5C5', 
-    backgroundColor: 'white', 
-    borderBottomLeftRadius: 10, 
-    borderBottomRightRadius: 10,     
-    alignSelf: 'center'
-  }, 
+  profileNameAndStatus:{
+    flexDirection: 'column',
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+  },
+  status: {
+    //marginLeft: Dimensions.get('window').width * .7, 
+    alignSelf: 'center', 
+    height: Dimensions.get('window').width * .1,
+    resizeMode: 'contain'
+  },
   profilePicture: {
     //flex: 3, 
-    width: Dimensions.get('window').width * .9,
-    height: Dimensions.get('window').width * .9,
+    width: Dimensions.get('window').width * .7,
+    height: Dimensions.get('window').width * .7,
     alignSelf: 'center', 
-    backgroundColor: 'white', 
-    borderRadius: Dimensions.get('window').height * .05 * 0.5,
+    borderRadius: Dimensions.get('window').height * .5 * 0.5,
     resizeMode: 'contain'
   }, 
   profileText: {
     //flex: 1, 
     padding: 10,
-    alignContent: 'flex-start',
-    alignItems: 'flex-start'
+    alignContent: 'center',
+    alignItems: 'center'
   }
   
 });
