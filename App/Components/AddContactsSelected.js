@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default class AddContacts extends React.Component {
+export default class AddContactsSelected extends React.Component {
   constructor(props){
     super(props);
     //See what props our StarWarsCard renders with
@@ -32,16 +32,16 @@ export default class AddContacts extends React.Component {
 
   addAll() {
     return (
-      <TouchableOpacity style = {styles.addButton} onPress = { () => {
+      <TouchableOpacity style = {styles.addButtonSelected} onPress = { () => {
         this.state["selectedAll"] = true; 
       }}>
-        <Text style = {styles.addText}> add all </Text>
+        <Text style = {styles.addText}> remove all </Text>
 
       </TouchableOpacity>
     );
   }
 
-
+  
 
   render() {
     
@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     tintColor: '#939393'
   }, 
-  addButton: {
+
+  addButtonSelected: {
     marginTop: 100,
     alignItems: "center",
     alignSelf: 'flex-end', 
@@ -88,10 +89,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 150,
     marginRight: 47,
-    backgroundColor: "#FFF0C1",
     borderRadius: 30,
+    backgroundColor: "#FED254",
   },
-
   addText: {
     fontSize: 20,
     color: '#939393',
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     height: 73,
     width: 336,
     alignSelf: 'center',
-    backgroundColor: "#FFF0C1",
+    backgroundColor: "#FED254",
   },
   contactText: {
     flexDirection: 'row', 

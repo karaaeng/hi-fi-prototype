@@ -7,6 +7,8 @@ import ButtonBar from './App/Components/ButtonBar';
 import Profile from './App/Components/Profile';
 import EditProfile from './App/Components/EditProfile';
 import AddContacts from './App/Components/AddContacts';
+import AddContactsSelected from './App/Components/AddContactsSelected';
+import FriendFeed from './App/Components/FriendFeed';
 
 export default function App() {
   const haroldProfile = Profiles.harold;
@@ -18,7 +20,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <AddContacts profile = {haroldProfile} />     
+      <FriendFeed profile = {haroldProfile} />     
       
 
 

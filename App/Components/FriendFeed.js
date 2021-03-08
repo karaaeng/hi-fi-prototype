@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default class AddContacts extends React.Component {
+export default class FriendFeed extends React.Component {
   constructor(props){
     super(props);
     //See what props our StarWarsCard renders with
@@ -17,14 +17,14 @@ export default class AddContacts extends React.Component {
   }
   
 
-  contact(name) {
+  notification(text, image) {
     return (
-      <TouchableOpacity style = {styles.contactButton} onPress = { () => {
+      <TouchableOpacity style = {styles.notification} onPress = { () => {
         console.log(this.state); 
       }}>
-      <View style = {styles.contactText}>
-        <Text style = {styles.buttonText}> {name} </Text>
-        <Icon name="plus" style={styles.icon}/>
+      <View style = {styles.notificationInside}>
+      <Image style = {styles.profileImages} source = {image}/>
+        <Text style = {styles.notificationText}> {text} </Text>
         </View>
       </TouchableOpacity>
     );
@@ -49,19 +49,14 @@ export default class AddContacts extends React.Component {
     <View style = {styles.container}>
     {this.addAll()}
     <ScrollView>
-      {this.contact("Marie Burnett")}
-      {this.contact("George Burnside")}
-      {this.contact("Kara Eng")}
-      {this.contact("Isa Fulford")}
-      {this.contact("Alex Hennessey")}
-      {this.contact("Nat Hojel")}
-      {this.contact("Xa Koch")}
-      {this.contact("Elianna Knight")}
-      {this.contact("Ryan Varis")}
-      {this.contact("Lauren Yi")}
-      {this.contact("Cam Burton")}
-      {this.contact("Thom Henri")}
-      {this.contact("Pablo Ocampo")}
+      {this.notification("Eden created a connection in New York, NY!", Images.settings)}
+      {this.notification("Cal was connected with someone in Santa Cruz, CA!", Images.harold)}
+      {this.notification("Kara moved to Los Angeles, CA!")}
+      {this.notification("Marie moved to Newport Beach, CA!")}
+      {this.notification("Eden created a  connection in Newport Beach, CA!")}
+      {this.notification("Wilder joined ven!")}
+      {this.notification("Christian joined ven!")}
+  
       </ScrollView>
       
     </View>
@@ -91,30 +86,43 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF0C1",
     borderRadius: 30,
   },
+  profileImages:{
+    width: 40, 
+    height: 40,
+    borderRadius: 20,
+    marginLeft: 10,
+    marginTop: 30,
+    marginBottom: 65,
+    resizeMode: 'contain', 
+  },
 
   addText: {
     fontSize: 20,
     color: '#939393',
   },
-  contactButton: {
+  notification: {
     marginTop: 20,
-    alignItems: "center",
+    
     borderRadius: 30,
     padding: 20,
-    height: 73,
+    height: 150,
     width: 336,
+    borderWidth: 2,
+    borderColor: "#FFF0C1",
     alignSelf: 'center',
-    backgroundColor: "#FFF0C1",
   },
-  contactText: {
+  notificationInside: {
     flexDirection: 'row', 
     alignItems: 'baseline',
     color: '#939393',
   },
-  buttonText: {
+  notificationText: {
     fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
+    fontSize: 20,
     color: '#939393',
+    marginLeft: 10,
+    marginRight: 15,
+    alignSelf: 'baseline'
   },
   
 });
