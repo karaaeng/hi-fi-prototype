@@ -8,51 +8,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default class EditProfile extends React.Component {
+export default class AddContacts extends React.Component {
   constructor(props){
     super(props);
     //See what props our StarWarsCard renders with
     console.log(JSON.stringify(props));
     
   }
-  editProfile() {
-    return (
-       <TouchableOpacity style = {styles.options} onPress = { () => {
-        console.log("edit profile pressed"); 
-      }}>
-      <Icon name="pencil" style={styles.icon} />
-        <Text style = {styles.informationText}> edit profile </Text>
-       
-        <Icon name="arrow-right" style={styles.icon}/>
-        </TouchableOpacity>
-    );
-  }
-
-  privacy() {
-    return (
-     <TouchableOpacity style = {styles.options} onPress = { () => {
-        console.log("privacy settings pressed"); 
-      }}>
-      <Icon name="chain" style={styles.icon}/>
-        <Text style = {styles.informationText}> privacy settings </Text>
-        
-        <Icon name="arrow-right" style={styles.icon}/>
-      </TouchableOpacity>
-    );
-  }
-
-  about() {
-    return (
-      <TouchableOpacity style = {styles.options} onPress = { () => {
-        console.log("about pressed"); 
-      }}>
-       <Icon name="info-circle" style={styles.icon} />
-        <Text style = {styles.informationText}> about </Text>
-       <Icon name="arrow-right" style={styles.icon}/>
-       
-      </TouchableOpacity>
-    );
-  }
+  
 
   logout() {
     return (
@@ -69,20 +32,7 @@ export default class EditProfile extends React.Component {
     
     return (      
     <View style = {styles.container}>
-    <NavigationBar profile ={this.props.profile} />
-    <View style = {styles.editprofilestuff}>
-      <View style = {styles.optionsTogether}>
-        {this.editProfile()}
-        {this.privacy()}
-        {this.about()}
-      </View>
-
-      <View style = {styles.logout}> 
-        {this.logout()}
-      </View>
-      </View>
-        
-      <ButtonBar style = {styles.buttonBar} profile ={this.props.profile}/>
+    
     </View>
     );
   }
@@ -145,6 +95,45 @@ const styles = StyleSheet.create({
     color: '#FED254', 
     fontSize: 15
   },
-
+  theirInfo: {
+    fontSize: 15, 
+    color: '#4A4A4A'
+  },
+  informationText:{
+    flexDirection: 'row'
+  },
+  information: {
+    alignSelf: 'center',
+    alignContent: 'flex-start'
+  },
+  profile:{
+    flex: 1, 
+    //flexDirection: 'column', 
+  }, 
+  profileNameAndStatus:{
+    flexDirection: 'column',
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+  },
+  status: {
+    //marginLeft: Dimensions.get('window').width * .7, 
+    alignSelf: 'center', 
+    height: Dimensions.get('window').width * .1,
+    resizeMode: 'contain'
+  },
+  profilePicture: {
+    //flex: 3, 
+    width: Dimensions.get('window').width * .7,
+    height: Dimensions.get('window').width * .7,
+    alignSelf: 'center', 
+    borderRadius: Dimensions.get('window').height * .5 * 0.5,
+    resizeMode: 'contain'
+  }, 
+  profileText: {
+    //flex: 1, 
+    padding: 10,
+    alignContent: 'center',
+    alignItems: 'center'
+  }
   
 });

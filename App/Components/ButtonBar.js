@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
-import { Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 
 export default class ButtonBar extends React.Component {
   constructor(props){
@@ -65,10 +65,33 @@ export default class ButtonBar extends React.Component {
 
     return (
     <View style = {styles.buttonBar}>
+      <TouchableOpacity onPress = { () => {
+        console.log("home pressed"); 
+      }}>
         {this.home(this.props.profile)}
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress = { () => {
+        console.log("chat pressed"); 
+      }}>
         {this.chat(this.props.profile)}
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress = { () => {
+        console.log("connections pressed"); 
+      }}>
         {this.connections(this.props.profile)}
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress = { () => {
+        console.log("profile pressed"); 
+      }}>
         {this.profile(this.props.profile)}
+      </TouchableOpacity>
+        
+        
+        
+        
     </View>
     );
   }
