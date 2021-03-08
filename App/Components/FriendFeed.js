@@ -47,7 +47,8 @@ export default class FriendFeed extends React.Component {
     
     return (      
     <View style = {styles.container}>
-    {this.addAll()}
+    <NavigationBar profile = {this.props.profile}/>
+    <Text style = {styles.topText} > Friends Feed </Text>
     <ScrollView>
       {this.notification("Eden created a connection in New York, NY!", Images.settings)}
       {this.notification("Cal was connected with someone in Santa Cruz, CA!", Images.harold)}
@@ -58,7 +59,7 @@ export default class FriendFeed extends React.Component {
       {this.notification("Christian joined ven!")}
   
       </ScrollView>
-      
+      <ButtonBar profile = {this.props.profile}/>
     </View>
     );
   }
@@ -123,6 +124,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 15,
     alignSelf: 'baseline'
+  },
+  topText: {
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 30,
+    alignSelf: 'center', 
+    color: '#939393',
   },
   
 });
