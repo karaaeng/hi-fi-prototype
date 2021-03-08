@@ -1,14 +1,17 @@
 // leave off @2x/@3x
 const images = {
-  logo: require('../Images/tinder-logo.png'),
-  chat: require('../Images/chatting.png'),
-  harold: require('../Images/Profiles/harold.jpg'),
-  like: require('../Images/like.png'),
-  nope: require('../Images/nope.png'),
-  boost: require('../Images/boost.png'),
-  superLike: require('../Images/super-like.png'),
-  rewind: require('../Images/rewind.png'),
-  settings: require('../Images/settings.png')
+  logo: require('../Images/logo.png'),
+  forward_icon: require('../Images/icons/forward.png'),
+  progress_name: require('../Images/icons/progress_name.png'),
+  progress_number: require('../Images/icons/progress_number.png'),
+  progress_photo: require('../Images/icons/progress_photo.png'),
+  progress_pronouns: require('../Images/icons/progress_pronouns.png'),
+  progress_ready: require('../Images/icons/progress_ready.png'),
+  progress_status: require('../Images/icons/progress_status.png'),
+  progress_addfriends: require('../Images/icons/progress_addfriends.png'),
+  progress_confirmation: require('../Images/icons/progress_confirmation.png'),
+  progress_interests: require('../Images/icons/progress_interests.png'),
+  progress_location: require('../Images/icons/progress_location.png'),
 }
 
 export default images
