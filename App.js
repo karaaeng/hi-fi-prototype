@@ -9,7 +9,9 @@ import EditProfile from './App/Components/EditProfile';
 import AddContacts from './App/Components/AddContacts';
 import AddContactsSelected from './App/Components/AddContactsSelected';
 import FriendFeed from './App/Components/FriendFeed';
-
+import KaraProfile from './App/Components/KaraProfile';
+import EdenProfile from './App/Components/EdenProfile';
+import MarieProfile from './App/Components/MarieProfile';
 export default function App() {
   const haroldProfile = Profiles.harold;
   const [profileImage] = useState(haroldProfile.image);
@@ -20,7 +22,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <FriendFeed profile = {haroldProfile} />     
+      <FriendFeed profile = {haroldProfile} image = {profileImage}/>     
       
 
 

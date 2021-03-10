@@ -5,7 +5,7 @@ import { Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-export default class NavigationBar extends React.Component {
+export default class NotificationBar extends React.Component {
   constructor(props){
     super(props);
 

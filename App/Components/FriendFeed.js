@@ -47,14 +47,14 @@ export default class FriendFeed extends React.Component {
     
     return (      
     <View style = {styles.container}>
-    <NavigationBar profile = {this.props.profile}/>
+    <NavigationBar logo = {true}/>
     <Text style = {styles.topText} > Friends Feed </Text>
     <ScrollView>
-      {this.notification("Eden created a connection in New York, NY!", Images.settings)}
+      {this.notification("Eden created a connection in New York, NY!", Images.eden)}
       {this.notification("Cal was connected with someone in Santa Cruz, CA!", Images.harold)}
-      {this.notification("Kara moved to Los Angeles, CA!")}
-      {this.notification("Marie moved to Newport Beach, CA!")}
-      {this.notification("Eden created a  connection in Newport Beach, CA!")}
+      {this.notification("Kara moved to Los Angeles, CA!", Images.kara)}
+      {this.notification("Marie moved to Newport Beach, CA!", Images.marie)}
+      {this.notification("Eden created a  connection in Newport Beach, CA!", Images.eden)}
       {this.notification("Wilder joined ven!")}
       {this.notification("Christian joined ven!")}
   
@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 30,
     marginBottom: 65,
-    resizeMode: 'contain', 
   },
 
   addText: {

@@ -99,7 +99,7 @@ export default class ButtonBar extends React.Component {
 
 const styles = StyleSheet.create({
   buttonBar: {
-    marginBottom: 100, 
+    marginBottom: 20, 
     flexDirection: 'row',
     justifyContent: 'space-evenly', 
     margin: Dimensions.get('window').width * .02

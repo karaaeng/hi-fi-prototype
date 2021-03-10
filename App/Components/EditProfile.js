@@ -69,7 +69,7 @@ export default class EditProfile extends React.Component {
     
     return (      
     <View style = {styles.container}>
-    <NavigationBar profile ={this.props.profile} />
+    <NavigationBar logo ={true} />
     <View style = {styles.editprofilestuff}>
       <View style = {styles.optionsTogether}>
         {this.editProfile()}

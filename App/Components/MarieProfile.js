@@ -1,67 +1,86 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
-import { Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import EditProfile from './EditProfile';
 import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 
 
-export default class Profile extends React.Component {
+export default class MarieProfile extends React.Component {
   constructor(props){
-    super(props);
+    super(props); 
     //See what props our StarWarsCard renders with
-    console.log(JSON.stringify(props));
+    console.log("kara fake profile");
     
   }
 
-  statusIcon(props) {
+  statusIcon(status) {
 
-    if (props.status ==="available"){
-      return( <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {props.status} </Text>
+    if (status ==="available"){
+      return( 
+        <View style = {styles.statusContainer}>
+        <Text style = {styles.statusText}> {status} </Text>
         <Image style = {styles.status} source = {Images.available}/>
         </View>
         );
-    } else if (props.status ==="on hold"){
+    } else if (status ==="on hold"){
       return (
       <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {props.status} </Text>
+        <Text style = {styles.statusText}> {status} </Text>
         <Image style = {styles.status} source = {Images.onhold}/>
         </View>
         );
     } else{
       return(
       <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {props.status} </Text>
+        <Text style = {styles.statusText}> {status} </Text>
         <Image style = {styles.status} source = {Images.open}/>
         </View>
         );
     }
+    
   }
 
-  location(props){
+  location(){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
-      <Text style={ styles.theirInfo}>{props.location} </Text> 
+      <Text style={ styles.theirInfo}> Newport Beach, CA </Text> 
       </View>
      );
   }
-  pronouns(props){
+  pronouns(){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
-      <Text style={ styles.theirInfo}>{props.pronouns} </Text> 
+      <Text style={ styles.theirInfo}> she/her </Text> 
       </View>
      );
   }
 
-  interests(props){
+  searchCircle() {
+    return (
+      <TouchableOpacity style = {styles.button} onPress = { () => {
+        console.log("serach your circle pressed"); 
+      }}>
+        <Text style = {styles.buttonText}> search your circle </Text>
+       
+      </TouchableOpacity>
+    );
+  }
+
+  titleText(){
+    return(
+    <Text style = {styles.titleText}> connecting Marie </Text>
+    );
+  }
+
+  interests(){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
-      <Text style={ styles.theirInfo}>{props.interests} </Text> 
+      <Text style={ styles.theirInfo}> pastries, travelling, running </Text> 
       </View>
      );  }
 
@@ -71,26 +90,30 @@ export default class Profile extends React.Component {
     
     return (     
     <View style = {styles.container}>
-      <NavigationBar profile ={this.props.profile} />
-
+      <NavigationBar logo ={true} />
+        {this.titleText()}
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
-          <Image style={styles.profilePicture} source={this.props.image}/>
+          <Image style={styles.profilePicture} source={Images.marie}/>
           
 
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-           <Text style={ styles.name }>{this.props.profile.name} {this.props.status}</Text>
-          {this.statusIcon(this.props.profile)}
+           <Text style={ styles.name }>Marie </Text>
+            {this.statusIcon("available")}
           </View>
           <View style = {styles.information}>
-           {this.location(this.props.profile)}         
-           {this.pronouns(this.props.profile)}
-           {this.interests(this.props.profile)}
+           {this.location()}         
+           {this.pronouns()}
+           {this.interests()}
             </View>
+            
+            
+            
           </View>
         </View>
+        {this.searchCircle()}
       </View>
       <ButtonBar profile ={this.props.profile}/>
     </View> 
@@ -110,6 +133,29 @@ const styles = StyleSheet.create({
     fontSize: 25, 
     alignSelf: 'center' 
   }, 
+    titleText: {
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 30,
+    color: '#FED254',
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
+   button: {
+    marginTop: 30,
+    alignItems: "center",
+    backgroundColor: "#FED254",
+    borderRadius: 30,
+    padding: 20,
+    height: 73,
+    width: 336,
+    alignSelf: 'center',
+  },
+  buttonText: {
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 30,
+    color: '#4A4A4A',
+  },
+
   category: {
     color: '#FED254', 
     fontSize: 15
@@ -149,7 +195,6 @@ const styles = StyleSheet.create({
  
   },
   profilePicture: {
-    //flex: 3, 
     width: Dimensions.get('window').width * .7,
     height: Dimensions.get('window').width * .7,
     alignSelf: 'center', 

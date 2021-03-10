@@ -1,6 +1,6 @@
 // leave off @2x/@3x
 const images = {
-  logo: require('../Images/tinder-logo.png'),
+  logo: require('../Images/logo.png'),
   harold: require('../Images/Profiles/harold.jpg'),
   like: require('../Images/like.png'),
   nope: require('../Images/nope.png'),
@@ -19,6 +19,9 @@ const images = {
   available: require('../Images/available.png'), 
   onhold: require('../Images/onhold.png'), 
   open: require('../Images/open.png'), 
+  kara: require('../Images/kara.jpg'), 
+  eden: require('../Images/eden.jpg'), 
+  marie: require('../Images/marie.jpg'), 
 
 }
 
