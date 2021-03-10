@@ -86,7 +86,7 @@ export default function AddFriends({navigation}) {
     "Elianna Knight",
     "Ryan Varis",
     "Lauren Yi",
-    "Cam Burton",
+    "Cam Horton",
     "Thom Henri",
     "Pablo Ocampo"]
 
