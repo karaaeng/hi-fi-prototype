@@ -13,26 +13,30 @@ export default class NotificationBar extends React.Component {
     console.log(JSON.stringify(props));
   }
 
-  whichOne(logo){
-    if (logo === true){
+  whichOne(map){
+    if (map === true){
       return(
       <View style = {styles.navigationBar}>
-        <Image style = {styles.logo} source = {Images.logo}/>            
-      
-      </View>);
-    }else{
-      return (<View style = {styles.navigationBar}>
-        <Icon name="address-book-o" style={styles.navigationBarAddress}/>
-        <TouchableOpacity onPress = { () => {
-          
-          console.log("settings pressed");
-        }}>
-        <Icon name="gear" style={styles.navigationBarSettings}/>
+      <TouchableOpacity style = {styles.addButton} onPress = { () => {
+        console.log("switched to feed view"); 
+      }}>
+        <Image style = {styles.logo} source = {Images.map}/>   
       </TouchableOpacity>
-            
-        
+                  
+      </View>);
+    } else{
+      return(
+      <View style = {styles.navigationBar}>
+      <TouchableOpacity style = {styles.addButton} onPress = { () => {
+        console.log("switched to map view"); 
+      }}>
+        <Image style = {styles.logo} source = {Images.feed}/>   
+      </TouchableOpacity>
+                  
       </View>);
     }
+      
+    
   }
 
   render() {
@@ -48,21 +52,14 @@ export default class NotificationBar extends React.Component {
 const styles = StyleSheet.create({
   navigationBar: {
     marginTop: 50, 
-    marginBottom: 50, 
+    marginBottom: 3, 
     flexDirection: 'row',
     justifyContent: 'space-between', 
     alignItems: 'center', 
     height: Platform.OS === 'ios' ? 44 : 56,
     margin: Dimensions.get('window').width * .025
   },
-  navigationBarAddress: {
-    fontSize: 35,
-    tintColor: '#4A4A4A'
-  }, 
-  navigationBarSettings: {
-    fontSize: 35,
-    tintColor: '#4A4A4A'
-  }, 
+
   logo: {
     alignItems: 'center', 
     alignContent: 'center',

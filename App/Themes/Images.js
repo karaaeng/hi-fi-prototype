@@ -22,6 +22,9 @@ const images = {
   kara: require('../Images/kara.jpg'), 
   eden: require('../Images/eden.jpg'), 
   marie: require('../Images/marie.jpg'), 
+  map: require('../Images/map_icon.png'), 
+  feed: require('../Images/feed_icon.png'), 
+
 
 }
 

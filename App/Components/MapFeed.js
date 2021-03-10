@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default class FriendFeed extends React.Component {
+export default class MapFeed extends React.Component {
   constructor(props){
     super(props);
     //See what props our StarWarsCard renders with
@@ -48,18 +48,10 @@ export default class FriendFeed extends React.Component {
     
     return (      
     <View style = {styles.container}>
-    <NotificationBar map = {false}/>
-    <Text style = {styles.titleText} > Friends Feed </Text>
-    <ScrollView>
-      {this.notification("Eden created a connection in New York, NY!", Images.eden)}
-      {this.notification("Cal was connected with someone in Santa Cruz, CA!", Images.harold)}
-      {this.notification("Kara moved to Los Angeles, CA!", Images.kara)}
-      {this.notification("Marie moved to Newport Beach, CA!", Images.marie)}
-      {this.notification("Eden created a  connection in Newport Beach, CA!", Images.eden)}
-      {this.notification("Wilder joined ven!")}
-      {this.notification("Christian joined ven!")}
-  
-      </ScrollView>
+    <NotificationBar logo = {true}/>
+    <Text style = {styles.titleText} > Map </Text>
+        <Image style = {styles.map} source = {Images.kara}/>
+
       <ButtonBar profile = {this.props.profile}/>
     </View>
     );
@@ -77,6 +69,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     tintColor: '#939393'
   }, 
+  map:{
+    alignSelf: 'center',
+    width: Dimensions.get('window').width * .9,
+    height: Dimensions.get('window').height * .6,
+  },
   addButton: {
     marginTop: 100,
     alignItems: "center",
