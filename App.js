@@ -113,9 +113,6 @@ export default function App() {
       <Stack.Screen name="AddFriends" component={AddFriends}
         options={{
         title: '',
-        headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
-        )
       }} />
       <Stack.Screen name="Ready" component={Ready}
         options={{

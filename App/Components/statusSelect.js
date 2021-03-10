@@ -10,11 +10,10 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
 export default function StatusSelect({navigation}) {
-  const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -27,14 +26,54 @@ export default function StatusSelect({navigation}) {
   //profile information
   const [userStatus, setuserStatus] = useState("");
 
+  let askingButtonDisplayed = null;
+  let openButtonDisplayed = null;
+
+  //if user has not set status yet, render unchosen buttons
+    askingButtonDisplayed =  
+        <View style = {styles.asking}>
+            <Text style = {styles.button_text}>asking</Text>
+            <Text style = {styles.button_text_small}>(actively ask for connections)</Text>
+        </View>;
+    openButtonDisplayed =  
+        <View style = {styles.open}>
+            <Text style = {styles.button_text}>open</Text>
+            <Text style = {styles.button_text_small}>(open to connections)</Text>
+        </View>;
+
+    //if user has set status to "asking", render chosen "asking" button  
+     if (userStatus === "asking") {
+        askingButtonDisplayed =  
+            <View style = {styles.asking_chosen}>
+                <Text style = {styles.button_text}>asking</Text>
+                <Text style = {styles.button_text_small}>(actively ask for connections)</Text>
+            </View>;
+    }
+
+     //if user has set status to "open", render chosen "open" button  
+     if (userStatus === "open") {
+        openButtonDisplayed =  
+            <View style = {styles.open_chosen}>
+                <Text style = {styles.button_text}>open</Text>
+                <Text style = {styles.button_text_small}>(open to connections)</Text>
+            </View>;
+    }
+
     return(
       <View style={styles.container}>
         <View>
         <Image style = {styles.progressbar} source={Images.progress_status}/>
         </View>
         <View>
-        <Text style = {styles.prompt}>TO DO</Text>
         <Text style = {styles.prompt}>choose your status</Text>
+        </View>
+        <View>
+            <TouchableOpacity onPress={() => {setuserStatus("asking")}}>
+                {askingButtonDisplayed}
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {setuserStatus("open")}}>
+                {openButtonDisplayed}
+            </TouchableOpacity>
         </View>
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('AddFriendsPermission')}>
@@ -89,12 +128,68 @@ const styles = StyleSheet.create({
         height: 80,
         width: 80,
         marginLeft: 320,
-        marginTop: 340,
+        marginTop: 170,
       },
       progressbar: {
         height: 17,
         width: 325,
         alignSelf: "center",
         marginTop: 70,
+      },
+      asking: {
+        borderColor: "#89FF95",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 100,
+        width: 325,
+        borderRadius: 35,
+        marginTop: 40,
+      },
+      asking_chosen: {
+        backgroundColor: "#89FF95",
+        borderColor: "#89FF95",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 100,
+        width: 325,
+        borderRadius: 35,
+        marginTop: 40,
+      },
+      open: {
+        borderColor: "#FED254",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 100,
+        width: 325,
+        borderRadius: 35,
+        marginTop: 40,
+      },
+      open_chosen: {
+        backgroundColor: "#FED254",
+        borderColor: "#FED254",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 100,
+        width: 325,
+        borderRadius: 35,
+        marginTop: 40,
+      },
+      button_text: {
+        alignSelf: 'center',
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 28,
+        color: '#4A4A4A',
+        marginTop: 12,
+      },
+      button_text_small: {
+        alignSelf: 'center',
+        fontFamily: 'Comfortaa_300Light',
+        fontSize: 12,
+        color: '#4A4A4A',
+        marginTop: 5,
       },
 });

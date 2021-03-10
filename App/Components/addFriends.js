@@ -14,7 +14,7 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWi
 import { Images } from '../Themes';
 
 export default function AddFriends({navigation}) {
-  const [text, setText] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -26,10 +26,16 @@ export default function AddFriends({navigation}) {
 
     return(
       <View style={styles.container}>
-        <View>
-        <Text style = {styles.prompt}>TO DO</Text>
-        <Text style = {styles.prompt}>display friends</Text>
+        <View style={styles.topBar}>
+            <View style={styles.searchBar}>
+            <Icon name="search" style={styles.icon} onPress={() => {console.log({searchTerm})}}/>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                    <TextInput value={searchTerm} onChangeText={(searchTerm) => {setSearchTerm(searchTerm)}} style={styles.textInput} placeholder = "Search your contacts"/>
+                </TouchableWithoutFeedback>
+            </View>
+            <Text style={styles.addAllbutton}>add all</Text>
         </View>
+        
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Ready')}>
         <Image style = {styles.forward} source={Images.forward_icon}/>
@@ -45,50 +51,43 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
       },
-      header: {
-        marginTop: 60,
-        height: 58,
-        width: 89,
-        alignSelf: 'center',
+      topBar: {
+        flex: 1,
+        flexDirection: "row",
       },
-      prompt: {
-        marginTop: 150,
-        alignSelf: 'center',
-        fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
-        color: '#4A4A4A',
-      },
-      inputBar: {
+      searchBar: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignSelf: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
         borderWidth: 3,
         borderColor: '#E5E5E5',
-        height: 81,
-        width: 345,
+        height: 50,
+        width: 260,
         borderRadius: 35,
-        marginTop: 30,
+        marginTop: 10,
+        marginLeft: 20,
       },
       textInput: {
         height: 81,
-        width: 270,
+        width: 200,
       },
       icon: {
-        fontSize: 35,
+        fontSize: 25,
         color: '#4A4A4A',
+        marginRight: 5,
       },
       forward: {
         height: 80,
         width: 80,
         marginLeft: 320,
-        marginTop: 340,
+        marginTop: 100,
       },
-      progressbar: {
-        height: 17,
-        width: 325,
-        alignSelf: "center",
-        marginTop: 70,
+      addAllbutton: {
+        color: '#FED254',
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 28,
+        marginTop: 20,
+        marginLeft: 20,
       },
 });

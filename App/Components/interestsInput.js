@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
       },
       textInputLong: {
+        marginTop: 20,
         height: 200,
         width: 270,
       },
