@@ -25,60 +25,104 @@ export default function AddFriends({navigation}) {
     Comfortaa_700Bold,
   });
 
+  let addRemoveAll = null;
+
+    addRemoveAll =  
+        <TouchableOpacity onPress = { () => {setSelected(true);}}>
+            <Text style={styles.addAllbutton}>add all</Text>
+        </TouchableOpacity>;
+
+     if (selectedAll === true) {
+        addRemoveAll =  
+            <TouchableOpacity onPress = { () => {setSelected(false);}}>
+                <Text style={styles.removeAllbutton}>remove all</Text>
+            </TouchableOpacity>;
+    }
+
   function contact(name) {
+    if (selectedAll === false) {
     return (
       <TouchableOpacity style = {styles.contactButton} onPress = { () => {
+        if (selectedAll === true) {
+            setSelected(false);
+        } else {
+            setSelected(true);
+        }
         console.log(selectedAll); 
       }}>
       <View style = {styles.contactText}>
-        <Text style = {styles.buttonText}> {name} </Text>
-        <Icon name="plus" style={styles.icon}/>
+        <Icon name="plus" style={styles.unselectedicon}/>
+        <Text style = {styles.unselectedbuttonText}> {name} </Text>
         </View>
       </TouchableOpacity>
     );
-  }
-
-  function addAll() {
+  } else {
     return (
-      <TouchableOpacity style = {styles.addButton} onPress = { () => {
-        setSelected(true); 
-      }}>
-        <Text style = {styles.addText}> add all </Text>
-
-      </TouchableOpacity>
-    );
+        <TouchableOpacity style = {styles.contactButton} onPress = { () => {
+            if (selectedAll === true) {
+                setSelected(false);
+            } else {
+                setSelected(true);
+            }
+            console.log(selectedAll); 
+        }}>
+        <View style = {styles.contactText}>
+          <Icon name="minus" style={styles.selectedicon}/>
+          <Text style = {styles.selectedbuttonText}> {name} </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
   }
+
+  let contacts = 
+    ["Marie Burnett",
+    "George Burnside",
+    "Kara Eng",
+    "Isa Fulford",
+    "Alex Hennessey",
+    "Nat Hojel",
+    "Xa Koch",
+    "Elianna Knight",
+    "Ryan Varis",
+    "Lauren Yi",
+    "Cam Burton",
+    "Thom Henri",
+    "Pablo Ocampo"]
+
+    //implement search contacts
+    let contactsToShow = [];
+    if (searchTerm === "" || searchTerm === " " || searchTerm === null) {
+        contactsToShow = contacts;
+    } else {
+        for (var i=0; i < contacts.length; i++) {
+            if (contacts[i].startsWith(searchTerm)) {
+                contactsToShow = contactsToShow.concat(contacts[i]);
+            }
+        }
+    }
 
     return(
       <View style={styles.container}>
         <View style={styles.topBar}>
             <View style={styles.searchBar}>
-            <Icon name="search" style={styles.icon} onPress={() => {console.log({searchTerm})}}/>
+            <Icon name="search" style={styles.searchicon} onPress={() => {console.log({searchTerm})}}/>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <TextInput value={searchTerm} onChangeText={(searchTerm) => {setSearchTerm(searchTerm)}} style={styles.textInput} placeholder = "Search your contacts"/>
                 </TouchableWithoutFeedback>
             </View>
-            <Text style={styles.addAllbutton}>add all</Text>
+            {addRemoveAll}
         </View>
+        <View style = {styles.outer}>
         <View style = {styles.othercontainer}>
-        {addAll()}
+
         <ScrollView>
-            {contact("Marie Burnett")}
-            {contact("George Burnside")}
-            {contact("Kara Eng")}
-            {contact("Isa Fulford")}
-            {contact("Alex Hennessey")}
-            {contact("Nat Hojel")}
-            {contact("Xa Koch")}
-            {contact("Elianna Knight")}
-            {contact("Ryan Varis")}
-            {contact("Lauren Yi")}
-            {contact("Cam Burton")}
-            {contact("Thom Henri")}
-            {contact("Pablo Ocampo")}
-      </ScrollView>
-      
-    </View>
+        {contactsToShow.map((currcontact) => (
+            contact(currcontact) ))}
+        </ScrollView>
+
+            </View>
+        </View>
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Ready')}>
         <Image style = {styles.forward} source={Images.forward_icon}/>
@@ -94,11 +138,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
       },
+      outer: {
+          height: 640,
+          marginBottom: 10,
+      },
       othercontainer: {
-        flex: 1,
         flexDirection: 'column',
         alignContent: 'center', 
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
       },
       topBar: {
         flex: 1,
@@ -121,16 +168,47 @@ const styles = StyleSheet.create({
         height: 81,
         width: 200,
       },
-      icon: {
+      searchicon: {
         fontSize: 25,
         color: '#4A4A4A',
         marginRight: 5,
+        color: "#E5E5E5",
+      },
+      unselectedicon: {
+        fontSize: 25,
+        color: '#4A4A4A',
+        marginRight: 5,
+        borderWidth: 4,
+        paddingTop: 4,
+        paddingBottom: 24,
+        paddingLeft: 6,
+        paddingRight: 6,
+        borderRadius: 20,
+        color: "#E5E5E5",
+        borderColor: "#E5E5E5",
+        alignSelf: "center",
+        marginRight: 20,
+      },
+      selectedicon: {
+        fontSize: 25,
+        color: '#4A4A4A',
+        marginRight: 5,
+        borderWidth: 4,
+        paddingTop: 4,
+        paddingBottom: 24,
+        paddingLeft: 6,
+        paddingRight: 6,
+        borderRadius: 20,
+        color: '#4A4A4A',
+        borderColor: '#4A4A4A',
+        alignSelf: "center",
+        marginRight: 20,
       },
       forward: {
         height: 80,
         width: 80,
         marginLeft: 320,
-        marginTop: 100,
+        marginBottom: 40,
       },
       addAllbutton: {
         color: '#FED254',
@@ -139,40 +217,40 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginLeft: 20,
       },
-      addButton: {
-        marginTop: 100,
-        alignItems: "center",
-        alignSelf: 'flex-end', 
-        padding: 10,
-        height: 50,
-        width: 150,
-        marginRight: 47,
-        backgroundColor: "#FFF0C1",
-        borderRadius: 30,
+      removeAllbutton: {
+        color: '#4A4A4A',
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 20,
+        marginTop: 20,
+        marginLeft: 20,
       },
-    
       addText: {
         fontSize: 20,
         color: '#939393',
       },
       contactButton: {
         marginTop: 20,
-        alignItems: "center",
-        borderRadius: 30,
-        padding: 20,
+        paddingTop: 20, 
+        paddingBottom: 20,
         height: 73,
         width: 336,
-        alignSelf: 'center',
-        backgroundColor: "#FFF0C1",
+        marginLeft: 40,
+        borderBottomWidth: 1,
+        borderColor: "#939393",
       },
       contactText: {
         flexDirection: 'row', 
         alignItems: 'baseline',
         color: '#939393',
       },
-      buttonText: {
-        fontFamily: 'Comfortaa_700Bold',
+      unselectedbuttonText: {
+        fontFamily: 'Comfortaa_400Regular',
         fontSize: 30,
         color: '#939393',
+      },
+      selectedbuttonText: {
+        fontFamily: 'Comfortaa_400Regular',
+        fontSize: 30,
+        color: '#4A4A4A',
       },
 });

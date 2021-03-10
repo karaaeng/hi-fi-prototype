@@ -117,9 +117,6 @@ export default function App() {
       <Stack.Screen name="Ready" component={Ready}
         options={{
         title: '',
-        headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
-        )
       }} />
     </Stack.Navigator>
   </NavigationContainer>

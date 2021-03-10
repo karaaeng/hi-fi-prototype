@@ -38,6 +38,7 @@ export default function NumberInput({navigation}) {
       <View style={styles.inputBar}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <TextInput
+      placeholder= "e.g. 123-456-7890"
       value={userNumber}
       onChangeText={(userNumber) => {
         setuserNumber(userNumber)
