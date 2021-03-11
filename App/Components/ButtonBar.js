@@ -1,50 +1,93 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
-import { Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default class ButtonBar extends React.Component {
-  constructor(props){
-    super(props);
 
-    //See what props our StarWarsCard renders with
-    console.log(JSON.stringify(props));
+export default function ButtonBar({navigation, which}) {
+  const [text, setText] = useState("");
+
+  function feed(selected){
+    if (selected === 'feed'){
+      return (<Image style = {styles.buttonFirstTier} source={Images.connectionsselected} />);
+    } else{
+      return (<Image style = {styles.buttonFirstTier} source={Images.connections} />);
+    }
   }
 
-  render() {
+  function profile(selected){
+    if (selected === 'profile'){
+      return (<Image style = {styles.buttonFirstTier} source={Images.profileselected} />);
+    } else{
+      return (<Image style = {styles.buttonFirstTier} source={Images.profile} />);
+    }
+  }
 
-    return (
+  function chat(selected){
+    if (selected === 'chat'){
+      return (<Image style = {styles.buttonFirstTier} source={Images.chatselected} />);
+    } else{
+      return (<Image style = {styles.buttonFirstTier} source={Images.chat} />);
+    }
+  }
+
+  function home(selected){
+    if (selected === 'notifications'){
+      return (<Image style = {styles.buttonFirstTier} source={Images.homeselected} />);
+    } else{
+      return (<Image style = {styles.buttonFirstTier} source={Images.home} />);
+    }
+  }
+
+  return (
     <View style = {styles.buttonBar}>
-        <Image style = {styles.buttonSecondTier} source={Images.rewind} />
-        <Image style = {styles.buttonFirstTier} source={Images.nope} />
-        <Image style = {styles.buttonSecondTier} source={Images.boost} />
-        <Image style = {styles.buttonFirstTier} source={Images.like} />
-        <Image style = {styles.buttonSecondTier} source={Images.superLike} />
+      <TouchableOpacity onPress = { () => {
+        console.log("home pressed"); 
+      }}>
+        {home(which)}
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress = { () => {
+        console.log(which); 
+      }}>
+        {chat(which)}
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress = { () => {
+        navigation.navigate('FriendFeed')
+      }}>
+        {feed(which)}
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress = { () => {
+        navigation.navigate('Profile')
+      }}>
+        {profile(which)}
+      </TouchableOpacity>
+        
+        
+        
+        
     </View>
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({
   buttonBar: {
-    marginBottom: 100, 
+    marginBottom: 30, 
     flexDirection: 'row',
     justifyContent: 'space-evenly', 
-    margin: Dimensions.get('window').width * .025
+    margin: Dimensions.get('window').width * .02
   }, 
   buttonFirstTier: {
-    width: Dimensions.get('window').width * .15,
-    height: Dimensions.get('window').width * .15,
-    resizeMode: 'contain', 
-    backgroundColor: 'white', 
+    width: Dimensions.get('window').width * .22,
+    height: Dimensions.get('window').width * .22,
+    resizeMode: 'contain',
     borderRadius: Dimensions.get('window').height * .1 * 0.5,
   },
-  buttonSecondTier: {
-    width: Dimensions.get('window').width * .1,
-    height: Dimensions.get('window').width * .1,
-    resizeMode: 'contain', 
-    backgroundColor: 'white', 
-    borderRadius: Dimensions.get('window').height * .05 * 0.5
-  }
+
   
 });

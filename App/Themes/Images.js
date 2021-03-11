@@ -26,6 +26,26 @@ const images = {
   robert: require('../Images/Profiles/robert.jpg'),
   cat: require('../Images/Profiles/cat.jpg'),
 
+  settings: require('../Images/settings.png'), 
+  profile: require('../Images/profile_unselected.png'), 
+  profileselected: require('../Images/profile_selected.png'), 
+  chat: require('../Images/chat_unselected.png'), 
+  chatselected: require('../Images/chat_selected.png'), 
+  connections: require('../Images/connection_unselected.png'), 
+  connectionsselected: require('../Images/connection_selected.png'), 
+  home: require('../Images/home_unselected.png'), 
+  homeselected: require('../Images/home_selected.png'), 
+  available: require('../Images/available.png'), 
+  onhold: require('../Images/onhold.png'), 
+  open: require('../Images/open.png'), 
+  kara: require('../Images/kara.jpg'), 
+  eden: require('../Images/eden.jpg'), 
+  marie: require('../Images/marie.jpg'), 
+  map: require('../Images/map_icon.png'), 
+  feed: require('../Images/feed_icon.png'), 
+  wilder: require('../Images/wilder.jpg'),
+  christian: require('../Images/christian.jpg'),
+  cal: require('../Images/cal.jpg'),
 }
 
 export default images

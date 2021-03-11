@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images, Profiles } from './App/Themes';
 import ButtonBar from './App/Components/ButtonBar'
-import Profile from './App/Components/Profile'
 
 import LoginScreen from './App/Components/loginScreen'
 import NameInput from './App/Components/nameInput'
@@ -21,6 +20,8 @@ import StatusSelect from './App/Components/statusSelect'
 import Permission from './App/Components/permission'
 import AddFriends from './App/Components/addFriends'
 import Ready from './App/Components/ready'
+
+import Profile from './App/Components/Profile'
 
 export default function App() {
 
@@ -115,6 +116,10 @@ export default function App() {
         title: '',
       }} />
       <Stack.Screen name="Ready" component={Ready}
+        options={{
+        title: '',
+      }} />
+      <Stack.Screen name="Profile" component={Profile}
         options={{
         title: '',
       }} />
