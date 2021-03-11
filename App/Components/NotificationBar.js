@@ -3,22 +3,21 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
-export default class NotificationBar extends React.Component {
-  constructor(props){
-    super(props);
 
-    //See what props our StarWarsCard renders with
-    console.log(JSON.stringify(props));
-  }
+export default function NotificationBar({navigation}) {
+  const [text, setText] = useState("");
 
-  whichOne(map){
-    if (map === true){
+
+  function whichOne(){
+    if (true){
       return(
       <View style = {styles.navigationBar}>
       <TouchableOpacity style = {styles.addButton} onPress = { () => {
-        console.log("switched to feed view"); 
+        navigation.navigate('MapFeed')
       }}>
         <Image style = {styles.logo} source = {Images.map}/>   
       </TouchableOpacity>
@@ -28,7 +27,7 @@ export default class NotificationBar extends React.Component {
       return(
       <View style = {styles.navigationBar}>
       <TouchableOpacity style = {styles.addButton} onPress = { () => {
-        console.log("switched to map view"); 
+        navigation.navigate('FriendFeed')
       }}>
         <Image style = {styles.logo} source = {Images.feed}/>   
       </TouchableOpacity>
@@ -39,19 +38,17 @@ export default class NotificationBar extends React.Component {
     
   }
 
-  render() {
 
     return (
       <View>
-      {this.whichOne(this.props.logo)}
+      {whichOne()}
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
   navigationBar: {
-    marginTop: 50, 
+    marginTop: 20, 
     marginBottom: 3, 
     flexDirection: 'row',
     justifyContent: 'space-between', 

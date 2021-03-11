@@ -6,22 +6,19 @@ import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 import NotificationBar from './NotificationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 
-export default class FriendFeed extends React.Component {
-  constructor(props){
-    super(props);
-    //See what props our StarWarsCard renders with
-    console.log(JSON.stringify(props));
-    this.state = {selectedAll: false}; 
-  }
-  
+export default function FriendFeed({navigation}) {
+  const [text, setText] = useState("");
 
-  notification(text, image) {
+
+  function notification(text, image, profileName) {
     return (
       <TouchableOpacity style = {styles.notification} onPress = { () => {
-        console.log(this.state); 
+        navigation.navigate(profileName)
       }}>
       <View style = {styles.notificationInside}>
       <Image style = {styles.profileImages} source = {image}/>
@@ -31,39 +28,36 @@ export default class FriendFeed extends React.Component {
     );
   }
 
-  addAll() {
-    return (
-      <TouchableOpacity style = {styles.addButton} onPress = { () => {
-        this.state["selectedAll"] = true; 
+ function notificationBar(){
+      return(
+      <View >
+      <TouchableOpacity onPress = { () => {
+        navigation.navigate('MapFeed')
       }}>
-        <Text style = {styles.addText}> add all </Text>
-
+        <Image style = {styles.navigationBar} source = {Images.map}/>   
       </TouchableOpacity>
-    );
-  }
+                  
+      </View>);
+    }
 
-
-
-  render() {
-    
-    return (      
+  return (      
     <View style = {styles.container}>
-    <NotificationBar map = {false}/>
-    <Text style = {styles.titleText} > Friends Feed </Text>
+    {notificationBar()}
+    <Text style = {styles.titleText} > Friend Feed </Text>
     <ScrollView>
-      {this.notification("Eden created a connection in New York, NY!", Images.eden)}
-      {this.notification("Cal was connected with someone in Santa Cruz, CA!", Images.harold)}
-      {this.notification("Kara moved to Los Angeles, CA!", Images.kara)}
-      {this.notification("Marie moved to Newport Beach, CA!", Images.marie)}
-      {this.notification("Eden created a  connection in Newport Beach, CA!", Images.eden)}
-      {this.notification("Wilder joined ven!")}
-      {this.notification("Christian joined ven!")}
+      {notification("Eden created a connection in New York, NY!", Images.eden, "EdenProfile")}
+      {notification("Cal was connected with someone in Santa Cruz, CA!", Images.cal, "CalProfile")}
+      {notification("Kara moved to Los Angeles, CA!", Images.kara, "KaraProfile")}
+      {notification("Marie moved to Newport Beach, CA!", Images.marie, "MarieProfile")}
+      {notification("Eden created a  connection in Newport Beach, CA!", Images.eden, "EdenProfile")}
+      {notification("Wilder joined ven!", Images.wilder, "WilderProfile")}
+      {notification("Christian joined ven!", Images.christian, "ChristianProfile")}
   
       </ScrollView>
-      <ButtonBar profile = {this.props.profile}/>
+      <ButtonBar navigation = {navigation} which = {"feed"}/>
     </View>
     );
-  }
+
 }
 
 const styles = StyleSheet.create({
@@ -111,6 +105,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#FFF0C1",
     alignSelf: 'center',
+  },
+
+
+  navigationBar: {
+    alignSelf: 'center',
+    width: Dimensions.get('window').width * .4,
+    height: Dimensions.get('window').height * 0.05,
+    resizeMode: 'contain'
   },
   notificationInside: {
     flexDirection: 'row', 

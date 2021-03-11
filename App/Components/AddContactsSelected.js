@@ -8,19 +8,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default class AddContactsSelected extends React.Component {
-  constructor(props){
-    super(props);
-    //See what props our StarWarsCard renders with
-    console.log(JSON.stringify(props));
-    this.state = {selectedAll: false}; 
-  }
-  
+export default function AddContactsSelected({navigation}) {
+  const [text, setText] = useState("");
 
-  contact(name) {
+
+  function contact(name) {
     return (
       <TouchableOpacity style = {styles.contactButton} onPress = { () => {
-        console.log(this.state); 
+        navigation.navigate('AddContacts');
       }}>
       <View style = {styles.contactText}>
         <Text style = {styles.buttonText}> {name} </Text>
@@ -30,10 +25,10 @@ export default class AddContactsSelected extends React.Component {
     );
   }
 
-  addAll() {
+  function addAll() {
     return (
       <TouchableOpacity style = {styles.addButtonSelected} onPress = { () => {
-        this.state["selectedAll"] = true; 
+        console.log("selectedAl");
       }}>
         <Text style = {styles.addText}> remove all </Text>
 
@@ -43,31 +38,29 @@ export default class AddContactsSelected extends React.Component {
 
   
 
-  render() {
-    
+
     return (      
     <View style = {styles.container}>
-    {this.addAll()}
+    {addAll()}
     <ScrollView>
-      {this.contact("Marie Burnett")}
-      {this.contact("George Burnside")}
-      {this.contact("Kara Eng")}
-      {this.contact("Isa Fulford")}
-      {this.contact("Alex Hennessey")}
-      {this.contact("Nat Hojel")}
-      {this.contact("Xa Koch")}
-      {this.contact("Elianna Knight")}
-      {this.contact("Ryan Varis")}
-      {this.contact("Lauren Yi")}
-      {this.contact("Cam Burton")}
-      {this.contact("Thom Henri")}
-      {this.contact("Pablo Ocampo")}
+      {contact("Marie Burnett")}
+      {contact("George Burnside")}
+      {contact("Kara Eng")}
+      {contact("Isa Fulford")}
+      {contact("Alex Hennessey")}
+      {contact("Nat Hojel")}
+      {contact("Xa Koch")}
+      {contact("Elianna Knight")}
+      {contact("Ryan Varis")}
+      {contact("Lauren Yi")}
+      {contact("Cam Burton")}
+      {contact("Thom Henri")}
+      {contact("Pablo Ocampo")}
       </ScrollView>
       
     </View>
     );
   }
-}
 
 const styles = StyleSheet.create({
   container: {

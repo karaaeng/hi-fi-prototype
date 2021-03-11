@@ -5,17 +5,15 @@ import { Dimensions, TouchableOpacity } from 'react-native';
 import EditProfile from './EditProfile';
 import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
-export default class KaraProfile extends React.Component {
-  constructor(props){
-    super(props); 
-    //See what props our StarWarsCard renders with
-    console.log("kara fake profile");
-    
-  }
 
-  statusIcon(status) {
+export default function KaraProfile ({navigation}){
+  const [text, setText] = useState("");
+
+  function statusIcon(status) {
 
     if (status ==="available"){
       return( 
@@ -42,7 +40,7 @@ export default class KaraProfile extends React.Component {
     
   }
 
-  location(){
+  function location(){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
@@ -50,7 +48,7 @@ export default class KaraProfile extends React.Component {
       </View>
      );
   }
-  pronouns(){
+  function pronouns(){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
@@ -59,7 +57,7 @@ export default class KaraProfile extends React.Component {
      );
   }
 
-  createConnection() {
+  function createConnection() {
     return (
       <TouchableOpacity style = {styles.button} onPress = { () => {
         console.log("serach your circle pressed"); 
@@ -70,13 +68,13 @@ export default class KaraProfile extends React.Component {
     );
   }
 
-  titleText(){
+  function titleText(){
     return(
     <Text style = {styles.titleText}> connecting Marie </Text>
     );
   }
 
-  interests(){
+  function interests(){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
@@ -84,14 +82,12 @@ export default class KaraProfile extends React.Component {
       </View>
      );  }
 
-  render() {
     const fake = "available";
     let status; 
       
     return (     
     <View style = {styles.container}>
-      <NavigationBar logo ={true} />
-        {this.titleText()}
+        {titleText()}
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
@@ -101,25 +97,24 @@ export default class KaraProfile extends React.Component {
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
            <Text style={ styles.name }>Kara </Text>
-            {this.statusIcon("available")}
+            {statusIcon("available")}
           </View>
           <View style = {styles.information}>
-           {this.location()}         
-           {this.pronouns()}
-           {this.interests()}
+           {location()}         
+           {pronouns()}
+           {interests()}
             </View>
             
             
             
           </View>
         </View>
-        {this.createConnection()}
+        {createConnection()}
       </View>
-      <ButtonBar profile ={this.props.profile}/>
+      <ButtonBar navigation = {navigation} which = {""}/>
     </View> 
     );
   }
-}
 
 const styles = StyleSheet.create({
   container: {

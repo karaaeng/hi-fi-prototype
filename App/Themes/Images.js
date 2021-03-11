@@ -24,6 +24,9 @@ const images = {
   marie: require('../Images/marie.jpg'), 
   map: require('../Images/map_icon.png'), 
   feed: require('../Images/feed_icon.png'), 
+  wilder: require('../Images/wilder.jpg'),
+  christian: require('../Images/christian.jpeg'),
+  cal: require('../Images/cal.jpg'),
 
 
 }

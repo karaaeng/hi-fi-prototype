@@ -5,17 +5,15 @@ import { Dimensions, TouchableOpacity } from 'react-native';
 import EditProfile from './EditProfile';
 import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
-export default class EdenProfile extends React.Component {
-  constructor(props){
-    super(props); 
-    //See what props our StarWarsCard renders with
-    console.log("kara fake profile");
-    
-  }
+export default function EdenProfile ({navigation}){
+  const [text, setText] = useState("");
 
-  statusIcon(status) {
+
+  function statusIcon(status) {
 
     if (status ==="available"){
       return( 
@@ -42,13 +40,13 @@ export default class EdenProfile extends React.Component {
     
   }
 
-  titleText(){
+  function titleText(){
     return(
     <Text style = {styles.titleText}> connection from Isa </Text>
     );
   }
 
-  acceptOrRejct(){
+  function acceptOrRejct(){
     return (
     <View>
       <TouchableOpacity style = {styles.buttonAccept} onPress = { () => {
@@ -69,7 +67,7 @@ export default class EdenProfile extends React.Component {
   }
   
 
-  location(){
+  function location(){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
@@ -77,7 +75,7 @@ export default class EdenProfile extends React.Component {
       </View>
      );
   }
-  pronouns(){
+  function pronouns(){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
@@ -86,7 +84,7 @@ export default class EdenProfile extends React.Component {
      );
   }
 
-  interests(){
+  function interests(){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
@@ -94,14 +92,13 @@ export default class EdenProfile extends React.Component {
       </View>
      );  }
 
-  render() {
+  
     const fake = "available";
     let status; 
     
     return (     
     <View style = {styles.container}>
-      <NavigationBar logo = {true} />
-      {this.titleText()}
+      {titleText()}
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
@@ -111,21 +108,20 @@ export default class EdenProfile extends React.Component {
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
            <Text style={ styles.name }>Eden </Text>
-            {this.statusIcon("available")}
+            {statusIcon("available")}
           </View>
           <View style = {styles.information}>
-           {this.location()}         
-           {this.pronouns()}
-           {this.interests()}
+           {location()}         
+           {pronouns()}
+           {interests()}
             </View>
           </View>
-          {this.acceptOrRejct()}
+          {acceptOrRejct()}
         </View>
       </View>
-      <ButtonBar profile ={this.props.profile}/>
+      <ButtonBar navigation = {navigation} which = {""}/>
     </View> 
     );
-  }
 }
 
 const styles = StyleSheet.create({

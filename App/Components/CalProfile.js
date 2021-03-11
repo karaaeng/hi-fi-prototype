@@ -7,7 +7,7 @@ import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 
 
-export default function EdenProfile ({navigation}){
+export default function CalProfile ({navigation}){
   const [text, setText] = useState("");
 
   function statusIcon(status) {
@@ -41,7 +41,7 @@ export default function EdenProfile ({navigation}){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
-      <Text style={ styles.theirInfo}> Newport Beach, CA </Text> 
+      <Text style={ styles.theirInfo}> Moutain View, CA </Text> 
       </View>
      );
   }
@@ -49,7 +49,7 @@ export default function EdenProfile ({navigation}){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
-      <Text style={ styles.theirInfo}> she/her </Text> 
+      <Text style={ styles.theirInfo}> he/him </Text> 
       </View>
      );
   }
@@ -67,7 +67,7 @@ export default function EdenProfile ({navigation}){
 
   function titleText(){
     return(
-    <Text style = {styles.titleText}> connecting Marie </Text>
+    <Text style = {styles.titleText}> Viewing Cal </Text>
     );
   }
 
@@ -75,7 +75,7 @@ export default function EdenProfile ({navigation}){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
-      <Text style={ styles.theirInfo}> pastries, travelling, running </Text> 
+      <Text style={ styles.theirInfo}> cooking, surfing, travelling </Text> 
       </View>
      );  }
 
@@ -89,13 +89,13 @@ export default function EdenProfile ({navigation}){
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
-          <Image style={styles.profilePicture} source={Images.marie}/>
+          <Image style={styles.profilePicture} source={Images.cal}/>
           
 
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-           <Text style={ styles.name }>Marie </Text>
-            {statusIcon("available")}
+           <Text style={ styles.name }>Cal </Text>
+            {statusIcon("open")}
           </View>
           <View style = {styles.information}>
            {location()}         
@@ -107,7 +107,6 @@ export default function EdenProfile ({navigation}){
             
           </View>
         </View>
-        {searchCircle()}
       </View>
       <ButtonBar navigation = {navigation} which = {""}/>
     </View> 

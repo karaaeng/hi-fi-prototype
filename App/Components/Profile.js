@@ -1,102 +1,124 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
-import { Dimensions } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import EditProfile from './EditProfile';
 import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-export default class Profile extends React.Component {
-  constructor(props){
-    super(props);
-    //See what props our StarWarsCard renders with
-    console.log(JSON.stringify(props));
+export default function Profile({navigation}) {
+  const [text, setText] = useState("");
+
+  function whichOne(){
+
+    return (<View style = {styles.navigationBar}>
+      <TouchableOpacity onPress = { () => {
+        navigation.navigate("AddContacts");
+      }}>
+      <Icon name="address-book-o" style={styles.navigationBarAddress}/>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress = { () => {
+        
+        navigation.navigate("MapFeed");
+      }}>
+      <Icon name="gear" style={styles.navigationBarSettings}/>
+    </TouchableOpacity>
+          
+      
+    </View>);
     
   }
 
-  statusIcon(props) {
+  function statusIcon(status) {
 
-    if (props.status ==="available"){
+    if (status ==="available"){
       return( <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {props.status} </Text>
+        <Text style = {styles.statusText}> {status} </Text>
         <Image style = {styles.status} source = {Images.available}/>
         </View>
         );
-    } else if (props.status ==="on hold"){
+    } else if (status ==="on hold"){
       return (
       <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {props.status} </Text>
+        <Text style = {styles.statusText}> {status} </Text>
         <Image style = {styles.status} source = {Images.onhold}/>
         </View>
         );
     } else{
       return(
       <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {props.status} </Text>
+        <Text style = {styles.statusText}> {status} </Text>
         <Image style = {styles.status} source = {Images.open}/>
         </View>
         );
     }
   }
 
-  location(props){
+  function location(location){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
-      <Text style={ styles.theirInfo}>{props.location} </Text> 
+      <Text style={ styles.theirInfo}>{location} </Text> 
       </View>
      );
   }
-  pronouns(props){
+  function pronouns(pronouns){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
-      <Text style={ styles.theirInfo}>{props.pronouns} </Text> 
+      <Text style={ styles.theirInfo}>{pronouns} </Text> 
       </View>
      );
   }
 
-  interests(props){
+  function interests(interests){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
-      <Text style={ styles.theirInfo}>{props.interests} </Text> 
+      <Text style={ styles.theirInfo}>{interests} </Text> 
       </View>
      );  }
 
-  render() {
-    const fake = "available";
+  
+    const fakestatus = "available";
+    const fakename = "Cat";
+    const fakeinterests = "music, coffee, dogs";
+    const fakepronouns = "she/her";
+    const fakelocation = "stanford, ca";
     let status; 
     
     return (     
     <View style = {styles.container}>
-      <NavigationBar profile ={this.props.profile} />
+      {whichOne()}
 
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
-          <Image style={styles.profilePicture} source={this.props.image}/>
+          <Image style={styles.profilePicture} source={Images.harold}/>
           
 
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-           <Text style={ styles.name }>{this.props.profile.name} {this.props.status}</Text>
-          {this.statusIcon(this.props.profile)}
+           <Text style={ styles.name }>Cat {fakestatus}</Text>
+          {statusIcon(fakestatus)}
           </View>
           <View style = {styles.information}>
-           {this.location(this.props.profile)}         
-           {this.pronouns(this.props.profile)}
-           {this.interests(this.props.profile)}
+           {location(fakelocation)}         
+           {pronouns(fakepronouns)}
+           {interests(fakeinterests)}
             </View>
           </View>
         </View>
       </View>
-      <ButtonBar profile ={this.props.profile}/>
+      <ButtonBar navigation = {navigation} which = {"profile"}/>
     </View> 
     );
   }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -118,6 +140,23 @@ const styles = StyleSheet.create({
     fontSize: 15, 
     color: '#4A4A4A'
   },
+  navigationBar: {
+    marginTop: 50, 
+    marginBottom: 50, 
+    flexDirection: 'row',
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    height: Platform.OS === 'ios' ? 44 : 56,
+    margin: Dimensions.get('window').width * .025
+  },
+  navigationBarAddress: {
+    fontSize: 35,
+    tintColor: '#4A4A4A'
+  }, 
+  navigationBarSettings: {
+    fontSize: 35,
+    tintColor: '#4A4A4A'
+  }, 
   informationText:{
     flexDirection: 'row'
   },

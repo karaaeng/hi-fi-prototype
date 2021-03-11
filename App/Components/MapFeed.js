@@ -9,16 +9,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default class MapFeed extends React.Component {
-  constructor(props){
-    super(props);
-    //See what props our StarWarsCard renders with
-    console.log(JSON.stringify(props));
-    this.state = {selectedAll: false}; 
-  }
+
+export default function MapFeed({navigation}) {
+  const [text, setText] = useState("");
+
   
 
-  notification(text, image) {
+  function notification(text, image) {
     return (
       <TouchableOpacity style = {styles.notification} onPress = { () => {
         console.log(this.state); 
@@ -31,7 +28,19 @@ export default class MapFeed extends React.Component {
     );
   }
 
-  addAll() {
+  function notificationBar(){
+      return(
+      <View >
+      <TouchableOpacity onPress = { () => {
+        navigation.navigate('FriendFeed')
+      }}>
+        <Image style = {styles.navigationBar} source = {Images.map}/>   
+      </TouchableOpacity>
+                  
+      </View>);
+    }
+
+  function addAll() {
     return (
       <TouchableOpacity style = {styles.addButton} onPress = { () => {
         this.state["selectedAll"] = true; 
@@ -42,20 +51,15 @@ export default class MapFeed extends React.Component {
     );
   }
 
-
-
-  render() {
     
-    return (      
+  return (      
     <View style = {styles.container}>
-    <NotificationBar logo = {true}/>
+    {notificationBar()}
     <Text style = {styles.titleText} > Map </Text>
         <Image style = {styles.map} source = {Images.kara}/>
-
-      <ButtonBar profile = {this.props.profile}/>
+      <ButtonBar navigation = {navigation} which = {"feed"}/>
     </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
@@ -69,10 +73,16 @@ const styles = StyleSheet.create({
     fontSize: 25,
     tintColor: '#939393'
   }, 
+  navigationBar: {
+    alignSelf: 'center',
+    width: Dimensions.get('window').width * .4,
+    height: Dimensions.get('window').height * 0.05,
+    resizeMode: 'contain'
+  },
   map:{
     alignSelf: 'center',
     width: Dimensions.get('window').width * .9,
-    height: Dimensions.get('window').height * .6,
+    height: Dimensions.get('window').height * .5,
   },
   addButton: {
     marginTop: 100,
