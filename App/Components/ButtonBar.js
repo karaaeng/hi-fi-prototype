@@ -34,7 +34,7 @@ export default function ButtonBar({navigation, which}) {
   }
 
   function home(selected){
-    if (selected === 'notifications'){
+    if (selected === 'home'){
       return (<Image style = {styles.buttonFirstTier} source={Images.homeselected} />);
     } else{
       return (<Image style = {styles.buttonFirstTier} source={Images.home} />);
@@ -44,25 +44,25 @@ export default function ButtonBar({navigation, which}) {
   return (
     <View style = {styles.buttonBar}>
       <TouchableOpacity onPress = { () => {
-        console.log("home pressed"); 
+        navigation.navigate('Home');
       }}>
         {home(which)}
       </TouchableOpacity>
 
       <TouchableOpacity onPress = { () => {
-        navigation.navigate('Chat')
+        navigation.navigate('Chat');
       }}>
         {chat(which)}
       </TouchableOpacity>
 
       <TouchableOpacity onPress = { () => {
-        navigation.navigate('FriendFeed')
+        navigation.navigate('FriendFeed');
       }}>
         {feed(which)}
       </TouchableOpacity>
 
       <TouchableOpacity onPress = { () => {
-        navigation.navigate('Profile')
+        navigation.navigate('Profile');
       }}>
         {profile(which)}
       </TouchableOpacity>

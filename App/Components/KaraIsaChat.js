@@ -11,7 +11,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 
-export default function WilderChristianChat({navigation}) {
+export default function KaraIsaChat({navigation}) {
   const [text, setText] = useState("");
 
   function chatBubble(image, name, text){
@@ -75,11 +75,11 @@ export default function WilderChristianChat({navigation}) {
   return (      
     <View style = {styles.container}>
     <Text style = {styles.titleText} > chat </Text>
-    {imageHeader(Images.harold, Images.wilder, Images.christian)}
+    {imageHeader(Images.harold, Images.kara, Images.harold)}
     <ScrollView>
      {sendChat(Images.harold, "Me", "You both have absolutley incredible sisters, so I thought you guys should meet")}
-     {chatBubble(Images.wilder, "Wilder", "Hey, nice to meet you!")}
-     {chatBubble(Images.christian, "Christian", "I've heard so much about you!")}
+     {chatBubble(Images.kara, "Kara", "Hey, nice to meet you!")}
+     {chatBubble(Images.harold, "Isa", "I've heard so much about you!")}
 
   
       </ScrollView>

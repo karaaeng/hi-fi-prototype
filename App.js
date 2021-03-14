@@ -20,6 +20,8 @@ import WilderProfile from './App/Components/WilderProfile';
 import ChristianProfile from './App/Components/ChristianProfile';
 import Chat from './App/Components/Chat';
 import WilderChristianChat from './App/Components/WilderChristianChat';
+import KaraIsaChat from './App/Components/KaraIsaChat';
+import Home from './App/Components/Home';
 
 
 
@@ -96,6 +98,16 @@ export default function App() {
         }} />
 
         <Stack.Screen name="WilderChristianChat" component={WilderChristianChat}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="KaraIsaChat" component={KaraIsaChat}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="Home" component={Home}
           options={{
           title: '',
         }} />
