@@ -151,11 +151,11 @@ const styles = StyleSheet.create({
   },
   navigationBarAddress: {
     fontSize: 35,
-    tintColor: '#4A4A4A'
+    color: '#4A4A4A'
   }, 
   navigationBarSettings: {
     fontSize: 35,
-    tintColor: '#4A4A4A'
+    color: '#4A4A4A'
   }, 
   informationText:{
     flexDirection: 'row'

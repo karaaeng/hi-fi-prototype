@@ -50,7 +50,7 @@ export default function ButtonBar({navigation, which}) {
       </TouchableOpacity>
 
       <TouchableOpacity onPress = { () => {
-        console.log(which); 
+        navigation.navigate('Chat')
       }}>
         {chat(which)}
       </TouchableOpacity>
