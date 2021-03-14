@@ -30,7 +30,7 @@ export default function PhotoSelect({navigation}) {
         <Image style = {styles.progressbar} source={Images.progress_photo}/>
         </View>
         <View>
-            <TouchableOpacity onPress={() => navigation.navigate('PhotoOptions')}>
+            <TouchableOpacity onPress={() => navigation.navigate('PhotoOptions', {which: 'signup'})}>
                 <Image style = {styles.image} source={Images.photo_select}/>
             </TouchableOpacity>
         </View>

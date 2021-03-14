@@ -1,150 +1,454 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { Images, Profiles } from '../Themes';
-import { Dimensions, TouchableOpacity } from 'react-native';
-import ButtonBar from './ButtonBar';
-import NavigationBar from './NavigationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {
+  useFonts,
+  Comfortaa_300Light,
+  Comfortaa_400Regular,
+  Comfortaa_500Medium,
+  Comfortaa_600SemiBold,
+  Comfortaa_700Bold,
+} from '@expo-google-fonts/comfortaa';
 
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
+import { Images } from '../Themes';
 
-export default class EditProfile extends React.Component {
-  constructor(props){
-    super(props);
-    //See what props our StarWarsCard renders with
-    console.log(JSON.stringify(props));
-    
+export default function EditProfile({navigation}) {
+  const [text, setText] = useState("");
+
+  let [fontsLoaded] = useFonts({
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
+  });
+
+  //profile information
+  const [userPhoto, setuserPhoto] = useState("");
+  const [userName, setuserName] = useState("Cat D.");
+  const [userInterests, setuserInterests] = useState("music, coffee, dogs");
+  const [userLocation, setuserLocation] = useState("Stanford, CA");
+  const [userNumber, setuserNumber] = useState("123-456-7890");
+  const [userPronouns, setuserPronouns] = useState("she/her");
+  const [userStatus, setuserStatus] = useState("");
+
+  let askingButtonDisplayed = null;
+  let openButtonDisplayed = null;
+  let holdButtonDisplayed = null;
+
+  //if user has not set status yet, render unchosen buttons
+    askingButtonDisplayed =  
+        <View style = {styles.asking}>
+            <Text style = {styles.button_text}>asking</Text>
+            <Text style = {styles.button_text_small}>(actively ask for connections)</Text>
+        </View>;
+    openButtonDisplayed =  
+        <View style = {styles.open}>
+            <Text style = {styles.button_text}>open</Text>
+            <Text style = {styles.button_text_small}>(open to connections)</Text>
+        </View>;
+    holdButtonDisplayed =  
+    <View style = {styles.hold}>
+        <Text style = {styles.button_text}>on hold</Text>
+        <Text style = {styles.button_text_small}>(not open to connections right now)</Text>
+    </View>;
+
+    //if user has set status to "asking", render chosen "asking" button  
+     if (userStatus === "asking") {
+        askingButtonDisplayed =  
+            <View style = {styles.asking_chosen}>
+                <Text style = {styles.button_text}>asking</Text>
+                <Text style = {styles.button_text_small}>(actively ask for connections)</Text>
+            </View>;
+    }
+
+     //if user has set status to "open", render chosen "open" button  
+     if (userStatus === "open") {
+        openButtonDisplayed =  
+            <View style = {styles.open_chosen}>
+                <Text style = {styles.button_text}>open</Text>
+                <Text style = {styles.button_text_small}>(open to connections)</Text>
+            </View>;
+    }
+
+     //if user has set status to "open", render chosen "open" button  
+     if (userStatus === "on hold") {
+      holdButtonDisplayed =  
+          <View style = {styles.hold_chosen}>
+              <Text style = {styles.button_text}>on hold</Text>
+              <Text style = {styles.button_text_small}>(not open to connections right now)</Text>
+          </View>;
   }
-  editProfile() {
-    return (
-       <TouchableOpacity style = {styles.options} onPress = { () => {
-        console.log("edit profile pressed"); 
-      }}>
-      <Icon name="pencil" style={styles.icon} />
-        <Text style = {styles.informationText}> edit profile </Text>
-       
-        <Icon name="arrow-right" style={styles.icon}/>
+
+    function save() {
+      return (
+        <TouchableOpacity style = {styles.saveButton} onPress = { () => {
+          navigation.navigate("Profile");
+        }}>
+          <Text style = {styles.buttonText}> save </Text>
         </TouchableOpacity>
-    );
-  }
+      );
+    }
 
-  privacy() {
-    return (
-     <TouchableOpacity style = {styles.options} onPress = { () => {
-        console.log("privacy settings pressed"); 
-      }}>
-      <Icon name="chain" style={styles.icon}/>
-        <Text style = {styles.informationText}> privacy settings </Text>
-        
-        <Icon name="arrow-right" style={styles.icon}/>
-      </TouchableOpacity>
-    );
-  }
+    return(
+        <View style={styles.container}>
+          <ScrollView>
+            
+          <View style = {styles.row}>
+            <TouchableOpacity onPress={() => navigation.navigate('PhotoOptions', {which: 'profile'})}>
+                <Icon name="pencil" style={styles.firsticon}/>
+                <Image style = {styles.image} source={Images.cat}/>
+            </TouchableOpacity>
+        </View>
 
-  about() {
-    return (
-      <TouchableOpacity style = {styles.options} onPress = { () => {
-        console.log("about pressed"); 
-      }}>
-       <Icon name="info-circle" style={styles.icon} />
-        <Text style = {styles.informationText}> about </Text>
-       <Icon name="arrow-right" style={styles.icon}/>
-       
-      </TouchableOpacity>
-    );
-  }
+          <View style = {styles.input}>
+            <Text style = {styles.prompt}>Name       </Text>
+          <View style={styles.inputBar}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <TextInput
+              value={userName}
+              onChangeText={(userName) => {
+               setuserName(userName)
+              }}
+              style={styles.textInput}
+            />
+            </TouchableWithoutFeedback>
+              <Icon name="pencil" style={styles.icon} 
+                onPress={() => {
+                  console.log({userName})
+              }}
+              />
+          </View>
+          </View>
 
-  logout() {
-    return (
-      <TouchableOpacity style = {styles.logoutButton} onPress = { () => {
-        console.log("logout pressed"); 
-      }}>
-        <Text style = {styles.buttonText}> logout </Text>
-       
-      </TouchableOpacity>
-    );
-  }
+          <View style = {styles.input}>
+            <Text style = {styles.prompt}>Pronouns</Text>
+          <View style={styles.inputBar}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <TextInput
+              value={userPronouns}
+              onChangeText={(userPronouns) => {
+               setuserPronouns(userPronouns)
+              }}
+              style={styles.textInput}
+            />
+            </TouchableWithoutFeedback>
+              <Icon name="pencil" style={styles.icon} 
+                onPress={() => {
+                  console.log({userName})
+              }}
+              />
+          </View>
+          </View>
 
-  render() {
-    
-    return (      
-    <View style = {styles.container}>
-    <NavigationBar logo ={true} />
-    <View style = {styles.editprofilestuff}>
-      <View style = {styles.optionsTogether}>
-        {this.editProfile()}
-        {this.privacy()}
-        {this.about()}
+          <View style = {styles.input}>
+            <Text style = {styles.prompt}>Phone      </Text>
+          <View style={styles.inputBar}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <TextInput
+              value={userNumber}
+              onChangeText={(userNumber) => {
+               setuserNumber(userNumber)
+              }}
+              style={styles.textInput}
+            />
+            </TouchableWithoutFeedback>
+              <Icon name="pencil" style={styles.icon} 
+                onPress={() => {
+                  console.log({userName})
+              }}
+              />
+          </View>
+          </View>
+
+          <View style = {styles.input}>
+            <Text style = {styles.prompt}>Location  </Text>
+          <View style={styles.inputBar}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <TextInput
+              value={userLocation}
+              onChangeText={(userLocation) => {
+               setuserLocation(userLocation)
+              }}
+              style={styles.textInput}
+            />
+            </TouchableWithoutFeedback>
+              <Icon name="pencil" style={styles.icon} 
+                onPress={() => {
+                  console.log({userName})
+              }}
+              />
+          </View>
+          </View>
+
+          <View style = {styles.input}>
+            <Text style = {styles.promptInterests}>Interests  </Text>
+          <View style={styles.interestsBar}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <TextInput
+              value={userInterests}
+              onChangeText={(userInterests) => {
+               setuserInterests(userInterests)
+              }}
+              style={styles.interestsInput}
+            />
+            </TouchableWithoutFeedback>
+              <Icon name="pencil" style={styles.iconInterests} 
+                onPress={() => {
+                  console.log({userName})
+              }}
+              />
+          </View>
+          </View>
+
+          <View style = {styles.input}>
+            <Text style = {styles.prompt}>Status </Text>
+            </View>
+            <View>
+            <TouchableOpacity onPress={() => {setuserStatus("asking")}}>
+                {askingButtonDisplayed}
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {setuserStatus("open")}}>
+                {openButtonDisplayed}
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {setuserStatus("on hold")}}>
+                {holdButtonDisplayed}
+            </TouchableOpacity>
+        </View>
+
+        <View style = {styles.save}> 
+        {save()}
       </View>
 
-      <View style = {styles.logout}> 
-        {this.logout()}
+      <View style= {styles.deleteButtonContainer}>
+      <Icon name="trash" style={styles.trashicon}/>
+          <TouchableOpacity onPress={() => {
+            setuserInterests("")
+            navigation.navigate('Delete')
+          }}>
+            <Text style={styles.deletebutton}>delete account</Text>
+          </TouchableOpacity>
+          </View>
+          </ScrollView>
       </View>
-      </View>
-        
-      <ButtonBar style = {styles.buttonBar} profile ={this.props.profile}/>
-    </View>
-    );
-  }
+      );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignContent: 'center', 
-    justifyContent: 'space-between'
-  },
-  icon: {
-    fontSize: 25,
-    tintColor: '#4A4A4A'
-  }, 
-  editprofilestuff: {
-    flex: 1
-  },
-  logoutButton: {
-    marginTop: 100,
-    alignItems: "center",
-    backgroundColor: "#FFF0C1",
-    borderRadius: 30,
-    padding: 20,
-    height: 73,
-    width: 336,
-    alignSelf: 'center',
-  },
-  buttonText: {
-    fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
-    color: '#4A4A4A',
-  },
-  logout: {
-    flex: 2
-  },
-
-  options: {
-    margin: 20, 
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
-    fontFamily: 'Comfortaa_700Bold',
-    fontSize: 15
-  },
-  optionsTogether: {
-    justifyContent: 'space-evenly', 
-    alignSelf: 'center', 
-    flex: 1
-  },
-  butttonBar: {
-    alignSelf: 'flex-end'
-  },
-  name: { 
-    fontWeight: 'bold', 
-    fontSize: 25, 
-    alignSelf: 'center' 
-  }, 
-  category: {
-    color: '#FED254', 
-    fontSize: 15
-  },
-
-  
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'white',
+      },
+      input: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        alignContent: "center",
+      },
+      prompt: {
+        alignSelf: 'center',
+        alignContent: 'flex-start',
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 20,
+        color: '#4A4A4A',
+        marginTop: 30,
+        marginRight: 25,
+        marginLeft: 25,
+      },
+      promptInterests: {
+        alignSelf: 'flex-start',
+        alignContent: 'flex-start',
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 20,
+        color: '#4A4A4A',
+        marginTop: 50,
+        marginRight: 25,
+        marginLeft: 25,
+      },
+      inputBar: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignSelf: "flex-end",
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderWidth: 3,
+        borderColor: '#E5E5E5',
+        height: 69,
+        width: 255,
+        borderRadius: 35,
+        marginTop: 30,
+      },
+      textInput: {
+        height: 69,
+        width: 175,
+      },
+      interestsBar: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignSelf: "flex-end",
+        alignItems: 'flex-end',
+        backgroundColor: '#fff',
+        borderWidth: 3,
+        borderColor: '#E5E5E5',
+        height: 215,
+        width: 255,
+        borderRadius: 35,
+        marginTop: 30,
+      },
+      interestsInput: {
+        height: 215,
+        width: 175,
+        marginBottom: 70,
+      },
+      icon: {
+        fontSize: 35,
+        color: '#4A4A4A',
+      },
+      iconInterests: {
+        fontSize: 35,
+        color: '#4A4A4A',
+        marginBottom: 15,
+      },
+      forward: {
+        height: 80,
+        width: 80,
+        marginLeft: 320,
+        marginTop: 340,
+      },
+      image: {
+        height: 220,
+        width: 220,
+        alignSelf: "center",
+        borderRadius: 109.5,
+        marginTop: -30,
+        marginBottom: 20,
+      },
+      row: {
+        flex: 1,
+        flexDirection: "column",
+        marginTop: -80,
+      },
+      firsticon: {
+        fontSize: 35,
+        color: '#4A4A4A',
+        alignSelf: "flex-end",
+        marginTop: 100,
+        marginRight: 90,
+      },
+      asking: {
+        borderColor: "#89FF95",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 83,
+        width: 273,
+        borderRadius: 35,
+        marginTop: 25,
+      },
+      asking_chosen: {
+        backgroundColor: "#89FF95",
+        borderColor: "#89FF95",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 83,
+        width: 273,
+        borderRadius: 35,
+        marginTop: 25,
+      },
+      open: {
+        borderColor: "#FED254",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 83,
+        width: 273,
+        borderRadius: 35,
+        marginTop: 25,
+      },
+      open_chosen: {
+        backgroundColor: "#FED254",
+        borderColor: "#FED254",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 83,
+        width: 273,
+        borderRadius: 35,
+        marginTop: 25,
+      },
+      hold: {
+        borderColor: "#FD9B9B",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 83,
+        width: 273,
+        borderRadius: 35,
+        marginTop: 25,
+      },
+      hold_chosen: {
+        backgroundColor: "#FD9B9B",
+        borderColor: "#FD9B9B",
+        borderWidth: 3,
+        alignSelf: "center",
+        justifyContent:"center",
+        height: 83,
+        width: 273,
+        borderRadius: 35,
+        marginTop: 25,
+      },
+      button_text: {
+        alignSelf: 'center',
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 28,
+        color: '#4A4A4A',
+        marginTop: 12,
+      },
+      button_text_small: {
+        alignSelf: 'center',
+        fontFamily: 'Comfortaa_300Light',
+        fontSize: 12,
+        color: '#4A4A4A',
+        marginTop: 5,
+      },
+      saveButton: {
+        marginTop: 100,
+        alignItems: "center",
+        backgroundColor: "#FFF0C1",
+        borderRadius: 30,
+        padding: 20,
+        height: 73,
+        width: 336,
+        alignSelf: 'center',
+      },
+      buttonText: {
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 30,
+        color: '#4A4A4A',
+      },
+      save: {
+        flex: 2
+      },
+      deletebutton: {
+        color: '#4A4A4A',
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 20,        
+      },
+      deleteButtonContainer: {
+        marginTop: 70,
+        marginBottom: 100,
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        alignContent: "center",
+        alignSelf: "center",
+      },
+      trashicon: {
+        fontSize: 30,
+        color: '#4A4A4A',
+        marginRight: 10,
+      },
 });

@@ -41,8 +41,7 @@ export default function Profile({navigation}) {
       </TouchableOpacity>
 
       <TouchableOpacity onPress = { () => {
-        
-        navigation.navigate("MapFeed");
+        navigation.navigate("SettingsPage");
       }}>
       <Icon name="gear" style={styles.navigationBarSettings}/>
     </TouchableOpacity>
@@ -56,23 +55,30 @@ export default function Profile({navigation}) {
 
     if (status ==="asking"){
       return( <View style = {styles.statusContainer}>
-        <View style = {styles.status}>
+        <View style = {styles.statusAsking}>
           <Text style = {styles.statusText}> {status} </Text>
         </View>
         </View>
         );
-    } else if (status ==="on hold"){
-      return (
-      <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {status} </Text>
-        <Image style = {styles.status} source = {Images.onhold}/>
+    } else if (status ==="open"){
+      return( <View style = {styles.statusContainer}>
+        <View style = {styles.statusOpen}>
+          <Text style = {styles.statusText}> {status} </Text>
+        </View>
         </View>
         );
-    } else{
-      return(
-      <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {status} </Text>
-        <Image style = {styles.status} source = {Images.open}/>
+      } else if (status ==="on hold"){
+        return( <View style = {styles.statusContainer}>
+          <View style = {styles.statusHold}>
+            <Text style = {styles.statusText}> {status} </Text>
+          </View>
+          </View>
+          );
+    } else {
+      return( <View style = {styles.statusContainer}>
+        <View style = {styles.statusOpen}>
+          <Text style = {styles.statusText}> {status} </Text>
+        </View>
         </View>
         );
     }
@@ -109,7 +115,6 @@ export default function Profile({navigation}) {
     const fakeinterests = "music, coffee, dogs";
     const fakepronouns = "she/her";
     const fakelocation = "Stanford, CA";
-    let status; 
     
     return (     
     <View style = {styles.container}>
@@ -205,13 +210,35 @@ const styles = StyleSheet.create({
   statusContainer: {
     flexDirection: 'column'
   },
-  status: {
+  statusAsking: {
     height: 50,
     width: 150,
     borderRadius: 25,
     resizeMode: 'contain', 
     alignContent: 'center',
     backgroundColor: "#89FF95",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  statusOpen: {
+    height: 50,
+    width: 150,
+    borderRadius: 25,
+    resizeMode: 'contain', 
+    alignContent: 'center',
+    backgroundColor: "#FED254",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  statusHold: {
+    height: 50,
+    width: 150,
+    borderRadius: 25,
+    resizeMode: 'contain', 
+    alignContent: 'center',
+    backgroundColor: "#FD9B9B",
     justifyContent: "center",
     marginTop: 10,
     marginBottom: 20,

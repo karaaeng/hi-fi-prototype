@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function PhotoOptions({navigation}) {
+export default function PhotoOptions({route, navigation}) {
   const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
@@ -23,6 +23,25 @@ export default function PhotoOptions({navigation}) {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
+
+  let { which } = route.params;
+  console.log(which);
+
+  function imageToSelect(goBackTo){
+    if (goBackTo === 'profile') {
+   return (
+        <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+            <Image style = {styles.photos} source={Images.cat}/>
+        </TouchableOpacity>
+   );
+    } else {
+      return (
+      <TouchableOpacity onPress={() => navigation.navigate('SelectedPhoto')}>
+          <Image style = {styles.photos} source={Images.cat}/>
+      </TouchableOpacity>
+      );
+    }
+  }
 
   //profile information
   const [userPhoto, setuserPhoto] = useState("");
@@ -39,9 +58,7 @@ export default function PhotoOptions({navigation}) {
             <Image style = {styles.lib} source={Images.library}/>
         </View>
         <View style = {styles.grid}>
-        <TouchableOpacity onPress={() => navigation.navigate('SelectedPhoto')}>
-            <Image style = {styles.photos} source={Images.cat}/>
-        </TouchableOpacity>
+        {imageToSelect(which)}
         <Image style = {styles.photos} source={Images.barbara}/>
         <Image style = {styles.photos} source={Images.robert}/>
         <Image style = {styles.photos} source={Images.liz}/>
