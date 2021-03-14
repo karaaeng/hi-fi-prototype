@@ -6,13 +6,12 @@ import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 import NotificationBar from './NotificationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-
+import MapView from 'react-native-maps';
 
 
 export default function MapFeed({navigation}) {
-  const [text, setText] = useState("");
-
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   
 
   function notification(text, image) {
@@ -51,12 +50,142 @@ export default function MapFeed({navigation}) {
     );
   }
 
-    
+
   return (      
     <View style = {styles.container}>
     {notificationBar()}
     <Text style = {styles.titleText} > Map </Text>
-        <Image style = {styles.map} source = {Images.kara}/>
+        <MapView style = {styles.map} initialRegion={{latitude: 37.4275, longitude: -122.2, 
+          latitudeDelta: 0.005,longitudeDelta: 0.21}}>
+            
+            <MapView.Marker
+              coordinate={{latitude: 37.4275, longitude: -122.2}}
+              title={"Me"}
+              description={"Stanford"}>
+              <Icon name="map-marker" style={styles.myMarker}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 34.0522,
+              longitude: -118.2437}}
+              title={"Kara"}
+              description={"Los Angeles"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 33.6189,
+              longitude: -117.9298}}
+              title={"Isa"}
+              description={"Newport Beach"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 33.6189,
+              longitude: -117.81}}
+              title={"Marie"}
+              description={"Newport Beach"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 37.3861,
+              longitude: -122.0839}}
+              title={"Cal"}
+              description={"Mountain View"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 51.5074,
+              longitude: -0.1278}}
+              title={"Wilder"}
+              description={"London"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 37.4275,
+              longitude: -122.1697}}
+              title={"Eden"}
+              description={"Stanford"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 40.7608,
+              longitude: -111.8910}}
+              title={"Christian"}
+              description={"Salt Lake City"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 38.5816,
+              longitude: -121.4944}}
+              title={"Thom"}
+              description={"Sacramento"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 25.7617,
+              longitude: -80.1918}}
+              title={"Pablo"}
+              description={"Miami"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 38.5449,
+              longitude: -121.7405}}
+              title={"Cam"}
+              description={"Davis"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 36.7378,
+              longitude: -119.7871}}
+              title={"George"}
+              description={"Fresno"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+             <MapView.Marker
+              coordinate={{latitude: 37.4848,
+              longitude: -122.2281}}
+              title={"Alex"}
+              description={"Redwood City"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 37.5630,
+              longitude: -122.3255}}
+              title={"Xa"}
+              description={"San Mateo"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 37.4419,
+              longitude: -122.1430}}
+              title={"Lauren"}
+              description={"Palo Alto"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+            <MapView.Marker
+              coordinate={{latitude: 37.4530,
+              longitude: -122.1817}}
+              title={"Nat"}
+              description={"Menlo Park"}>
+              <Icon name="map-marker" style={styles.icon}/>
+            </MapView.Marker>
+
+        </MapView>
       <ButtonBar navigation = {navigation} which = {"feed"}/>
     </View>
     );
@@ -70,9 +199,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   icon: {
-    fontSize: 25,
-    tintColor: '#939393'
+    fontSize: 30,
+    color: '#4A4A4A'
   }, 
+  myMarker: {
+    fontSize: 30,
+    color: '#FED254'
+  },
   navigationBar: {
     alignSelf: 'center',
     width: Dimensions.get('window').width * .4,
@@ -82,27 +215,9 @@ const styles = StyleSheet.create({
   map:{
     alignSelf: 'center',
     width: Dimensions.get('window').width * .9,
-    height: Dimensions.get('window').height * .5,
+    height: Dimensions.get('window').height * .65,
   },
-  addButton: {
-    marginTop: 100,
-    alignItems: "center",
-    alignSelf: 'flex-end', 
-    padding: 10,
-    height: 50,
-    width: 150,
-    marginRight: 47,
-    backgroundColor: "#FFF0C1",
-    borderRadius: 30,
-  },
-  profileImages:{
-    width: 40, 
-    height: 40,
-    borderRadius: 20,
-    marginLeft: 10,
-    marginTop: 30,
-    marginBottom: 65,
-  },
+
 
   addText: {
     fontSize: 20,
@@ -136,7 +251,7 @@ titleText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
     color: '#FED254',
-    marginBottom: 5,
+    marginBottom: 2,
     alignSelf: 'center',
   },
   

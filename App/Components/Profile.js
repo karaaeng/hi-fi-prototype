@@ -24,7 +24,7 @@ export default function Profile({navigation}) {
 
       <TouchableOpacity onPress = { () => {
         
-        navigation.navigate("MapFeed");
+        navigation.navigate("EditProfile");
       }}>
       <Icon name="gear" style={styles.navigationBarSettings}/>
     </TouchableOpacity>
