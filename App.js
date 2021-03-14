@@ -33,6 +33,7 @@ import AddFriends from './App/Components/addFriends'
 import Ready from './App/Components/ready'
 
 import Profile from './App/Components/Profile'
+import FriendFeed from './App/Components/FriendFeed'
 
 import SettingsPage from './App/Components/settings'
 import EditProfile from './App/Components/EditProfile'
@@ -271,6 +272,13 @@ export default function App() {
           fontSize: 30,
           color: '#4A4A4A',
         },
+      }} />
+      <Stack.Screen name="FriendFeed" component={FriendFeed}
+        options={{
+          headerStyle: {
+            height: 110,
+          },
+        title: '',
       }} />
     </Stack.Navigator>
   </NavigationContainer>
