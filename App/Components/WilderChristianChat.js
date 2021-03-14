@@ -52,11 +52,21 @@ export default function WilderChristianChat({navigation}) {
   
   function imageHeader (image1, image2, image3) {
     return(
-      <View style = {styles.imageContainer}> 
-        <Image style = {styles.headerImage} source = {image1}/>
-        <Image style = {styles.headerImage} source = {image2}/>
-        <Image style = {styles.headerImage} source = {image3}/>
-      </View>
+      <View style = {styles.headerContainer}>
+        <View style = {styles.imageContainer}> 
+          <View style = {styles.firstImage}>
+            <Image style = {styles.headerImage} source = {image1}/>
+          </View>
+          <View style = {styles.middleImage}> 
+            <Image style = {styles.headerImage} source = {image2}/>
+          </View>
+          <View style = {styles.lastImage}>
+            <Image style = {styles.headerImage} source = {image3}/>
+          </View>
+        </View>
+        <Text style = {styles.headerText}>you, Isa, & Eden</Text>
+      </View> 
+
     );
   }
   
@@ -87,16 +97,36 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly', 
     backgroundColor: "#FFFF"
   },
+  middleImage: {
+    marginTop: -30, 
+    marginLeft: -20
+  },
+  headerText:{
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 24,
+    color: '#4A4A4A',
+    marginTop: -20,
+    paddingBottom: 20
+  },
+
+  lastImage: {
+    marginLeft: -20
+  },
   message: {
     borderRadius: 20
   },
   imageContainer: {
     alignSelf: 'center', 
-    flexDirection: 'row'
+    flexDirection: 'row', 
+    padding: 35
+  },
+  headerContainer: {
+    flexDirection: 'column', 
+    alignItems: 'center', 
   },
   help:{
     margin: 10,
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start', 
   },
   helpSend:{
     margin: 10,
@@ -111,8 +141,8 @@ const styles = StyleSheet.create({
     tintColor: '#939393'
   }, 
   headerImage: {
-    width: 55, 
-    height: 55, 
+    width: 60, 
+    height: 60, 
     borderRadius: 30
   },
   profileImages:{
