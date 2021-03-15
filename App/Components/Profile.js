@@ -31,26 +31,6 @@ export default function Profile({navigation}) {
 
   const [text, setText] = useState("");
 
-  function whichOne(){
-
-    return (<View style = {styles.navigationBar}>
-      <TouchableOpacity onPress = { () => {
-        navigation.navigate("AddContacts");
-      }}>
-      <Icon name="address-book-o" style={styles.navigationBarAddress}/>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress = { () => {
-        navigation.navigate("SettingsPage");
-      }}>
-      <Icon name="gear" style={styles.navigationBarSettings}/>
-    </TouchableOpacity>
-          
-      
-    </View>);
-    
-  }
-
   function statusIcon(status) {
 
     if (status ==="asking"){
@@ -118,14 +98,9 @@ export default function Profile({navigation}) {
     
     return (     
     <View style = {styles.container}>
-      {whichOne()}
-
         <View style = {styles.profile}>
-          <View style = {styles.profileCard}>
-          
+          <View style = {styles.profileCard}>     
           <Image style={styles.profilePicture} source={Images.cat}/>
-          
-
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
             <Text style={ styles.name }>{fakename}</Text>
@@ -172,25 +147,6 @@ const styles = StyleSheet.create({
     color: '#4A4A4A',
     fontFamily: "Comfortaa_300Light",
   },
-  navigationBar: {
-    marginTop:10, 
-    marginBottom: 40, 
-    flexDirection: 'row',
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    height: Platform.OS === 'ios' ? 44 : 56,
-    margin: Dimensions.get('window').width * .025
-  },
-  navigationBarAddress: {
-    fontSize: 40,
-    color: '#4A4A4A',
-    marginLeft: 10,
-  }, 
-  navigationBarSettings: {
-    fontSize: 40,
-    color: '#4A4A4A',
-    marginRight: 10,
-  }, 
   informationText:{
     flexDirection: 'row'
   },
@@ -202,6 +158,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     //flexDirection: 'column', 
   }, 
+  profileCard: {
+    marginTop: 60,
+  },
   profileNameAndStatus:{
     flexDirection: 'column',
     justifyContent: 'space-between', 

@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions, ScrollView} from 'react-native';
 import { Images } from '../Themes';
 
-export default function AddFriends({navigation}) {
+export default function AddFriends({route, navigation}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAll, setSelected] = useState(false);
 
@@ -24,6 +24,9 @@ export default function AddFriends({navigation}) {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
+
+  let { which } = route.params;
+  console.log(which);
 
   let addRemoveAll = null;
 
@@ -75,6 +78,24 @@ export default function AddFriends({navigation}) {
     }
   }
 
+  let forwardButton = null;
+
+  if (which === "signup") {
+    forwardButton = 
+      <View>
+        <TouchableOpacity onPress={() => navigation.navigate("Ready")}>
+          <Image style = {styles.forward} source={Images.forward_icon}/>
+        </TouchableOpacity>
+      </View>
+  } else if (which === "profile") {
+    forwardButton = 
+      <View>
+        <TouchableOpacity onPress={() => navigation.navigate("ConfirmAddFriends")}>
+          <Image style = {styles.forward} source={Images.forward_icon}/>
+        </TouchableOpacity>
+      </View>
+  }
+
   let contacts = 
     ["Marie Burnett",
     "George Burnside",
@@ -123,11 +144,7 @@ export default function AddFriends({navigation}) {
 
             </View>
         </View>
-        <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Ready')}>
-        <Image style = {styles.forward} source={Images.forward_icon}/>
-        </TouchableOpacity>
-        </View>
+        {forwardButton}
     </View>
     );
   }

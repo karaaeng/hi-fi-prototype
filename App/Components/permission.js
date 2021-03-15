@@ -34,14 +34,14 @@ export default function Permission({navigation}) {
         </View>
         <View style={styles.notification}>
             <Text style = {styles.notification_prompt}>allow ven to access your contacts?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('AddFriends')}>
+            <TouchableOpacity onPress={() => navigation.navigate("AddFriends", {which: 'signup'})}>
                 <View style={styles.button}>
                     <Text style = {styles.yes}>yes!</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {
             setuserFriends("")
-            navigation.navigate('Ready')
+            navigation.navigate("Ready")
           }}>
                 <Text style={styles.skipbutton}>skip</Text>
             </TouchableOpacity>

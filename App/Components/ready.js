@@ -23,7 +23,7 @@ export default function Ready({navigation}) {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
-
+  
     return(
       <View style={styles.container}>
         <View>

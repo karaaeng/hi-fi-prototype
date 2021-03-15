@@ -27,18 +27,6 @@ export default function MapFeed({navigation}) {
     );
   }
 
-  function notificationBar(){
-      return(
-      <View >
-      <TouchableOpacity onPress = { () => {
-        navigation.navigate('FriendFeed')
-      }}>
-        <Image style = {styles.navigationBar} source = {Images.map}/>   
-      </TouchableOpacity>
-                  
-      </View>);
-    }
-
   function addAll() {
     return (
       <TouchableOpacity style = {styles.addButton} onPress = { () => {
@@ -53,7 +41,6 @@ export default function MapFeed({navigation}) {
 
   return (      
     <View style = {styles.container}>
-    {notificationBar()}
     <Text style = {styles.titleText} > Map </Text>
         <MapView style = {styles.map} initialRegion={{latitude: 37.4275, longitude: -122.2, 
           latitudeDelta: 0.005,longitudeDelta: 0.21}}>
@@ -193,6 +180,7 @@ export default function MapFeed({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#FFFFFF",
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
@@ -206,19 +194,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#FED254'
   },
-  navigationBar: {
-    alignSelf: 'center',
-    width: Dimensions.get('window').width * .4,
-    height: Dimensions.get('window').height * 0.05,
-    resizeMode: 'contain'
-  },
   map:{
     alignSelf: 'center',
     width: Dimensions.get('window').width * .9,
     height: Dimensions.get('window').height * .65,
   },
-
-
   addText: {
     fontSize: 20,
     color: '#939393',
@@ -247,11 +227,13 @@ const styles = StyleSheet.create({
     marginRight: 15,
     alignSelf: 'baseline'
   },
-titleText: {
+  titleText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
-    color: '#FED254',
-    marginBottom: 2,
+    color: '#4A4A4A',
+    marginBottom: 5,
+    marginTop: 20,
+    marginBottom: 15,
     alignSelf: 'center',
   },
   

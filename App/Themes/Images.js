@@ -43,9 +43,10 @@ const images = {
   marie: require('../Images/marie.jpg'), 
   map: require('../Images/map_icon.png'), 
   feed: require('../Images/feed_icon.png'), 
-  wilder: require('../Images/wilder.jpg'),
+  wilder: require('../Images/wilder.png'),
   christian: require('../Images/christian.jpg'),
-  cal: require('../Images/cal.jpg'),
+  cal: require('../Images/cal.png'),
+  isa: require('../Images/isabella.jpeg'),
 }
 
 export default images

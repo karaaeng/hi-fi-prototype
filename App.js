@@ -14,7 +14,6 @@ import {
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images, Profiles } from './App/Themes';
-import ButtonBar from './App/Components/ButtonBar'
 
 import LoginScreen from './App/Components/loginScreen'
 import LoginInputScreen from './App/Components/loginInputScreen'
@@ -32,14 +31,29 @@ import Permission from './App/Components/permission'
 import AddFriends from './App/Components/addFriends'
 import Ready from './App/Components/ready'
 
+import NavigationBar from './App/Components/NavigationBar';
+import ButtonBar from './App/Components/ButtonBar';
 import Profile from './App/Components/Profile'
 import FriendFeed from './App/Components/FriendFeed'
+import MapFeed from './App/Components/MapFeed'
+import KaraProfile from './App/Components/KaraProfile';
+import EdenProfile from './App/Components/EdenProfile';
+import MarieProfile from './App/Components/MarieProfile';
+import CalProfile from './App/Components/CalProfile';
+import WilderProfile from './App/Components/WilderProfile';
+import ChristianProfile from './App/Components/ChristianProfile';
+import Chat from './App/Components/Chat';
+import WilderChristianChat from './App/Components/WilderChristianChat';
+import KaraIsaChat from './App/Components/KaraIsaChat';
+import CatEdenChat from './App/Components/CatEdenChat';
+import Home from './App/Components/Home';
 
 import SettingsPage from './App/Components/settings'
 import EditProfile from './App/Components/EditProfile'
 import About from './App/Components/about'
 import Delete from './App/Components/delete'
 import Privacy from './App/Components/privacy'
+import ConfirmAddFriends from './App/Components/ConfirmAddFriends'
 
 
 export default function App() {
@@ -53,9 +67,11 @@ export default function App() {
   });
 
   const Stack = createStackNavigator();
+  const RootStack = createStackNavigator();
 
+function MainStack () {
   return (
-    <NavigationContainer>
+   
     <Stack.Navigator>
       <Stack.Screen name="Login" component={LoginScreen}
       options={{
@@ -83,7 +99,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="Number" component={NumberInput}
@@ -93,7 +111,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="Confirm" component={ConfirmationCode}
@@ -103,7 +123,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="Location" component={LocationInput}
@@ -113,7 +135,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="Photo" component={PhotoSelect}
@@ -123,7 +147,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="PhotoOptions" component={PhotoOptions}
@@ -133,7 +159,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="SelectedPhoto" component={SelectedPhoto}
@@ -143,7 +171,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="Pronouns" component={PronounsInput}
@@ -153,7 +183,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="Interests" component={InterestsInput}
@@ -163,7 +195,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="Status" component={StatusSelect}
@@ -173,7 +207,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="AddFriendsPermission" component={Permission}
@@ -183,7 +219,9 @@ export default function App() {
           },
         title: '',
         headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
       }} />
       <Stack.Screen name="AddFriends" component={AddFriends}
@@ -201,7 +239,7 @@ export default function App() {
         title: '',
       }} />
       <Stack.Screen name="Profile" component={Profile}
-        options={{
+        options={({navigation}) => ({
           headerStyle: {
             height: 110,
           },
@@ -211,10 +249,21 @@ export default function App() {
           fontSize: 30,
           color: '#4A4A4A',
         },
-        headerLeft: () => (
-          <View></View>
+        headerRight: () => (
+          <TouchableOpacity onPress = { () => {
+            navigation.navigate("SettingsPage");
+          }}>
+          <Icon name="gear" style={styles.navigationBarSettings}/>
+        </TouchableOpacity>
           ),
-      }} />
+          headerLeft: () => (
+            <TouchableOpacity onPress = { () => {
+              navigation.navigate("AddFriends", {which: 'profile'})
+            }}>
+            <Icon name="address-book-o" style={styles.navigationBarAddress}/>
+            </TouchableOpacity>
+            ),
+        })}/>
         <Stack.Screen name="SettingsPage" component={SettingsPage}
         options={{
           headerStyle: {
@@ -274,18 +323,154 @@ export default function App() {
         },
       }} />
       <Stack.Screen name="FriendFeed" component={FriendFeed}
+        options={({navigation}) => ({
+          headerStyle: {
+            height: 110,
+          },
+        title: '',
+        header: () => (
+          <View style = {styles.headerContainer}>
+            <TouchableOpacity onPress = { () => {
+              navigation.navigate('MapFeed')
+            }}>
+            <Image style = {styles.navigationBar} source = {Images.feed}/>   
+          </TouchableOpacity>       
+          </View>
+          ),
+      })} />
+      <Stack.Screen name='MapFeed' component={MapFeed}
+       options={({navigation}) => ({
+        headerStyle: {
+          height: 110,
+        },
+      title: '',
+      header: () => (
+        <View style = {styles.headerContainer}>
+          <TouchableOpacity onPress = { () => {
+            navigation.navigate('FriendFeed')
+          }}>
+          <Image style = {styles.navigationBar} source = {Images.map}/>   
+        </TouchableOpacity>       
+        </View>
+        ),
+    })} />
+    <Stack.Screen name="Chat" component={Chat}
+          options={{
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+        }} />
+
+    <Stack.Screen name="EdenProfile" component={EdenProfile}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="KaraProfile" component={KaraProfile}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="MarieProfile" component={MarieProfile}
+          options={{
+          title: '',
+        }} />
+        <Stack.Screen name="WilderProfile" component={WilderProfile}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="CalProfile" component={CalProfile}
+          options={{
+          title: '',
+        }} />
+        <Stack.Screen name="ChristianProfile" component={ChristianProfile}
+          options={{
+          title: '',
+        }} />
+        <Stack.Screen name="WilderChristianChat" component={WilderChristianChat}
+          options={{
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+        }} />
+
+        <Stack.Screen name="KaraIsaChat" component={KaraIsaChat}
+          options={{
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+        }} />
+         <Stack.Screen name="CatEdenChat" component={CatEdenChat}
+          options={{
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+        }} />
+        <Stack.Screen name="Home" component={Home}
+          options={{
+          title: '',
+        }} />
+    </Stack.Navigator>
+
+   );
+}
+
+return (
+  <NavigationContainer>
+    <RootStack.Navigator mode="modal">
+      <RootStack.Screen
+        name="Main"
+        component={MainStack}
+        options={{
+          headerStyle: {
+          },
+           headerShown: false 
+        }}
+      />
+      <RootStack.Screen name="ConfirmAddFriends" component={ConfirmAddFriends}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerLeft: () => (
+         <View></View>
+          ),
       }} />
-    </Stack.Navigator>
-  </NavigationContainer>
+    </RootStack.Navigator>
+    </NavigationContainer>
 );
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    backgroundColor: "#FFFFFF",
+  },
   header: {
     marginTop: 60,
     height: 58,
@@ -301,4 +486,21 @@ const styles = StyleSheet.create({
     height: Platform.OS === 'ios' ? 44 : 56,
     margin: Dimensions.get('window').width * .025
   },
+  navigationBarSettings: {
+    fontSize: 40,
+    color: '#4A4A4A',
+    marginRight: 15,
+  }, 
+  navigationBarAddress: {
+    fontSize: 40,
+    color: '#4A4A4A',
+    marginLeft: 15,
+  }, 
+  navigationBar: {
+    marginTop: 50,
+    alignSelf: 'center',
+    width: Dimensions.get('window').width * .5,
+    height: Dimensions.get('window').height * 0.05,
+    resizeMode: 'contain',
+  }
 });

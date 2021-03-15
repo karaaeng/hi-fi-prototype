@@ -34,7 +34,7 @@ export default function ButtonBar({navigation, which}) {
   }
 
   function home(selected){
-    if (selected === 'notifications'){
+    if (selected === 'home'){
       return (<Image style = {styles.buttonFirstTier} source={Images.homeselected} />);
     } else{
       return (<Image style = {styles.buttonFirstTier} source={Images.home} />);
@@ -44,40 +44,35 @@ export default function ButtonBar({navigation, which}) {
   return (
     <View style = {styles.buttonBar}>
       <TouchableOpacity onPress = { () => {
-        console.log("home pressed"); 
+        navigation.navigate('Home');
       }}>
         {home(which)}
       </TouchableOpacity>
 
       <TouchableOpacity onPress = { () => {
-        console.log(which); 
+        navigation.navigate('Chat');
       }}>
         {chat(which)}
       </TouchableOpacity>
 
       <TouchableOpacity onPress = { () => {
-        navigation.navigate('FriendFeed')
+        navigation.navigate('FriendFeed');
       }}>
         {feed(which)}
       </TouchableOpacity>
 
       <TouchableOpacity onPress = { () => {
-        navigation.navigate('Profile')
+        navigation.navigate('Profile');
       }}>
         {profile(which)}
-      </TouchableOpacity>
-        
-        
-        
-        
+      </TouchableOpacity> 
     </View>
     );
-  
 }
 
 const styles = StyleSheet.create({
   buttonBar: {
-    marginBottom: 30, 
+    marginBottom: 20, 
     flexDirection: 'row',
     justifyContent: 'space-evenly', 
     margin: Dimensions.get('window').width * .02
@@ -89,5 +84,4 @@ const styles = StyleSheet.create({
     borderRadius: Dimensions.get('window').height * .1 * 0.5,
   },
 
-  
 });
