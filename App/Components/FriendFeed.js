@@ -9,11 +9,26 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import {
+    useFonts,
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
+  } from '@expo-google-fonts/comfortaa'; 
 
 
 export default function FriendFeed({navigation}) {
   const [text, setText] = useState("");
 
+  let [fontsLoaded] = useFonts({
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
+  });
 
   function notification(text, image, profileName) {
     return (
@@ -22,7 +37,7 @@ export default function FriendFeed({navigation}) {
       }}>
       <View style = {styles.notificationInside}>
       <Image style = {styles.profileImages} source = {image}/>
-        <Text style = {styles.notificationText}> {text} </Text>
+        <Text style = {styles.notificationText}>{text} </Text>
         </View>
       </TouchableOpacity>
     );
@@ -43,9 +58,9 @@ export default function FriendFeed({navigation}) {
   return (      
     <View style = {styles.container}>
     {notificationBar()}
-    <Text style = {styles.titleText} > Friend Feed </Text>
+    <Text style = {styles.titleText} > newsfeed </Text>
     <ScrollView>
-      {notification("Eden created a connection in New York, NY!", Images.eden, "EdenProfile")}
+      {notification('Eden created a connection in New York, NY!', Images.eden, "EdenProfile")}
       {notification("Cal was connected with someone in Santa Cruz, CA!", Images.cal, "CalProfile")}
       {notification("Kara moved to Los Angeles, CA!", Images.kara, "KaraProfile")}
       {notification("Marie moved to Newport Beach, CA!", Images.marie, "MarieProfile")}
@@ -62,76 +77,54 @@ export default function FriendFeed({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#FFFFFF",
     flex: 1,
     flexDirection: 'column',
-    alignContent: 'center', 
-    justifyContent: 'space-between'
   },
   icon: {
     fontSize: 25,
     tintColor: '#939393'
   }, 
-  addButton: {
-    marginTop: 100,
-    alignItems: "center",
-    alignSelf: 'flex-end', 
-    padding: 10,
-    height: 50,
-    width: 150,
-    marginRight: 47,
-    backgroundColor: "#FFF0C1",
-    borderRadius: 30,
-  },
   profileImages:{
-    width: 40, 
-    height: 40,
-    borderRadius: 20,
+    width: 60, 
+    height: 60,
+    borderRadius: 115,
     marginLeft: 10,
-    marginTop: 30,
-    marginBottom: 65,
-  },
-
-  addText: {
-    fontSize: 20,
-    color: '#939393',
   },
   notification: {
-    marginTop: 20,
-    
-    borderRadius: 30,
-    padding: 20,
     height: 150,
     width: 336,
-    borderWidth: 2,
-    borderColor: "#FFF0C1",
+    borderTopWidth: 1,
+    borderColor: "#E5E5E5",
     alignSelf: 'center',
+    justifyContent: "center",
   },
-
-
   navigationBar: {
     alignSelf: 'center',
-    width: Dimensions.get('window').width * .4,
+    width: Dimensions.get('window').width * .5,
     height: Dimensions.get('window').height * 0.05,
     resizeMode: 'contain'
   },
   notificationInside: {
     flexDirection: 'row', 
-    alignItems: 'baseline',
+    alignItems: 'center',
     color: '#939393',
   },
   notificationText: {
-    fontFamily: 'Comfortaa_700Bold',
-    fontSize: 20,
-    color: '#939393',
-    marginLeft: 10,
-    marginRight: 15,
-    alignSelf: 'baseline'
+    fontFamily: 'Comfortaa_400Regular',
+    fontSize: 23,
+    color: '#4A4A4A',
+    marginLeft: 20,
+    marginRight: 50,
+    textAlignVertical: "center",
   },
 titleText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
-    color: '#FED254',
+    color: '#4A4A4A',
     marginBottom: 5,
+    marginTop: 20,
+    marginBottom: 25,
     alignSelf: 'center',
   },
   

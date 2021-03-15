@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
-import { Dimensions, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { Keyboard, TextInput, Dimensions, ScrollView, TouchableOpacity, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 import NotificationBar from './NotificationBar';
@@ -12,8 +12,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 export default function Chat({navigation}) {
-  const [text, setText] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
+  function searchBar(){
+    return(
+    <View style={styles.searchBar}>
+      <Icon name="search" style={styles.searchicon} onPress={() => {console.log({searchTerm})}}/>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+              <TextInput value={searchTerm} onChangeText={(searchTerm) => {setSearchTerm(searchTerm)}} style={styles.textInput} placeholder = "Search your chats"/>
+          </TouchableWithoutFeedback>
+      </View>
+      ); 
+  }
 
   function notification(image1, image2, name1, name2, preview, first, chatName) {
     if (first ===true){
@@ -52,10 +62,13 @@ export default function Chat({navigation}) {
    
   }
 
+  
+
 
   return (      
     <View style = {styles.container}>
     <Text style = {styles.titleText} > chat </Text>
+    {searchBar()}
     <ScrollView>
       {notification(Images.harold, Images.eden, "Isa", "Eden", 
         "Hey Cat & Eden!  I love you both so much and know you’d make the cutest friends! Now go...", 
@@ -102,45 +115,64 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginLeft: -10
   },
-
-  notification: {
+  searchBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 3,
+    borderColor: '#E5E5E5',
+    height: 50,
+    width: 375,
+    borderRadius: 35,
     marginTop: 10,
-    
-    borderRadius: 30,
-    padding: 20,
+    marginBottom: 10,
+    alignSelf: 'center', 
+    marginLeft: 20,
+  },
+  textInput: {
+    height: 81,
+    width: 300,
+  },
+  searchicon: {
+    fontSize: 25,
+    color: '#4A4A4A',
+    marginRight: 5,
+    color: "#E5E5E5",
+  },
+  notification: {
     height: 150,
-    width: 400,
+    width: 336,
     borderBottomWidth: 2,
-    borderColor: "#939393",
+    borderColor: "#E5E5E5",
     alignSelf: 'center',
+    justifyContent: "center",
   },
   firstNotification: {
-    marginTop: 10,
-    
-    borderRadius: 30,
-    padding: 20,
     height: 150,
-    width: 400,
+    width: 336,
     borderTopWidth: 2,
-    borderBottomWidth: 2,
-    borderColor: "#939393",
+    borderColor: "#E5E5E5",
     alignSelf: 'center',
+    justifyContent: "center",
+    borderBottomWidth: 2,
+
   },
   peopleInChat:{
-    fontFamily: 'Comfortaa_700Bold',
+    fontFamily: 'Comfortaa_400Bold',
     fontSize: 18,
     color: '#4A4A4A',
-    marginLeft: 10,
-    marginRight: 15,
-    alignSelf: 'baseline'
+    marginLeft: 20,
+    marginRight: 50,
+    textAlignVertical: "center",
   },
   chatPreview:{
-    fontFamily: 'Comfortaa_700Bold',
+    fontFamily: 'Comfortaa_400Regular',
     fontSize: 14,
     color: '#4A4A4A',
-    marginLeft: 10,
-    marginRight: 15,
-    alignSelf: 'baseline'
+    marginLeft: 20,
+    marginRight: 50,
+    textAlignVertical: "center",
   },
   navigationBar: {
     alignSelf: 'center',

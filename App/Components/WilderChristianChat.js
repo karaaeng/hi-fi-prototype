@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
-import { Dimensions, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { Keyboard, TextInput, Dimensions, ScrollView, TouchableOpacity, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 import NotificationBar from './NotificationBar';
@@ -13,30 +13,36 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 export default function WilderChristianChat({navigation}) {
   const [text, setText] = useState("");
+  const [isVisible, setIsVisible] = useState(0);
 
-  function chatBubble(image, name, text){
-    return(
-      <View>
-        <View style = {styles.message}> 
-        <Text style = {styles.chatText}>{text}</Text>
-        </View>
-
-        <View style = {styles.help}> 
-          <View style = {styles.chatDetails}>
-            <Image style = {styles.profileImages} source = {image}/>
-            <Text style = {styles.peopleInChat}> {name} </Text>
+  function chatBubble(image, name, givenText){
+    if ({isVisible} !== 0){
+      return(
+        <View>
+          <View style = {styles.message}> 
+          <Text style = {styles.chatText}>{givenText}</Text>
           </View>
-        </View>
 
-      </View>
-    );
+          <View style = {styles.help}> 
+            <View style = {styles.chatDetails}>
+              <Image style = {styles.profileImages} source = {image}/>
+              <Text style = {styles.peopleInChat}> {name} </Text>
+            </View>
+          </View>
+
+        </View>
+      );
+    }
   }
 
-  function sendChat(image, name, text){
-    return(
+  function sendChat(image, name, givenText){
+    console.log({isVisible})
+    if ({isVisible} !== 0 ){
+      console.log('got here');
+      return(
       <View>
         <View style = {styles.message}> 
-        <Text style = {styles.chatSent}>{text}</Text>
+          <Text style = {styles.chatSent}>{givenText.text}</Text>
         </View>
 
         <View style = {styles.helpSend}> 
@@ -48,6 +54,8 @@ export default function WilderChristianChat({navigation}) {
 
       </View>
     );
+    }
+    
   }
   
   function imageHeader (image1, image2, image3) {
@@ -70,19 +78,42 @@ export default function WilderChristianChat({navigation}) {
     );
   }
   
+  function inputText() {
+    return (
+      <View style={styles.inputBar}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <TextInput
+            value={text}
+            onChangeText={(text) => {
+            setText(text)
+          }}
+          style={styles.textInput}
+          />
+        </TouchableWithoutFeedback>
+        <Icon name="arrow-circle-o-up" style={styles.icon} 
+              onPress={() => {
+                setIsVisible(1)
+                
+          }}
+        />
+        </View>
+        
 
+    );
+  }
 
   return (      
     <View style = {styles.container}>
     <Text style = {styles.titleText} > chat </Text>
     {imageHeader(Images.harold, Images.wilder, Images.christian)}
     <ScrollView>
-     {sendChat(Images.harold, "Me", "You both have absolutley incredible sisters, so I thought you guys should meet")}
+     {sendChat(Images.harold, "Me", {text})}
      {chatBubble(Images.wilder, "Wilder", "Hey, nice to meet you!")}
      {chatBubble(Images.christian, "Christian", "I've heard so much about you!")}
 
   
       </ScrollView>
+      {inputText()}
       <ButtonBar navigation = {navigation} which = {"chat"}/>
     </View>
     );
@@ -97,6 +128,24 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly', 
     backgroundColor: "#FFFF"
   },
+  inputBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 3,
+    borderColor: '#E5E5E5',
+    height: 81,
+    width: 345,
+    borderRadius: 35,
+    marginTop: 30,
+  },
+  textInput: {
+    height: 81,
+    width: 270,
+  },
+      
   middleImage: {
     marginTop: -30, 
     marginLeft: -20
@@ -137,8 +186,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    fontSize: 25,
-    tintColor: '#939393'
+    fontSize: 35,
+    color: '#4A4A4A'
   }, 
   headerImage: {
     width: 60, 
@@ -181,9 +230,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 18,
     color: '#4A4A4A',
-    marginLeft: 50,
+    marginLeft: 20,
     width: 250,
-    marginRight: 15,
     justifyContent: 'center', 
     backgroundColor: "#E5E5E5", 
     borderRadius: 20, 
@@ -193,9 +241,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 18,
     color: '#4A4A4A',
-    marginLeft: 50,
     width: 250,
-    marginRight: 15,
+    marginRight: 20,
     justifyContent: 'center', 
     backgroundColor: "#FFF0C1", 
     alignSelf: 'flex-end',
