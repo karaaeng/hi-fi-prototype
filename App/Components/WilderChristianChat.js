@@ -11,9 +11,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 
-export default function WilderChristianChat({navigation}) {
+export default function WilderChristianChat({route, navigation}) {
   const [text, setText] = useState("");
   const [isVisible, setIsVisible] = useState(0);
+  const [didLeave, setDidLeave] = useState(false);
 
   function chatBubble(image, name, givenText){
     if ({isVisible} !== 0){
@@ -34,6 +35,9 @@ export default function WilderChristianChat({navigation}) {
       );
     }
   }
+
+  let  {status}  = route.params;
+  console.log(status);
 
   function sendChat(image, name, givenText){
     console.log({isVisible})
@@ -79,6 +83,7 @@ export default function WilderChristianChat({navigation}) {
   }
   
   function inputText() {
+    if (didLeave === false) {
     return (
       <View style={styles.inputBar}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -99,10 +104,23 @@ export default function WilderChristianChat({navigation}) {
         />
         </View>
         </View>
-        
-
     );
+        } else {
+          return (
+          <View></View>
+          );
+        }
   }
+
+  let leftChat = null;
+
+    if (didLeave === true) {
+      leftChat =
+        <Text style = {styles.notice}>you left the chat.</Text>;
+    } else {
+      leftChat =
+        <View></View>;
+    }
 
   return (      
     <View style = {styles.container}>
@@ -111,7 +129,7 @@ export default function WilderChristianChat({navigation}) {
      {sendChat(Images.cat, "Me", "You both have absolutley incredible sisters, so I thought you guys should meet!")}
      {chatBubble(Images.wilder, "Wilder", "Hey, nice to meet you!")}
      {chatBubble(Images.christian, "Christian", "I've heard so much about you!")}
-    <Text style = {styles.notice}>you left the chat.</Text>
+      {leftChat}
       </ScrollView>
       {inputText()}
     </View>

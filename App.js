@@ -55,8 +55,9 @@ import Delete from './App/Components/delete'
 import Privacy from './App/Components/privacy'
 import ConfirmAddFriends from './App/Components/ConfirmAddFriends'
 
-
 export default function App() {
+
+  const [didLeave, setDidLeave] = useState(false);
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -68,6 +69,23 @@ export default function App() {
 
   const Stack = createStackNavigator();
   const RootStack = createStackNavigator();
+
+  function leaveChatButton({navigation}) {
+    if (didLeave === false) {
+      return (
+        <TouchableOpacity onPress = { () => {
+          setDidLeave(true);
+          navigation.navigate("WilderChristianChat", {status: {didLeave}});
+        }}>
+        <View style={styles.leavechatbutton}> 
+          <Text style={styles.leavechatbuttontext}>leave chat</Text>
+        </View>
+        </TouchableOpacity>
+      );
+      } else {
+        <View></View>
+      }
+  }
 
 function MainStack () {
   return (
@@ -395,7 +413,7 @@ function MainStack () {
           title: '',
         }} />
         <Stack.Screen name="WilderChristianChat" component={WilderChristianChat}
-          options={{
+          options={({navigation}) => ({
             headerStyle: {
               height: 110,
             },
@@ -405,8 +423,10 @@ function MainStack () {
               fontSize: 30,
               color: '#4A4A4A',
             },
-        }} />
-
+            headerRight: () => (
+            leaveChatButton({navigation})
+              ),
+        })} />
         <Stack.Screen name="KaraIsaChat" component={KaraIsaChat}
           options={{
             headerStyle: {
@@ -502,5 +522,22 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * .5,
     height: Dimensions.get('window').height * 0.05,
     resizeMode: 'contain',
-  }
+  },
+  leavechatbutton: {
+    backgroundColor: "#FED254",
+    height: 55,
+    width: 90,
+    borderRadius: 24,
+    marginRight: 15,
+    justifyContent: "center",
+  },
+  leavechatbuttontext: { 
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 18,
+    color: '#4A4A4A',
+    textAlign: "center",
+    textAlignVertical: "center",
+    marginLeft: 20,
+    marginRight: 20,
+  },
 });
