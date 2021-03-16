@@ -72,7 +72,7 @@ export default function CatEdenChat({navigation}) {
             <Image style = {styles.headerImage} source = {image3}/>
           </View>
         </View>
-        <Text style = {styles.headerText}>Wilder & Christian</Text>
+        <Text style = {styles.headerText}>Cat & Eden</Text>
       </View> 
 
     );
@@ -106,7 +106,7 @@ export default function CatEdenChat({navigation}) {
 
   return (      
     <View style = {styles.container}>
-    {imageHeader(Images.cat, Images.wilder, Images.christian)}
+    {imageHeader(Images.cat, Images.isa, Images.eden)}
     <ScrollView>
      {sendChat(Images.cat, "Me", "You both have absolutley incredible sisters, so I thought you guys should meet!")}
      {chatBubble(Images.wilder, "Wilder", "Hey, nice to meet you!")}

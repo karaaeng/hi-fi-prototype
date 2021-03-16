@@ -19,7 +19,7 @@ import {
   } from '@expo-google-fonts/comfortaa'; 
 
 
-export default function Home({navigation}) {
+export default function CatEdenConnect({navigation}) {
   const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
@@ -30,50 +30,38 @@ export default function Home({navigation}) {
     Comfortaa_700Bold,
   });
 
-  function acceptOrRejct(connectionProfile, connectAccept){
+  function chatOrReject(){
     return (
     <View style = {styles.acceptOrReject}>
-      <TouchableOpacity style = {styles.buttonAccept} onPress = { () => {
-        navigation.navigate(connectAccept)
+      <TouchableOpacity style = {styles.buttonViewChat} onPress = { () => {
+        navigation.navigate("CatEdenChat")
       }}>
-        <Text style = {styles.buttonText}> accept </Text>
+        <Text style = {styles.buttonText}> View Chat </Text>
        
       </TouchableOpacity>
 
-      <TouchableOpacity style = {styles.buttonMoreInfo} onPress = { () => {
-        navigation.navigate(connectionProfile)
+      <TouchableOpacity style = {styles.buttonIgnore} onPress = { () => {
+        navigation.navigate("Home")
       }}>
-        <Text style = {styles.buttonText}> more info </Text>
+        <Text style = {styles.buttonText}> ignore </Text>
        
       </TouchableOpacity>
       </View>
     );
   }
 
-  function notification(first, text, connector, connectionImage, connectionProfile, chatName) {
-    if (first === true){
-      return (
-      <View style = {styles.firstNotification}>
-      <View style = {styles.notificationInside}>
-        <Image style = {styles.profileImages} source = {connector}/>
-        <Image style = {styles.secondImage} source = {connectionImage}/>
-          <Text style = {styles.notificationText}>{text}</Text>
-          </View>
-          {acceptOrRejct(connectionProfile, chatName)}
-      </View>
-    );
-    } else{
-      return (
+  function notification(text) {
+    return (
       <View style = {styles.notification}>
-      <View style = {styles.notificationInside}>
-        <Image style = {styles.profileImages} source = {connector}/>
-        <Image style = {styles.secondImage} source = {connectionImage}/>
+        
+        <View style = {styles.notificationInside}>
+        
           <Text style = {styles.notificationText}>{text}</Text>
           </View>
-          {acceptOrRejct(connectionProfile, chatName)}
+          {chatOrReject()}
       </View>
     );
-    }
+
     
   }
 
@@ -91,11 +79,12 @@ export default function Home({navigation}) {
 
   return (      
     <View style = {styles.container}>
-    {notificationBar()}
-    <Text style = {styles.titleText} > connect me </Text>
+    <View style = {styles.images}>
+        <Image style = {styles.profileImages} source = {Images.cat}/>
+        <Image style = {styles.secondImage} source = {Images.eden}/>
+        </View>
     <ScrollView>
-      {notification(true, 'Isa connected you with Eden', Images.isa, Images.eden, "EdenProfileSuggested", "CatEdenConnect")}
-      {notification(false, 'Wilder connected you with Christian', Images.wilder, Images.christian, "CatEdenConnect", "WilderChristianChat")}
+      {notification('Congrats! You and Eden are now connected.')}
 
   
       </ScrollView>
@@ -112,10 +101,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   acceptOrReject:{
-    flexDirection: 'row', 
-    justifyContent: 'space-between'
+    flexDirection: 'column', 
+    alignItems: 'center'
   },
-  buttonAccept: {
+  buttonViewChat: {
     fontFamily: 'Comfortaa_400Regular',
     fontSize: 20,
     marginTop: 10,
@@ -127,52 +116,49 @@ const styles = StyleSheet.create({
     width: 152,
     justifyContent: 'center'
   },
-  buttonMoreInfo: {
+  buttonIgnore: {
     fontFamily: 'Comfortaa_400Regular',
     fontSize: 20,
     marginTop: 10,
     alignItems: "center",
     alignContent: 'center',
-    backgroundColor: "#FFF0C1",
+    backgroundColor: "#E5E5E5",
     borderRadius: 30,
     height: 55,
     width: 152,
     justifyContent: 'center'
+ },
+ images: {
+  flexDirection: 'row', 
+  justifyContent: 'center', 
+  margin: 80
  },
   icon: {
     fontSize: 25,
     tintColor: '#939393'
   }, 
   profileImages:{
-    width: 60, 
-    height: 60,
-    borderRadius: 30,
+    width: 102, 
+    height: 102,
+    borderRadius: 51,
   },
   secondImage:{
-    width: 60, 
-    height: 60,
-    borderRadius: 30,
+    width: 102, 
+    height: 102,
+    borderRadius: 51,
     marginLeft: -15
   },
   notification: {
-    height: 210,
-    width: 336,
-    borderBottomWidth: 2,
+    height: 270,
+    width: 357,
+    borderRadius: 20,
+    backgroundColor: "#FFF0C1",
     borderColor: "#E5E5E5",
     alignSelf: 'center',
     justifyContent: "center",
     padding: 10
   },
-  firstNotification: {
-    height: 210,
-    width: 336,
-    borderTopWidth: 2,
-    borderColor: "#E5E5E5",
-    alignSelf: 'center',
-    justifyContent: "center",
-    borderBottomWidth: 2,
-
-  },
+  
   navigationBar: {
     alignSelf: 'center',
     width: Dimensions.get('window').width * .5,

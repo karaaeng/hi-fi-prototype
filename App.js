@@ -23,6 +23,13 @@ import WilderChristianChat from './App/Components/WilderChristianChat';
 import KaraIsaChat from './App/Components/KaraIsaChat';
 import CatEdenChat from './App/Components/CatEdenChat';
 import Home from './App/Components/Home';
+import ConnectFriends from './App/Components/ConnectFriends';
+import EdenProfileSuggested from './App/Components/EdenProfileSuggested';
+import KaraProfileConnect from './App/Components/KaraProfileConnect';
+import MarieProfileConnect from './App/Components/MarieProfileConnect';
+import IsaProfileConnect from './App/Components/IsaProfileConnect';
+import CatEdenConnect from './App/Components/CatEdenConnect';
+import ConnectingIsaWithFriends from './App/Components/ConnectingIsaWithFriends';
 
 
 
@@ -112,11 +119,47 @@ export default function App() {
           options={{
           title: '',
         }} />
-
+        
         <Stack.Screen name="Home" component={Home}
           options={{
           title: '',
+        }} />        
+
+        <Stack.Screen name="ConnectFriends" component={ConnectFriends}
+          options={{
+          title: '',
         }} />
+
+        <Stack.Screen name="EdenProfileSuggested" component={EdenProfileSuggested}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="KaraProfileConnect" component={KaraProfileConnect}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="MarieProfileConnect" component={MarieProfileConnect}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="IsaProfileConnect" component={IsaProfileConnect}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="CatEdenConnect" component={CatEdenConnect}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="ConnectingIsaWithFriends" component={ConnectingIsaWithFriends}
+          options={{
+          title: '',
+        }} />
+
       </Stack.Navigator>
     </NavigationContainer>
 

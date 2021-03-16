@@ -7,7 +7,7 @@ import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 
 
-export default function EdenProfile ({navigation}){
+export default function MarieProfile ({navigation}){
   const [text, setText] = useState("");
 
   function statusIcon(status) {
@@ -54,20 +54,11 @@ export default function EdenProfile ({navigation}){
      );
   }
 
-  function searchCircle() {
-    return (
-      <TouchableOpacity style = {styles.button} onPress = { () => {
-        console.log("serach your circle pressed"); 
-      }}>
-        <Text style = {styles.buttonText}> search your circle </Text>
-       
-      </TouchableOpacity>
-    );
-  }
+
 
   function titleText(){
     return(
-    <Text style = {styles.titleText}> connecting Marie </Text>
+    <Text style = {styles.titleText}> Viewing Marie </Text>
     );
   }
 
@@ -107,7 +98,6 @@ export default function EdenProfile ({navigation}){
             
           </View>
         </View>
-        {searchCircle()}
       </View>
       <ButtonBar navigation = {navigation} which = {""}/>
     </View> 
@@ -119,18 +109,20 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between', 
+    backgroundColor: "#FFFF"
   },
   name: { 
     fontWeight: 'bold', 
     fontSize: 25, 
     alignSelf: 'center' 
   }, 
-    titleText: {
+  titleText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
     color: '#FED254',
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 10,
     alignSelf: 'center',
   },
    button: {

@@ -42,29 +42,10 @@ export default function EdenProfile ({navigation}){
 
   function titleText(){
     return(
-    <Text style = {styles.titleText}> connection from Isa </Text>
+    <Text style = {styles.titleText}> Viewing Eden </Text>
     );
   }
 
-  function acceptOrRejct(){
-    return (
-    <View>
-      <TouchableOpacity style = {styles.buttonAccept} onPress = { () => {
-        console.log("accept pressed"); 
-      }}>
-        <Text style = {styles.buttonText}> accept </Text>
-       
-      </TouchableOpacity>
-
-      <TouchableOpacity style = {styles.buttonIgnore} onPress = { () => {
-        console.log("ignore pressed"); 
-      }}>
-        <Text style = {styles.buttonText}> ignore </Text>
-       
-      </TouchableOpacity>
-      </View>
-    );
-  }
   
 
   function location(){
@@ -116,7 +97,6 @@ export default function EdenProfile ({navigation}){
            {interests()}
             </View>
           </View>
-          {acceptOrRejct()}
         </View>
       </View>
       <ButtonBar navigation = {navigation} which = {""}/>
@@ -129,7 +109,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between', 
+    backgroundColor: "#FFFF"
   },
   name: { 
     fontWeight: 'bold', 
@@ -162,7 +143,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
     color: '#FED254',
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 10,
     alignSelf: 'center',
   },
   buttonText: {

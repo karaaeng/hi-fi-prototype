@@ -5,9 +5,12 @@ import { Dimensions, TouchableOpacity } from 'react-native';
 import EditProfile from './EditProfile';
 import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
-export default function CalProfile ({navigation}){
+
+export default function KaraProfile ({navigation}){
   const [text, setText] = useState("");
 
   function statusIcon(status) {
@@ -41,7 +44,7 @@ export default function CalProfile ({navigation}){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
-      <Text style={ styles.theirInfo}> Moutain View, CA </Text> 
+      <Text style={ styles.theirInfo}> Los Angeles, CA </Text> 
       </View>
      );
   }
@@ -49,17 +52,17 @@ export default function CalProfile ({navigation}){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
-      <Text style={ styles.theirInfo}> he/him </Text> 
+      <Text style={ styles.theirInfo}> she/her </Text> 
       </View>
      );
   }
 
-  function searchCircle() {
+  function createConnection() {
     return (
       <TouchableOpacity style = {styles.button} onPress = { () => {
-        console.log("serach your circle pressed"); 
+        navigation.navigate("KaraIsaChat")
       }}>
-        <Text style = {styles.buttonText}> search your circle </Text>
+        <Text style = {styles.buttonText}> create connection </Text>
        
       </TouchableOpacity>
     );
@@ -67,7 +70,7 @@ export default function CalProfile ({navigation}){
 
   function titleText(){
     return(
-    <Text style = {styles.titleText}> Viewing Cal </Text>
+    <Text style = {styles.titleText}> connecting Isa </Text>
     );
   }
 
@@ -75,27 +78,26 @@ export default function CalProfile ({navigation}){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
-      <Text style={ styles.theirInfo}> cooking, surfing, travelling </Text> 
+      <Text style={ styles.theirInfo}> knitting, dogs, reading </Text> 
       </View>
      );  }
 
-
     const fake = "available";
     let status; 
-    
+      
     return (     
     <View style = {styles.container}>
         {titleText()}
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
-          <Image style={styles.profilePicture} source={Images.cal}/>
+          <Image style={styles.profilePicture} source={Images.kara}/>
           
 
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-           <Text style={ styles.name }>Cal </Text>
-            {statusIcon("open")}
+           <Text style={ styles.name }>Kara </Text>
+            {statusIcon("available")}
           </View>
           <View style = {styles.information}>
            {location()}         
@@ -107,8 +109,9 @@ export default function CalProfile ({navigation}){
             
           </View>
         </View>
+        {createConnection()}
       </View>
-      <ButtonBar navigation = {navigation} which = {""}/>
+      <ButtonBar navigation = {navigation} which = {"home"}/>
     </View> 
     );
   }
@@ -134,7 +137,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'center',
   },
-   button: {
+  button: {
     marginTop: 30,
     alignItems: "center",
     backgroundColor: "#FED254",
@@ -149,7 +152,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#4A4A4A',
   },
-
   category: {
     color: '#FED254', 
     fontSize: 15
@@ -189,6 +191,7 @@ const styles = StyleSheet.create({
  
   },
   profilePicture: {
+    //flex: 3, 
     width: Dimensions.get('window').width * .7,
     height: Dimensions.get('window').width * .7,
     alignSelf: 'center', 

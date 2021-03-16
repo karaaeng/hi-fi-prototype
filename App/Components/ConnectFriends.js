@@ -19,7 +19,7 @@ import {
   } from '@expo-google-fonts/comfortaa'; 
 
 
-export default function Home({navigation}) {
+export default function ConnectFriends({navigation}) {
   const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
@@ -30,47 +30,36 @@ export default function Home({navigation}) {
     Comfortaa_700Bold,
   });
 
-  function acceptOrRejct(connectionProfile, connectAccept){
+  function searchCircle(connectionProfile) {
     return (
-    <View style = {styles.acceptOrReject}>
-      <TouchableOpacity style = {styles.buttonAccept} onPress = { () => {
-        navigation.navigate(connectAccept)
+      <TouchableOpacity style = {styles.button} onPress = { () => {
+        navigation.navigate(connectionProfile);
       }}>
-        <Text style = {styles.buttonText}> accept </Text>
+        <Text style = {styles.buttonText}> search your circle </Text>
        
       </TouchableOpacity>
-
-      <TouchableOpacity style = {styles.buttonMoreInfo} onPress = { () => {
-        navigation.navigate(connectionProfile)
-      }}>
-        <Text style = {styles.buttonText}> more info </Text>
-       
-      </TouchableOpacity>
-      </View>
     );
   }
 
-  function notification(first, text, connector, connectionImage, connectionProfile, chatName) {
+  function notification(first, text, image, connectionProfile) {
     if (first === true){
       return (
       <View style = {styles.firstNotification}>
       <View style = {styles.notificationInside}>
-        <Image style = {styles.profileImages} source = {connector}/>
-        <Image style = {styles.secondImage} source = {connectionImage}/>
+        <Image style = {styles.profileImages} source = {image}/>
           <Text style = {styles.notificationText}>{text}</Text>
           </View>
-          {acceptOrRejct(connectionProfile, chatName)}
+          {searchCircle(connectionProfile)}
       </View>
     );
     } else{
       return (
       <View style = {styles.notification}>
       <View style = {styles.notificationInside}>
-        <Image style = {styles.profileImages} source = {connector}/>
-        <Image style = {styles.secondImage} source = {connectionImage}/>
+        <Image style = {styles.profileImages} source = {image}/>
           <Text style = {styles.notificationText}>{text}</Text>
           </View>
-          {acceptOrRejct(connectionProfile, chatName)}
+          {searchCircle(connectionProfile)}
       </View>
     );
     }
@@ -78,24 +67,23 @@ export default function Home({navigation}) {
   }
 
  function notificationBar(){
-      return(
+    return(
       <View >
       <TouchableOpacity onPress = { () => {
-        navigation.navigate('ConnectFriends')
+        navigation.navigate('Home')
       }}>
         <Image style = {styles.navigationBar} source = {Images.map}/>   
       </TouchableOpacity>
                   
       </View>);
-    }
+  }
 
   return (      
     <View style = {styles.container}>
     {notificationBar()}
-    <Text style = {styles.titleText} > connect me </Text>
+    <Text style = {styles.titleText} > connect friends </Text>
     <ScrollView>
-      {notification(true, 'Isa connected you with Eden', Images.isa, Images.eden, "EdenProfileSuggested", "CatEdenConnect")}
-      {notification(false, 'Wilder connected you with Christian', Images.wilder, Images.christian, "CatEdenConnect", "WilderChristianChat")}
+      {notification(true, 'Isa is asking for connections in Newport Beach, CA', Images.isa, "IsaProfileConnect")}
 
   
       </ScrollView>
@@ -111,34 +99,23 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  acceptOrReject:{
-    flexDirection: 'row', 
-    justifyContent: 'space-between'
-  },
-  buttonAccept: {
-    fontFamily: 'Comfortaa_400Regular',
-    fontSize: 20,
-    marginTop: 10,
+
+  button: {
+    marginTop: 30,
     alignItems: "center",
-    alignContent: 'center',
     backgroundColor: "#FED254",
     borderRadius: 30,
     height: 55,
-    width: 152,
+    width: 254,
+    alignSelf: 'center',
     justifyContent: 'center'
   },
-  buttonMoreInfo: {
-    fontFamily: 'Comfortaa_400Regular',
-    fontSize: 20,
-    marginTop: 10,
-    alignItems: "center",
-    alignContent: 'center',
-    backgroundColor: "#FFF0C1",
-    borderRadius: 30,
-    height: 55,
-    width: 152,
-    justifyContent: 'center'
- },
+  buttonText: {
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 18,
+    color: '#4A4A4A',
+
+  },
   icon: {
     fontSize: 25,
     tintColor: '#939393'

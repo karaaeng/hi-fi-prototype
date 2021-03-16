@@ -7,7 +7,7 @@ import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 
 
-export default function CalProfile ({navigation}){
+export default function IsaProfileConnect ({navigation}){
   const [text, setText] = useState("");
 
   function statusIcon(status) {
@@ -41,7 +41,7 @@ export default function CalProfile ({navigation}){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
-      <Text style={ styles.theirInfo}> Moutain View, CA </Text> 
+      <Text style={ styles.theirInfo}> Newport Beach, CA </Text> 
       </View>
      );
   }
@@ -49,7 +49,7 @@ export default function CalProfile ({navigation}){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
-      <Text style={ styles.theirInfo}> he/him </Text> 
+      <Text style={ styles.theirInfo}> she/her </Text> 
       </View>
      );
   }
@@ -57,7 +57,7 @@ export default function CalProfile ({navigation}){
   function searchCircle() {
     return (
       <TouchableOpacity style = {styles.button} onPress = { () => {
-        console.log("serach your circle pressed"); 
+        navigation.navigate("ConnectingIsaWithFriends");
       }}>
         <Text style = {styles.buttonText}> search your circle </Text>
        
@@ -67,7 +67,7 @@ export default function CalProfile ({navigation}){
 
   function titleText(){
     return(
-    <Text style = {styles.titleText}> Viewing Cal </Text>
+    <Text style = {styles.titleText}> connecting Isa </Text>
     );
   }
 
@@ -75,7 +75,7 @@ export default function CalProfile ({navigation}){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
-      <Text style={ styles.theirInfo}> cooking, surfing, travelling </Text> 
+      <Text style={ styles.theirInfo}> pastries, travelling, running </Text> 
       </View>
      );  }
 
@@ -89,13 +89,13 @@ export default function CalProfile ({navigation}){
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
-          <Image style={styles.profilePicture} source={Images.cal}/>
+          <Image style={styles.profilePicture} source={Images.isa}/>
           
 
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-           <Text style={ styles.name }>Cal </Text>
-            {statusIcon("open")}
+           <Text style={ styles.name }>Isa</Text>
+            {statusIcon("available")}
           </View>
           <View style = {styles.information}>
            {location()}         
@@ -107,8 +107,9 @@ export default function CalProfile ({navigation}){
             
           </View>
         </View>
+        {searchCircle()}
       </View>
-      <ButtonBar navigation = {navigation} which = {""}/>
+      <ButtonBar navigation = {navigation} which = {"home"}/>
     </View> 
     );
   }
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 25, 
     alignSelf: 'center' 
   }, 
-  titleText: {
+    titleText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
     color: '#FED254',

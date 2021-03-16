@@ -5,10 +5,13 @@ import { Dimensions, TouchableOpacity } from 'react-native';
 import EditProfile from './EditProfile';
 import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
-export default function CalProfile ({navigation}){
+export default function EdenProfileSuggested ({navigation}){
   const [text, setText] = useState("");
+
 
   function statusIcon(status) {
 
@@ -37,11 +40,38 @@ export default function CalProfile ({navigation}){
     
   }
 
+  function titleText(){
+    return(
+    <Text style = {styles.titleText}> connection from Isa </Text>
+    );
+  }
+
+  function acceptOrRejct(){
+    return (
+    <View>
+      <TouchableOpacity style = {styles.buttonAccept} onPress = { () => {
+        navigation.navigate("CatEdenChat"); 
+      }}>
+        <Text style = {styles.buttonText}> accept </Text>
+       
+      </TouchableOpacity>
+
+      <TouchableOpacity style = {styles.buttonIgnore} onPress = { () => {
+        navigation.navigate("Home"); 
+      }}>
+        <Text style = {styles.buttonText}> ignore </Text>
+       
+      </TouchableOpacity>
+      </View>
+    );
+  }
+  
+
   function location(){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
-      <Text style={ styles.theirInfo}> Moutain View, CA </Text> 
+      <Text style={ styles.theirInfo}> Stanford, CA </Text> 
       </View>
      );
   }
@@ -49,107 +79,99 @@ export default function CalProfile ({navigation}){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
-      <Text style={ styles.theirInfo}> he/him </Text> 
+      <Text style={ styles.theirInfo}> she/her </Text> 
       </View>
      );
-  }
-
-  function searchCircle() {
-    return (
-      <TouchableOpacity style = {styles.button} onPress = { () => {
-        console.log("serach your circle pressed"); 
-      }}>
-        <Text style = {styles.buttonText}> search your circle </Text>
-       
-      </TouchableOpacity>
-    );
-  }
-
-  function titleText(){
-    return(
-    <Text style = {styles.titleText}> Viewing Cal </Text>
-    );
   }
 
   function interests(){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
-      <Text style={ styles.theirInfo}> cooking, surfing, travelling </Text> 
+      <Text style={ styles.theirInfo}> music, film, volleball </Text> 
       </View>
      );  }
 
-
+  
     const fake = "available";
     let status; 
     
     return (     
     <View style = {styles.container}>
-        {titleText()}
+      {titleText()}
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
-          <Image style={styles.profilePicture} source={Images.cal}/>
+          <Image style={styles.profilePicture} source={Images.eden}/>
           
 
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-           <Text style={ styles.name }>Cal </Text>
-            {statusIcon("open")}
+           <Text style={ styles.name }>Eden </Text>
+            {statusIcon("available")}
           </View>
           <View style = {styles.information}>
            {location()}         
            {pronouns()}
            {interests()}
             </View>
-            
-            
-            
           </View>
+          {acceptOrRejct()}
         </View>
       </View>
-      <ButtonBar navigation = {navigation} which = {""}/>
+      <ButtonBar navigation = {navigation} which = {"home"}/>
     </View> 
     );
-  }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
-    justifyContent: 'space-between', 
-    backgroundColor: "#FFFF"
+    justifyContent: 'space-between'
   },
   name: { 
     fontWeight: 'bold', 
     fontSize: 25, 
     alignSelf: 'center' 
   }, 
+  buttonAccept: {
+    marginTop: 10,
+    alignItems: "center",
+    alignContent: 'center',
+    backgroundColor: "#FED254",
+    borderRadius: 30,
+    padding: 10,
+    height: 43,
+    width: 200,
+    alignSelf: 'center',
+  },
+  buttonIgnore: {
+    marginTop: 10,
+    alignItems: "center",
+    alignContent: 'center',
+    backgroundColor: "#FFF0C1",
+    borderRadius: 30,
+    padding: 10,
+    height: 43,
+    width: 200,
+    alignSelf: 'center',
+  },
   titleText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
     color: '#FED254',
-    marginBottom: 10,
-    marginTop: 10,
-    alignSelf: 'center',
-  },
-   button: {
-    marginTop: 30,
-    alignItems: "center",
-    backgroundColor: "#FED254",
-    borderRadius: 30,
-    padding: 20,
-    height: 73,
-    width: 336,
+    marginBottom: 20,
     alignSelf: 'center',
   },
   buttonText: {
     fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
+    fontSize: 15,
+    resizeMode: 'contain',
     color: '#4A4A4A',
+    alignSelf: 'center',
   },
-
   category: {
     color: '#FED254', 
     fontSize: 15
@@ -189,6 +211,7 @@ const styles = StyleSheet.create({
  
   },
   profilePicture: {
+    //flex: 3, 
     width: Dimensions.get('window').width * .7,
     height: Dimensions.get('window').width * .7,
     alignSelf: 'center', 

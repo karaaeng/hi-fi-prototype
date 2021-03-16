@@ -28,6 +28,7 @@ const images = {
   christian: require('../Images/christian.jpeg'),
   cal: require('../Images/cal.jpg'),
   cat: require('../Images/cat.jpg'),
+  isa: require('../Images/isa.jpeg'),
 
 
 }
