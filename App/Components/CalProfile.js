@@ -118,18 +118,20 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between', 
+    backgroundColor: "#FFFF"
   },
   name: { 
     fontWeight: 'bold', 
     fontSize: 25, 
     alignSelf: 'center' 
   }, 
-    titleText: {
+  titleText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
     color: '#FED254',
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 10,
     alignSelf: 'center',
   },
    button: {

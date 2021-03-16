@@ -70,7 +70,7 @@ export default function KaraProfile ({navigation}){
 
   function titleText(){
     return(
-    <Text style = {styles.titleText}> connecting Marie </Text>
+    <Text style = {styles.titleText}> Viewing Kara </Text>
     );
   }
 
@@ -104,12 +104,8 @@ export default function KaraProfile ({navigation}){
            {pronouns()}
            {interests()}
             </View>
-            
-            
-            
           </View>
         </View>
-        {createConnection()}
       </View>
       <ButtonBar navigation = {navigation} which = {""}/>
     </View> 
@@ -121,13 +117,22 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between', 
+    backgroundColor: "#FFFF"
   },
   name: { 
     fontWeight: 'bold', 
     fontSize: 25, 
     alignSelf: 'center' 
   }, 
+  titleText: {
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 30,
+    color: '#FED254',
+    marginBottom: 10,
+    marginTop: 10,
+    alignSelf: 'center',
+  },
   button: {
     marginTop: 30,
     alignItems: "center",
@@ -136,13 +141,6 @@ const styles = StyleSheet.create({
     padding: 20,
     height: 73,
     width: 336,
-    alignSelf: 'center',
-  },
-  titleText: {
-    fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
-    color: '#FED254',
-    marginBottom: 20,
     alignSelf: 'center',
   },
   buttonText: {

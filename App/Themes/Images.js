@@ -47,6 +47,8 @@ const images = {
   christian: require('../Images/christian.jpg'),
   cal: require('../Images/cal.png'),
   isa: require('../Images/isabella.jpeg'),
+  connectme: require('../Images/connectme.png'),
+  connectfriends: require('../Images/connectfriends.png'),
 }
 
 export default images

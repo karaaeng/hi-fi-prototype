@@ -81,6 +81,7 @@ export default function KaraIsaChat({navigation}) {
      {chatBubble(Images.isa, "Isa", "Wow, this friendship comes with great perks!")}
      <Text style = {styles.notice}>you left the chat.</Text>
       </ScrollView>
+      <ButtonBar navigation = {navigation} which = {"chat"}/>
     </View>
     );
 

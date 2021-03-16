@@ -30,14 +30,13 @@ export default function WilderChristianChat({route, navigation}) {
               <Text style = {styles.peopleInChat}> {name} </Text>
             </View>
           </View>
-
         </View>
       );
     }
   }
 
-  let  {status}  = route.params;
-  console.log(status);
+  //let  {status}  = route.params;
+  //console.log(status);
 
   function sendChat(image, name, givenText){
     console.log({isVisible})
@@ -132,6 +131,7 @@ export default function WilderChristianChat({route, navigation}) {
       {leftChat}
       </ScrollView>
       {inputText()}
+      <ButtonBar navigation = {navigation} which = {"chat"}/>
     </View>
     );
 
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     height: 60,
     width: 345,
     borderRadius: 35,
-    marginBottom: 50,
+    marginBottom: 10,
     marginTop: 10,
   },
   textInput: {

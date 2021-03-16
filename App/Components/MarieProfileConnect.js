@@ -7,7 +7,7 @@ import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 
 
-export default function ChristianProfile ({navigation}){
+export default function MarieProfileConnect ({navigation}){
   const [text, setText] = useState("");
 
   function statusIcon(status) {
@@ -41,7 +41,7 @@ export default function ChristianProfile ({navigation}){
      return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>location </Text> 
-      <Text style={ styles.theirInfo}> Salt Lake City, Utah </Text> 
+      <Text style={ styles.theirInfo}> Newport Beach, CA </Text> 
       </View>
      );
   }
@@ -49,7 +49,7 @@ export default function ChristianProfile ({navigation}){
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns </Text> 
-      <Text style={ styles.theirInfo}> he/him </Text> 
+      <Text style={ styles.theirInfo}> she/her </Text> 
       </View>
      );
   }
@@ -67,7 +67,7 @@ export default function ChristianProfile ({navigation}){
 
   function titleText(){
     return(
-    <Text style = {styles.titleText}> Viewing Christian </Text>
+    <Text style = {styles.titleText}> connecting Marie </Text>
     );
   }
 
@@ -75,7 +75,7 @@ export default function ChristianProfile ({navigation}){
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>interests </Text> 
-      <Text style={ styles.theirInfo}> fishing, hiking, Rick and Morty </Text> 
+      <Text style={ styles.theirInfo}> pastries, travelling, running </Text> 
       </View>
      );  }
 
@@ -89,13 +89,13 @@ export default function ChristianProfile ({navigation}){
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>
           
-          <Image style={styles.profilePicture} source={Images.christian}/>
+          <Image style={styles.profilePicture} source={Images.marie}/>
           
 
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-           <Text style={ styles.name }>Christian </Text>
-            {statusIcon("open")}
+           <Text style={ styles.name }>Marie </Text>
+            {statusIcon("available")}
           </View>
           <View style = {styles.information}>
            {location()}         
@@ -107,8 +107,9 @@ export default function ChristianProfile ({navigation}){
             
           </View>
         </View>
+        {searchCircle()}
       </View>
-      <ButtonBar navigation = {navigation} which = {""}/>
+      <ButtonBar navigation = {navigation} which = {"home"}/>
     </View> 
     );
   }
@@ -118,7 +119,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between', 
+    backgroundColor: "#FFFF"
   },
   name: { 
     fontWeight: 'bold', 
@@ -129,7 +131,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,
     color: '#FED254',
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 10,
     alignSelf: 'center',
   },
    button: {
@@ -199,3 +202,4 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
   
+});
