@@ -9,10 +9,26 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import {
+    useFonts,
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
+  } from '@expo-google-fonts/comfortaa'; 
 
 
 export default function Chat({navigation}) {
   const [searchTerm, setSearchTerm] = useState("");
+
+  let [fontsLoaded] = useFonts({
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
+  });
 
   function searchBar(){
     return(
@@ -36,8 +52,8 @@ export default function Chat({navigation}) {
       <Image style = {styles.profileImages} source = {image1}/>
       <Image style = {styles.secondImage} source = {image2}/>
       <View style = {styles.chat}>
-        <Text style = {styles.peopleInChat}> {name1} & {name2} </Text>
-        <Text style = {styles.chatPreview}> {preview} </Text>
+        <Text style = {styles.peopleInChat}>{name1} & {name2} </Text>
+        <Text style = {styles.chatPreview}>{preview} </Text>
       </View>
       </View>
       </TouchableOpacity>
@@ -51,8 +67,8 @@ export default function Chat({navigation}) {
       <Image style = {styles.profileImages} source = {image1}/>
       <Image style = {styles.secondImage} source = {image2}/>
       <View style = {styles.chat}>
-        <Text style = {styles.peopleInChat}> {name1} & {name2} </Text>
-        <Text style = {styles.chatPreview}> {preview} </Text>
+        <Text style = {styles.peopleInChat}>{name1} & {name2} </Text>
+        <Text style = {styles.chatPreview}>{preview} </Text>
       </View>
         </View>
       </TouchableOpacity>
@@ -67,17 +83,16 @@ export default function Chat({navigation}) {
 
   return (      
     <View style = {styles.container}>
-    <Text style = {styles.titleText} > chat </Text>
     {searchBar()}
     <ScrollView>
-      {notification(Images.harold, Images.eden, "Isa", "Eden", 
+      {notification(Images.cat, Images.eden, "Isa", "Eden", 
         "Hey Cat & Eden!  I love you both so much and know you’d make the cutest friends! Now go...", 
         true, "CatEdenChat")}
       {notification(Images.wilder, Images.christian, "Wilder", "Christian", 
         "You both have absolutley incredible sisters, so...", 
         false, "WilderChristianChat")}
-      {notification(Images.kara, Images.harold, "Kara", "Isa", 
-        "If you get along well, Kara might  knit you a custom sweater...", 
+      {notification(Images.kara, Images.isa, "Kara", "Isa", 
+        "If you get along well, Kara might knit you a custom sweater...", 
         false, "KaraIsaChat")}
 
 
@@ -91,6 +106,7 @@ export default function Chat({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#FFFFFF",
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
@@ -105,15 +121,15 @@ const styles = StyleSheet.create({
   }, 
  
   profileImages:{
-    width: 40, 
-    height: 40,
-    borderRadius: 20,
+    width: 60, 
+    height: 60,
+    borderRadius: 30,
   },
   secondImage:{
-    width: 40, 
-    height: 40,
-    borderRadius: 20,
-    marginLeft: -10
+    width: 60, 
+    height: 60,
+    borderRadius: 30,
+    marginLeft: -15
   },
   searchBar: {
     flexDirection: 'row',
@@ -128,7 +144,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     alignSelf: 'center', 
-    marginLeft: 20,
   },
   textInput: {
     height: 81,
@@ -141,7 +156,7 @@ const styles = StyleSheet.create({
     color: "#E5E5E5",
   },
   notification: {
-    height: 150,
+    height: 130,
     width: 336,
     borderBottomWidth: 2,
     borderColor: "#E5E5E5",
@@ -149,7 +164,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   firstNotification: {
-    height: 150,
+    height: 130,
     width: 336,
     borderTopWidth: 2,
     borderColor: "#E5E5E5",
@@ -159,19 +174,19 @@ const styles = StyleSheet.create({
 
   },
   peopleInChat:{
-    fontFamily: 'Comfortaa_400Bold',
-    fontSize: 18,
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 20,
     color: '#4A4A4A',
-    marginLeft: 20,
+    marginLeft: 10,
     marginRight: 50,
     textAlignVertical: "center",
   },
   chatPreview:{
     fontFamily: 'Comfortaa_400Regular',
-    fontSize: 14,
+    fontSize: 15,
     color: '#4A4A4A',
-    marginLeft: 20,
-    marginRight: 50,
+    marginLeft: 10,
+    marginRight: 80,
     textAlignVertical: "center",
   },
   navigationBar: {
@@ -182,17 +197,9 @@ const styles = StyleSheet.create({
   },
   notificationInside: {
     flexDirection: 'row', 
-    alignItems: 'baseline',
+    alignItems: 'center',
     alignContent: 'space-around',
     color: '#939393',
-  },
-
-  titleText: {
-    fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
-    color: '#4A4A4A',
-    marginBottom: 5,
-    alignSelf: 'center',
   },
   
 });

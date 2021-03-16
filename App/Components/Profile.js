@@ -9,10 +9,27 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {
+  useFonts,
+  Comfortaa_300Light,
+  Comfortaa_400Regular,
+  Comfortaa_500Medium,
+  Comfortaa_600SemiBold,
+  Comfortaa_700Bold,
+} from '@expo-google-fonts/comfortaa';
+
 
 export default function Profile({navigation}) {
-  const [text, setText] = useState("");
 
+  let [fontsLoaded] = useFonts({
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
+  });
+
+  const [text, setText] = useState("");
   function whichOne(){
 
     return (<View style = {styles.navigationBar}>
@@ -33,27 +50,34 @@ export default function Profile({navigation}) {
     </View>);
     
   }
-
   function statusIcon(status) {
 
-    if (status ==="available"){
+    if (status ==="asking"){
       return( <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {status} </Text>
-        <Image style = {styles.status} source = {Images.available}/>
+        <View style = {styles.statusAsking}>
+          <Text style = {styles.statusText}> {status} </Text>
+        </View>
         </View>
         );
-    } else if (status ==="on hold"){
-      return (
-      <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {status} </Text>
-        <Image style = {styles.status} source = {Images.onhold}/>
+    } else if (status ==="open"){
+      return( <View style = {styles.statusContainer}>
+        <View style = {styles.statusOpen}>
+          <Text style = {styles.statusText}> {status} </Text>
+        </View>
         </View>
         );
-    } else{
-      return(
-      <View style = {styles.statusContainer}>
-        <Text style = {styles.statusText}> {status} </Text>
-        <Image style = {styles.status} source = {Images.open}/>
+      } else if (status ==="on hold"){
+        return( <View style = {styles.statusContainer}>
+          <View style = {styles.statusHold}>
+            <Text style = {styles.statusText}> {status} </Text>
+          </View>
+          </View>
+          );
+    } else {
+      return( <View style = {styles.statusContainer}>
+        <View style = {styles.statusOpen}>
+          <Text style = {styles.statusText}> {status} </Text>
+        </View>
         </View>
         );
     }
@@ -62,7 +86,7 @@ export default function Profile({navigation}) {
   function location(location){
      return (
       <View style = {styles.informationText}> 
-      <Text style={ styles.category}>location </Text> 
+      <Text style={ styles.category}>   location: </Text> 
       <Text style={ styles.theirInfo}>{location} </Text> 
       </View>
      );
@@ -70,7 +94,7 @@ export default function Profile({navigation}) {
   function pronouns(pronouns){
     return (
       <View style = {styles.informationText}> 
-      <Text style={ styles.category}>pronouns </Text> 
+      <Text style={ styles.category}>pronouns: </Text> 
       <Text style={ styles.theirInfo}>{pronouns} </Text> 
       </View>
      );
@@ -79,33 +103,28 @@ export default function Profile({navigation}) {
   function interests(interests){
       return (
       <View style = {styles.informationText}> 
-      <Text style={ styles.category}>interests </Text> 
+      <Text style={ styles.category}>  interests: </Text> 
       <Text style={ styles.theirInfo}>{interests} </Text> 
       </View>
      );  }
 
   
-    const fakestatus = "available";
-    const fakename = "Cat";
+    const fakestatus = "asking";
+    const fakename = "Cat D.";
     const fakeinterests = "music, coffee, dogs";
     const fakepronouns = "she/her";
-    const fakelocation = "stanford, ca";
-    let status; 
+    const fakelocation = "Stanford, CA";
     
     return (     
     <View style = {styles.container}>
-      {whichOne()}
-
+        {whichOne()}
         <View style = {styles.profile}>
-          <View style = {styles.profileCard}>
-          
-          <Image style={styles.profilePicture} source={Images.harold}/>
-          
-
+          <View style = {styles.profileCard}>     
+          <Image style={styles.profilePicture} source={Images.cat}/>
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-           <Text style={ styles.name }>Cat {fakestatus}</Text>
-          {statusIcon(fakestatus)}
+            <Text style={ styles.name }>{fakename}</Text>
+            {statusIcon(fakestatus)}
           </View>
           <View style = {styles.information}>
            {location(fakelocation)}         
@@ -125,24 +144,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center', 
-    justifyContent: 'space-between'
-  },
-  name: { 
-    fontWeight: 'bold', 
-    fontSize: 25, 
-    alignSelf: 'center' 
-  }, 
-  category: {
-    color: '#FED254', 
-    fontSize: 15
-  },
-  theirInfo: {
-    fontSize: 15, 
-    color: '#4A4A4A'
+    justifyContent: 'space-between',
+    backgroundColor: '#FFFFFF',
   },
   navigationBar: {
-    marginTop: 50, 
-    marginBottom: 50, 
+    marginTop: 5, 
+    marginBottom: 10, 
     flexDirection: 'row',
     justifyContent: 'space-between', 
     alignItems: 'center', 
@@ -157,6 +164,26 @@ const styles = StyleSheet.create({
     fontSize: 35,
     color: '#4A4A4A'
   }, 
+  name: { 
+    fontFamily: "Comfortaa_700Bold",
+    fontSize: 44, 
+    alignSelf: 'center',
+    marginTop: 10,
+    color: "#4A4A4A",
+  }, 
+  category: {
+    marginTop: 15,
+    color: '#FED254', 
+    fontSize: 20,
+    fontFamily: "Comfortaa_700Bold",
+  },
+  theirInfo: {
+    marginTop: 15,
+    marginLeft: 10,
+    fontSize: 20, 
+    color: '#4A4A4A',
+    fontFamily: "Comfortaa_300Light",
+  },
   informationText:{
     flexDirection: 'row'
   },
@@ -168,6 +195,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     //flexDirection: 'column', 
   }, 
+  profileCard: {
+    marginTop: 60,
+  },
   profileNameAndStatus:{
     flexDirection: 'column',
     justifyContent: 'space-between', 
@@ -176,21 +206,49 @@ const styles = StyleSheet.create({
   statusContainer: {
     flexDirection: 'column'
   },
-  status: {
-    height: Dimensions.get('window').width * .1,
+  statusAsking: {
+    height: 50,
+    width: 150,
+    borderRadius: 25,
     resizeMode: 'contain', 
     alignContent: 'center',
+    backgroundColor: "#89FF95",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  statusOpen: {
+    height: 50,
+    width: 150,
+    borderRadius: 25,
+    resizeMode: 'contain', 
+    alignContent: 'center',
+    backgroundColor: "#FED254",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  statusHold: {
+    height: 50,
+    width: 150,
+    borderRadius: 25,
+    resizeMode: 'contain', 
+    alignContent: 'center',
+    backgroundColor: "#FD9B9B",
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 20,
   },
   statusText: {
     fontSize: 20, 
     alignSelf: 'center',
     alignContent: 'center',
- 
+    fontFamily: "Comfortaa_400Regular",
   },
   profilePicture: {
     //flex: 3, 
-    width: Dimensions.get('window').width * .7,
-    height: Dimensions.get('window').width * .7,
+    width: Dimensions.get('window').width * .5,
+    height: Dimensions.get('window').width * .5,
     alignSelf: 'center', 
     borderRadius: Dimensions.get('window').height * .5 * 0.5,
   }, 

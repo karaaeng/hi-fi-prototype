@@ -21,6 +21,7 @@ import ChristianProfile from './App/Components/ChristianProfile';
 import Chat from './App/Components/Chat';
 import WilderChristianChat from './App/Components/WilderChristianChat';
 import KaraIsaChat from './App/Components/KaraIsaChat';
+import CatEdenChat from './App/Components/CatEdenChat';
 import Home from './App/Components/Home';
 
 
@@ -103,6 +104,11 @@ export default function App() {
         }} />
 
         <Stack.Screen name="KaraIsaChat" component={KaraIsaChat}
+          options={{
+          title: '',
+        }} />
+
+        <Stack.Screen name="CatEdenChat" component={CatEdenChat}
           options={{
           title: '',
         }} />

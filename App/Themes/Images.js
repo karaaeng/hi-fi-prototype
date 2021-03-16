@@ -27,6 +27,7 @@ const images = {
   wilder: require('../Images/wilder.jpg'),
   christian: require('../Images/christian.jpeg'),
   cal: require('../Images/cal.jpg'),
+  cat: require('../Images/cat.jpg'),
 
 
 }
