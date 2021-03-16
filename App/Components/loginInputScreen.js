@@ -1,4 +1,5 @@
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ForwardButton from './ForwardButton';
 
 import {
   useFonts,
@@ -66,8 +67,10 @@ export default function LoginInputScreen({navigation}) {
           </TouchableOpacity>
           </View>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-      <Image style = {styles.forward} source={Images.forward_icon}/>
+        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+        <View style = {styles.forward}>
+                 <ForwardButton/>
+              </View>
       </TouchableOpacity>
       </View>
   </View>

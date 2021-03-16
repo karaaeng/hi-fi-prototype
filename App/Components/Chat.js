@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Keyboard, TextInput, Dimensions, ScrollView, TouchableOpacity, ImageBackground, TouchableWithoutFeedback } from 'react-native';
-import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 import NotificationBar from './NotificationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -94,11 +93,7 @@ export default function Chat({navigation}) {
       {notification(Images.kara, Images.isa, "Kara", "Isa", 
         "If you get along well, Kara might knit you a custom sweater...", 
         false, "KaraIsaChat")}
-
-
-  
       </ScrollView>
-      <ButtonBar navigation = {navigation} which = {"chat"}/>
     </View>
     );
 

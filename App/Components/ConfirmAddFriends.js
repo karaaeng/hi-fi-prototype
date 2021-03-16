@@ -1,4 +1,5 @@
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ForwardButton from './ForwardButton';
 
 import {
   useFonts,
@@ -34,7 +35,9 @@ export default function ConfirmAddFriends({navigation}) {
         </View>
         <View>
         <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-          <Image style = {styles.forward} source={Images.forward_icon}/>
+          <View style = {styles.forward}>
+                 <ForwardButton/>
+              </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
         height: 80,
         width: 80,
         marginLeft: 320,
-        marginBottom: 40,
-        marginTop: 200,
+        marginBottom: 30,
+        marginTop: 230,
       },
 });

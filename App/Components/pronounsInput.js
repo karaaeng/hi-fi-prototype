@@ -1,3 +1,4 @@
+import ForwardButton from './ForwardButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
@@ -62,7 +63,9 @@ export default function PronounsInput({navigation}) {
           </View>
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Interests')}>
-        <Image style = {styles.forwardwithskip} source={Images.forward_icon}/>
+          <View style = {styles.forwardwithskip}>
+                 <ForwardButton/>
+              </View>
         </TouchableOpacity>
         </View>
     </View>

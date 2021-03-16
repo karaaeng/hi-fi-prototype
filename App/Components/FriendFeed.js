@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Dimensions, ScrollView, TouchableOpacity } from 'react-native';
-import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 import NotificationBar from './NotificationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -56,7 +55,6 @@ export default function FriendFeed({navigation}) {
       {notification("Christian joined ven!", Images.christian, "ChristianProfile")}
   
       </ScrollView>
-      <ButtonBar navigation = {navigation} which = {"feed"}/>
     </View>
     );
 

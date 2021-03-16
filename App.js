@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
@@ -14,6 +15,7 @@ import {
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images, Profiles } from './App/Themes';
+import BackButton from './App/Components/BackButton'
 
 import LoginScreen from './App/Components/loginScreen'
 import LoginInputScreen from './App/Components/loginInputScreen'
@@ -31,8 +33,6 @@ import Permission from './App/Components/permission'
 import AddFriends from './App/Components/addFriends'
 import Ready from './App/Components/ready'
 
-import NavigationBar from './App/Components/NavigationBar';
-import ButtonBar from './App/Components/ButtonBar';
 import Profile from './App/Components/Profile'
 import FriendFeed from './App/Components/FriendFeed'
 import MapFeed from './App/Components/MapFeed'
@@ -55,13 +55,13 @@ import IsaProfileConnect from './App/Components/IsaProfileConnect';
 import CatEdenConnect from './App/Components/CatEdenConnect';
 import ConnectingIsaWithFriends from './App/Components/ConnectingIsaWithFriends';
 
-
 import SettingsPage from './App/Components/settings'
 import EditProfile from './App/Components/EditProfile'
 import About from './App/Components/about'
 import Delete from './App/Components/delete'
 import Privacy from './App/Components/privacy'
 import ConfirmAddFriends from './App/Components/ConfirmAddFriends'
+import { NavigationEvents } from 'react-navigation';
 
 export default function App() {
 
@@ -74,9 +74,6 @@ export default function App() {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
-
-  const Stack = createStackNavigator();
-  const RootStack = createStackNavigator();
 
   function leaveChatButton({navigation}) {
     if (didLeave === false) {
@@ -95,176 +92,248 @@ export default function App() {
       }
   }
 
-function MainStack () {
-  return (
-   
-    <Stack.Navigator>
-      <Stack.Screen name="Login" component={LoginScreen}
+  const Stack = createStackNavigator();
+  const RootStack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
+
+  const SignupStack = createStackNavigator();
+  const ProfileStack = createStackNavigator();
+  const FriendsStack = createStackNavigator();
+  const ChatStack = createStackNavigator();
+  const HomeStack = createStackNavigator();
+
+  function SignUpStackScreens() {
+    return (
+      <SignupStack.Navigator>
+      <SignupStack.Screen name="Login" component={LoginScreen}
       options={{
         headerStyle: {
           height: 110,
         },
         title: '',
       }} />
-      <Stack.Screen name="LoginInputScreen" component={LoginInputScreen}
+      <SignupStack.Screen name="LoginInputScreen" component={LoginInputScreen}
       options={{
         headerStyle: {
           height: 110,
         },
       title: 'login',
+      headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
       headerTitleStyle: {
         fontFamily: 'Comfortaa_700Bold',
         fontSize: 30,
         color: '#4A4A4A',
       },
       }} />
-      <Stack.Screen name="Name" component={NameInput}
+      <SignupStack.Screen name="Name" component={NameInput}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="Number" component={NumberInput}
+      <SignupStack.Screen name="Number" component={NumberInput}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="Confirm" component={ConfirmationCode}
+      <SignupStack.Screen name="Confirm" component={ConfirmationCode}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="Location" component={LocationInput}
+      <SignupStack.Screen name="Location" component={LocationInput}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="Photo" component={PhotoSelect}
+      <SignupStack.Screen name="Photo" component={PhotoSelect}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="PhotoOptions" component={PhotoOptions}
+      <SignupStack.Screen name="PhotoOptions" component={PhotoOptions}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="SelectedPhoto" component={SelectedPhoto}
+      <SignupStack.Screen name="SelectedPhoto" component={SelectedPhoto}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="Pronouns" component={PronounsInput}
+      <SignupStack.Screen name="Pronouns" component={PronounsInput}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="Interests" component={InterestsInput}
+      <SignupStack.Screen name="Interests" component={InterestsInput}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="Status" component={StatusSelect}
+      <SignupStack.Screen name="Status" component={StatusSelect}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="AddFriendsPermission" component={Permission}
+      <SignupStack.Screen name="AddFriendsPermission" component={Permission}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerBackground: () => (
           <View style = {styles.headerContainer}>
             <Image style = {styles.header} source={Images.logo}/>
           </View>
         )
       }} />
-      <Stack.Screen name="AddFriends" component={AddFriends}
+      <SignupStack.Screen name="AddFriends" component={AddFriends}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
       }} />
-      <Stack.Screen name="Ready" component={Ready}
+      <SignupStack.Screen name="Ready" component={Ready}
         options={{
           headerStyle: {
             height: 110,
           },
         title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
       }} />
-      <Stack.Screen name="Profile" component={Profile}
+      </SignupStack.Navigator>
+    );
+  }
+
+  function ProfileStackScreens () {
+    return (
+      <ProfileStack.Navigator>
+          <ProfileStack.Screen name="Profile" component={Profile}
         options={({navigation}) => ({
           headerStyle: {
             height: 110,
@@ -290,65 +359,30 @@ function MainStack () {
             </TouchableOpacity>
             ),
         })}/>
-        <Stack.Screen name="SettingsPage" component={SettingsPage}
+        <ProfileStack.Screen name="SettingsPage" component={SettingsPage}
         options={{
           headerStyle: {
             height: 110,
           },
         title: 'settings',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
         headerTitleStyle: {
           fontFamily: 'Comfortaa_700Bold',
           fontSize: 30,
           color: '#4A4A4A',
         },
       }} />
-      <Stack.Screen name="EditProfile" component={EditProfile}
-        options={{
-          headerStyle: {
-            height: 110,
-          },
-        title: 'edit profile',
-        headerTitleStyle: {
-          fontFamily: 'Comfortaa_700Bold',
-          fontSize: 30,
-          color: '#4A4A4A',
-        },
-      }} />
-      <Stack.Screen name="About" component={About}
-        options={{
-          headerStyle: {
-            height: 110,
-          },
-        title: 'about',
-        headerTitleStyle: {
-          fontFamily: 'Comfortaa_700Bold',
-          fontSize: 30,
-          color: '#4A4A4A',
-        },
-      }} />
-      <Stack.Screen name="Delete" component={Delete}
-        options={{
-          headerStyle: {
-            height: 110,
-          },
-        title: '',
-        headerBackground: () => (
-          <Image style = {styles.header} source={Images.logo}/>
-        )
-      }} />
-      <Stack.Screen name="Privacy" component={Privacy}
-        options={{
-          headerStyle: {
-            height: 110,
-          },
-        title: 'privacy',
-        headerTitleStyle: {
-          fontFamily: 'Comfortaa_700Bold',
-          fontSize: 30,
-          color: '#4A4A4A',
-        },
-      }} />
-      <Stack.Screen name="FriendFeed" component={FriendFeed}
+      </ProfileStack.Navigator>
+    );
+  }
+
+  function FriendsStackScreens () {
+    return(
+    <FriendsStack.Navigator>
+      <FriendsStack.Screen name="FriendFeed" component={FriendFeed}
         options={({navigation}) => ({
           headerStyle: {
             height: 110,
@@ -364,7 +398,7 @@ function MainStack () {
           </View>
           ),
       })} />
-      <Stack.Screen name='MapFeed' component={MapFeed}
+      <FriendsStack.Screen name='MapFeed' component={MapFeed}
        options={({navigation}) => ({
         headerStyle: {
           height: 110,
@@ -380,7 +414,83 @@ function MainStack () {
         </View>
         ),
     })} />
-    <Stack.Screen name="Chat" component={Chat}
+    <FriendsStack.Screen name="EdenProfile" component={EdenProfile}
+          options={{
+          title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+        }} />
+
+        <FriendsStack.Screen name="KaraProfile" component={KaraProfile}
+          options={{
+          title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+        }} />
+
+        <FriendsStack.Screen name="MarieProfile" component={MarieProfile}
+          options={{
+          title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+        }} />
+        <FriendsStack.Screen name="WilderProfile" component={WilderProfile}
+          options={{
+          title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+        }} />
+
+        <FriendsStack.Screen name="CalProfile" component={CalProfile}
+          options={{
+          title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+        }} />
+        <FriendsStack.Screen name="ChristianProfile" component={ChristianProfile}
+          options={{
+          title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+        }} />
+   </FriendsStack.Navigator>
+    );
+  }
+
+  function ChatStackScreens () {
+    return(
+      <ChatStack.Navigator>
+        <ChatStack.Screen name="Chat" component={Chat}
           options={{
             headerStyle: {
               height: 110,
@@ -395,74 +505,14 @@ function MainStack () {
               <View></View>
                 ),
         }} />
+      </ChatStack.Navigator>
+    );
+  }
 
-    <Stack.Screen name="EdenProfile" component={EdenProfile}
-          options={{
-          title: '',
-        }} />
-
-        <Stack.Screen name="KaraProfile" component={KaraProfile}
-          options={{
-          title: '',
-        }} />
-
-        <Stack.Screen name="MarieProfile" component={MarieProfile}
-          options={{
-          title: '',
-        }} />
-        <Stack.Screen name="WilderProfile" component={WilderProfile}
-          options={{
-          title: '',
-        }} />
-
-        <Stack.Screen name="CalProfile" component={CalProfile}
-          options={{
-          title: '',
-        }} />
-        <Stack.Screen name="ChristianProfile" component={ChristianProfile}
-          options={{
-          title: '',
-        }} />
-        <Stack.Screen name="WilderChristianChat" component={WilderChristianChat}
-          options={({navigation}) => ({
-            headerStyle: {
-              height: 110,
-            },
-            title: 'chat',
-            headerTitleStyle: {
-              fontFamily: 'Comfortaa_700Bold',
-              fontSize: 30,
-              color: '#4A4A4A',
-            },
-            headerRight: () => (
-            leaveChatButton({navigation})
-              ),
-        })} />
-        <Stack.Screen name="KaraIsaChat" component={KaraIsaChat}
-          options={{
-            headerStyle: {
-              height: 110,
-            },
-            title: 'chat',
-            headerTitleStyle: {
-              fontFamily: 'Comfortaa_700Bold',
-              fontSize: 30,
-              color: '#4A4A4A',
-            },
-        }} />
-         <Stack.Screen name="CatEdenChat" component={CatEdenChat}
-          options={{
-            headerStyle: {
-              height: 110,
-            },
-            title: 'chat',
-            headerTitleStyle: {
-              fontFamily: 'Comfortaa_700Bold',
-              fontSize: 30,
-              color: '#4A4A4A',
-            },
-        }} />
-        <Stack.Screen name="Home" component={Home}
+function HomeStackScreens () {
+  return(
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={Home}
           options={({navigation}) => ({
             headerStyle: {
               height: 110,
@@ -477,7 +527,7 @@ function MainStack () {
               </View>
               ),
         })} />
-        <Stack.Screen name="ConnectFriends" component={ConnectFriends}
+        <HomeStack.Screen name="ConnectFriends" component={ConnectFriends}
           options={({navigation}) => ({
             headerStyle: {
               height: 110,
@@ -493,46 +543,167 @@ function MainStack () {
               ),
         })} />
 
-        <Stack.Screen name="EdenProfileSuggested" component={EdenProfileSuggested}
+        <HomeStack.Screen name="EdenProfileSuggested" component={EdenProfileSuggested}
           options={{
           title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
         }} />
 
-        <Stack.Screen name="KaraProfileConnect" component={KaraProfileConnect}
+        <HomeStack.Screen name="KaraProfileConnect" component={KaraProfileConnect}
           options={{
           title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
         }} />
 
-        <Stack.Screen name="MarieProfileConnect" component={MarieProfileConnect}
+        <HomeStack.Screen name="MarieProfileConnect" component={MarieProfileConnect}
           options={{
           title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
         }} />
 
-        <Stack.Screen name="IsaProfileConnect" component={IsaProfileConnect}
+        <HomeStack.Screen name="IsaProfileConnect" component={IsaProfileConnect}
           options={{
           title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
         }} />
 
-        <Stack.Screen name="CatEdenConnect" component={CatEdenConnect}
+        <HomeStack.Screen name="CatEdenConnect" component={CatEdenConnect}
           options={{
           title: '',
+          headerStyle: {
+            height: 110,
+          },
+          headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
         }} />
 
-        <Stack.Screen name="ConnectingIsaWithFriends" component={ConnectingIsaWithFriends}
+        <HomeStack.Screen name="ConnectingIsaWithFriends" component={ConnectingIsaWithFriends}
           options={{
             headerStyle: {
               height: 110,
             },
             title: 'Connecting Isa',
+            headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
             headerTitleStyle: {
               fontFamily: 'Comfortaa_700Bold',
               fontSize: 30,
               color: '#4A4A4A',
             },
         }} />
+         <HomeStack.Screen name="CatEdenChat" component={CatEdenChat}
+          options={{
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+        }} />
+         <HomeStack.Screen name="KaraIsaChat" component={KaraIsaChat}
+          options={{
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+        }} />
+    </HomeStack.Navigator>
+  );
+}
 
-    </Stack.Navigator>
-
+function MainTabStack () {
+  return (
+    <Tab.Navigator 
+    tabBarOptions={{
+      activeBackgroundColor: "#FED254",
+      inactiveBackgroundColor: "#FFF0C1",
+      style: {
+        height: 120,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      tabStyle: {
+        height: 85,
+        width: 200,
+        borderRadius: 50,
+        marginTop: 10,
+        marginLeft: 11,
+        marginRight: 11,
+      },
+      }}>
+       <Tab.Screen name="HomeStack" component={HomeStackScreens}
+          options={{
+          title: '',
+          tabBarIcon: () => (
+            <Icon name="home" style={styles.icon} />
+           ),
+        }} />
+        <Tab.Screen name="ChatStack" component={ChatStackScreens}
+          options={{
+          title: '',
+          tabBarIcon: () => (
+            <Icon name="comments" style={styles.icon} />
+           ),
+        }} />
+         <Tab.Screen name="FriendsStack" component={FriendsStackScreens}
+          options={{
+          title: '',
+          tabBarIcon: () => (
+            <Icon name="users" style={styles.icon}/>
+           ),
+        }} />
+       <Tab.Screen name="ProfileStack" component={ProfileStackScreens}
+          options={{
+          title: '',
+          tabBarIcon: () => (
+            <Icon name="user" style={styles.icon} />
+           ),
+        }} />
+    </Tab.Navigator>
    );
 }
 
@@ -540,16 +711,40 @@ return (
   <NavigationContainer>
     <RootStack.Navigator mode="modal">
       <RootStack.Screen
-        name="Main"
-        component={MainStack}
+        name="SignUp"
+        component={SignUpStackScreens}
         options={{
           headerStyle: {
           },
            headerShown: false 
         }}
       />
+        <RootStack.Screen
+        name="Main"
+        component={MainTabStack}
+        options={{
+          headerStyle: {
+          },
+           headerShown: false 
+        }}
+      />
+      <RootStack.Screen name="AddFriends" component={AddFriends}
+        options={{
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+          headerStyle: {
+            height: 110,
+          },
+        title: '',
+      }} />
       <RootStack.Screen name="ConfirmAddFriends" component={ConfirmAddFriends}
         options={{
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
           headerStyle: {
             height: 110,
           },
@@ -558,6 +753,119 @@ return (
          <View></View>
           ),
       }} />
+      <ProfileStack.Screen name="EditProfile" component={EditProfile}
+        options={{
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+          headerStyle: {
+            height: 110,
+          },
+        title: 'edit profile',
+        headerTitleStyle: {
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 30,
+          color: '#4A4A4A',
+        },
+      }} />
+      <RootStack.Screen name="About" component={About}
+        options={{
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+          headerStyle: {
+            height: 110,
+          },
+        title: 'about',
+        headerTitleStyle: {
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 30,
+          color: '#4A4A4A',
+        },
+      }} />
+      <RootStack.Screen name="Delete" component={Delete}
+        options={{
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+          headerStyle: {
+            height: 110,
+          },
+        title: '',
+        headerBackground: () => (
+          <Image style = {styles.header} source={Images.logo}/>
+        )
+      }} />
+      <RootStack.Screen name="Privacy" component={Privacy}
+        options={{
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+          headerStyle: {
+            height: 110,
+          },
+        title: 'privacy',
+        headerTitleStyle: {
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 30,
+          color: '#4A4A4A',
+        },
+      }} />
+      <ChatStack.Screen name="WilderChristianChat" component={WilderChristianChat}
+          options={({navigation}) => ({
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+            headerRight: () => (
+            leaveChatButton({navigation})
+              ),
+        })} />
+        <ChatStack.Screen name="KaraIsaChat" component={KaraIsaChat}
+          options={{
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+        }} />
+         <ChatStack.Screen name="CatEdenChat" component={CatEdenChat}
+          options={{
+            headerStyle: {
+              height: 110,
+            },
+            title: 'chat',
+            headerBackTitleVisible: false,
+            headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+            headerTitleStyle: {
+              fontFamily: 'Comfortaa_700Bold',
+              fontSize: 30,
+              color: '#4A4A4A',
+            },
+        }} />
     </RootStack.Navigator>
     </NavigationContainer>
 );
@@ -615,5 +923,11 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     marginLeft: 20,
     marginRight: 20,
+  },
+  icon: {
+    fontSize: Dimensions.get('window').width * .095,
+    alignSelf: "center",
+    color: '#4A4A4A',
+    marginTop: 10,
   },
 });

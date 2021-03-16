@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Keyboard, TextInput, Dimensions, ScrollView, TouchableOpacity, ImageBackground, TouchableWithoutFeedback } from 'react-native';
-import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 import NotificationBar from './NotificationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -112,7 +111,6 @@ export default function CatEdenChat({navigation}) {
      {chatBubble(Images.eden, "Eden", "FINALLY! So nice to meet you cat!")}
       </ScrollView>
       {inputText()}
-      <ButtonBar navigation = {navigation} which = {"chat"}/>
     </View>
     );
 
@@ -137,7 +135,7 @@ const styles = StyleSheet.create({
     height: 60,
     width: 345,
     borderRadius: 35,
-    marginBottom: 10,
+    marginBottom: 25,
     marginTop: 10,
   },
   textInput: {

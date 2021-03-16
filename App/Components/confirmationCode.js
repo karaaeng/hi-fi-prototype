@@ -1,3 +1,4 @@
+import ForwardButton from './ForwardButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
@@ -53,7 +54,9 @@ export default function ConfirmationCode({navigation}) {
           </View>
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Location')}>
-        <Image style = {styles.forward} source={Images.forward_icon}/>
+          <View style = {styles.forward}>
+                 <ForwardButton/>
+              </View>
         </TouchableOpacity>
         </View>
     </View>

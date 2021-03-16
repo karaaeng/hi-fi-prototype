@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import EditProfile from './EditProfile';
-import ButtonBar from './ButtonBar';
 import NavigationBar from './NavigationBar';
 
 
@@ -113,7 +112,6 @@ export default function IsaProfileConnect ({navigation}){
         </View>
         {searchCircle()}
       </View>
-      <ButtonBar navigation = {navigation} which = {"home"}/>
     </View> 
     );
   }

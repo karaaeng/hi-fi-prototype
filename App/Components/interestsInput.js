@@ -1,3 +1,4 @@
+import ForwardButton from './ForwardButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
@@ -63,7 +64,9 @@ export default function InterestsInput({navigation}) {
           </View>
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Status')}>
-        <Image style = {styles.forwardwithskiplong} source={Images.forward_icon}/>
+          <View style = {styles.forwardwithskiplong}>
+                 <ForwardButton/>
+              </View>
         </TouchableOpacity>
         </View>
     </View>

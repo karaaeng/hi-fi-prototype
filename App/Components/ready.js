@@ -1,3 +1,4 @@
+import ForwardButton from './ForwardButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
@@ -38,8 +39,10 @@ export default function Ready({navigation}) {
         <Text style = {styles.tagline}>social circles!</Text>
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-        <Image style = {styles.forwardready} source={Images.forward_icon}/>
+          <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+          <View style = {styles.forwardready}>
+                 <ForwardButton/>
+              </View>
         </TouchableOpacity>
         </View>
     </View>
@@ -75,7 +78,7 @@ export default function Ready({navigation}) {
       height: 80,
       width: 80,
       marginLeft: 320,
-      marginTop: 200,
+      marginTop: 210,
     },
     progressbar: {
       height: 17,

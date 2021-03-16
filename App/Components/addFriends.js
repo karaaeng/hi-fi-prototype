@@ -1,3 +1,4 @@
+import ForwardButton from './ForwardButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
@@ -84,14 +85,18 @@ export default function AddFriends({route, navigation}) {
     forwardButton = 
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("Ready")}>
-          <Image style = {styles.forward} source={Images.forward_icon}/>
+        <View style = {styles.forward}>
+                 <ForwardButton/>
+              </View>
         </TouchableOpacity>
       </View>
   } else if (which === "profile") {
     forwardButton = 
       <View>
         <TouchableOpacity onPress={() => navigation.navigate("ConfirmAddFriends")}>
-          <Image style = {styles.forward} source={Images.forward_icon}/>
+        <View style = {styles.forward}>
+                 <ForwardButton/>
+              </View>
         </TouchableOpacity>
       </View>
   }
@@ -225,7 +230,7 @@ const styles = StyleSheet.create({
         height: 80,
         width: 80,
         marginLeft: 320,
-        marginBottom: 40,
+        marginBottom: 10,
       },
       addAllbutton: {
         color: '#FED254',
