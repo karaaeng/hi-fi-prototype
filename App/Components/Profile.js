@@ -18,7 +18,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 
-export default function Profile({navigation}) {
+export default function Profile({navigation, route}) {
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -28,7 +28,36 @@ export default function Profile({navigation}) {
     Comfortaa_700Bold,
   });
 
-  const [text, setText] = useState("");
+  let currUserName = null;
+  let currUserPronouns = null;
+  let currUserStatus = null;
+  let currUserImage = null;
+  let currUserLocation = null;
+  let currUserInterests = null;
+  let Message = null;
+  let ButtonMessage = null;
+
+  if (route.params.user !== undefined) {
+    let User = route.params.user;
+    console.log(User);
+
+    currUserName = User.name;
+    currUserPronouns = User.pronouns;
+    currUserStatus = User.status;
+    currUserImage = User.image;
+    currUserLocation = User.location;
+    currUserInterests = User.interests;
+  }
+
+  if (route.params.message !== undefined) {
+    Message = route.params.message;
+    console.log(Message);
+  }
+
+  if (route.params.buttonMessage !== undefined) {
+    ButtonMessage = route.params.buttonMessage;
+    console.log("Button:" + ButtonMessage);
+  }
 
   function statusIcon(status) {
 
@@ -86,31 +115,73 @@ export default function Profile({navigation}) {
       <Text style={ styles.category}>  interests: </Text> 
       <Text style={ styles.theirInfo}>{interests} </Text> 
       </View>
-     );  }
+     );  
+    }
 
-  
-    const fakestatus = "asking";
-    const fakename = "Cat D.";
-    const fakeinterests = "music, coffee, dogs";
-    const fakepronouns = "she/her";
-    const fakelocation = "Stanford, CA";
+    function acceptOrRejct(){
+      if (String(Message).includes("Connection")) {
+        return (
+          <View>
+            <TouchableOpacity style = {styles.buttonAccept} onPress = { () => {
+              navigation.navigate("CatEdenChat"); 
+            }}>
+              <Text style = {styles.buttonText}> accept </Text>
+             
+            </TouchableOpacity>
+      
+            <TouchableOpacity style = {styles.buttonIgnore} onPress = { () => {
+              navigation.navigate("Home"); 
+            }}>
+              <Text style = {styles.buttonText}> ignore </Text>
+             
+            </TouchableOpacity>
+            </View>
+          );
+      } else if (String(Message).includes("Connecting")) {
+          if (ButtonMessage === "search your circle") {
+            return (
+          <TouchableOpacity style = {styles.button} onPress = { () => {
+            navigation.navigate("ConnectingIsaWithFriends");
+          }}>
+            <Text style = {styles.buttonText}>{ButtonMessage}</Text>
+           
+          </TouchableOpacity>
+        );
+          } else if (ButtonMessage === "create connection") {
+            return (
+              <TouchableOpacity style = {styles.button} onPress = { () => {
+                navigation.navigate("KaraIsaChat")
+              }}>
+                <Text style = {styles.buttonText}>{ButtonMessage}</Text>
+               
+              </TouchableOpacity>
+            );
+          }
+    } else {
+      return (
+        <View></View>
+      );
+    }
+  }
     
     return (     
     <View style = {styles.container}>
+      <Text style = {styles.titleText}>{Message}</Text>
         <View style = {styles.profile}>
           <View style = {styles.profileCard}>     
-          <Image style={styles.profilePicture} source={Images.cat}/>
+          <Image style={styles.profilePicture} source={currUserImage}/>
           <View style = {styles.profileText}>
           <View style = {styles.profileNameAndStatus}>
-            <Text style={ styles.name }>{fakename}</Text>
-            {statusIcon(fakestatus)}
+            <Text style={ styles.name }>{currUserName}</Text>
+            {statusIcon(currUserStatus)}
           </View>
           <View style = {styles.information}>
-           {location(fakelocation)}         
-           {pronouns(fakepronouns)}
-           {interests(fakeinterests)}
+           {location(currUserLocation)}         
+           {pronouns(currUserPronouns)}
+           {interests(currUserInterests)}
             </View>
           </View>
+          {acceptOrRejct()}
         </View>
       </View>
     </View> 
@@ -157,7 +228,7 @@ const styles = StyleSheet.create({
     //flexDirection: 'column', 
   }, 
   profileCard: {
-    marginTop: 60,
+    marginTop: 20,
   },
   profileNameAndStatus:{
     flexDirection: 'column',
@@ -218,6 +289,53 @@ const styles = StyleSheet.create({
     padding: 10,
     alignContent: 'center',
     alignItems: 'center'
-  }
+  },
+  buttonAccept: {
+    marginTop: 10,
+    alignItems: "center",
+    alignContent: 'center',
+    backgroundColor: "#FED254",
+    borderRadius: 40,
+    padding: 10,
+    height: 56,
+    width: 156,
+    alignSelf: 'center',
+    justifyContent: "center",
+  },
+  buttonIgnore: {
+    marginTop: 10,
+    alignItems: "center",
+    alignContent: 'center',
+    padding: 10,
+    height: 50,
+    width: 200,
+    alignSelf: 'center',
+    justifyContent: "center",
+  },
+  titleText: {
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 30,
+    color: '#FED254',
+    textAlign: 'center',
+    textAlignVertical: "center",
+    marginTop: 20,
+  },
+  buttonText: {
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: 20,
+    resizeMode: 'contain',
+    color: '#4A4A4A',
+    alignSelf: 'center',
+  },
+  button: {
+    marginTop: 30,
+    alignItems: "center",
+    backgroundColor: "#FED254",
+    borderRadius: 40,
+    padding: 20,
+    height: 60,
+    width: 240,
+    alignSelf: 'center',
+  },
   
 });

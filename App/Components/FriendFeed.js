@@ -29,16 +29,14 @@ export default function FriendFeed({navigation}) {
     Comfortaa_700Bold,
   });
 
-  function notification(text, image, profileName) {
+  function notification(text, image) {
     return (
-      <TouchableOpacity style = {styles.notification} onPress = { () => {
-        navigation.navigate(profileName)
-      }}>
+      <View style = {styles.notification}>
       <View style = {styles.notificationInside}>
       <Image style = {styles.profileImages} source = {image}/>
         <Text style = {styles.notificationText}>{text} </Text>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 
@@ -46,14 +44,46 @@ export default function FriendFeed({navigation}) {
     <View style = {styles.container}>
     <Text style = {styles.titleText} > newsfeed </Text>
     <ScrollView>
-      {notification('Eden created a connection in New York, NY!', Images.eden, "EdenProfile")}
-      {notification("Cal was connected with someone in Santa Cruz, CA!", Images.cal, "CalProfile")}
-      {notification("Kara moved to Los Angeles, CA!", Images.kara, "KaraProfile")}
-      {notification("Marie moved to Newport Beach, CA!", Images.marie, "MarieProfile")}
-      {notification("Eden created a  connection in Newport Beach, CA!", Images.eden, "EdenProfile")}
-      {notification("Wilder joined ven!", Images.wilder, "WilderProfile")}
-      {notification("Christian joined ven!", Images.christian, "ChristianProfile")}
-  
+    <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.eden, message: "", buttonMessage: ""})}
+              }>
+      {notification('Eden was connected with someone in Stanford, CA!', Images.eden,)}
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.cal, message: "", buttonMessage: ""})}
+              }>
+      {notification("Cal created a connection in Santa Cruz, CA!", Images.cal)}
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.kara, message: "", buttonMessage: ""})}
+              }>
+      {notification("Kara moved to Los Angeles, CA!", Images.kara)}
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.eden, message: "", buttonMessage: ""})}
+              }>
+      {notification("Eden created a  connection in Newport Beach, CA!", Images.eden)}
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.marie, message: "", buttonMessage: ""})}
+              }>
+      {notification("Marie moved to Newport Beach, CA!", Images.marie)}
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.cat})}
+              }>
+      {notification("Cat created a connection in London!", Images.cat)}
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.wilder, message: "", buttonMessage: ""})}
+              }>
+      {notification("Wilder joined ven!", Images.wilder)}
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.christian, message: "", buttonMessage: ""})}
+              }>
+      {notification("Christian joined ven!", Images.christian)}
+      </TouchableOpacity>
       </ScrollView>
     </View>
     );

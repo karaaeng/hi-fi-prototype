@@ -15,19 +15,14 @@ export default function WilderChristianChat({route, navigation}) {
   const [isVisible, setIsVisible] = useState(0);
   const [didLeave, setDidLeave] = useState(false);
 
-  function chatBubble(image, name, givenText){
+  function chatBubble(givenText){
     if ({isVisible} !== 0){
       return(
         <View>
           <View style = {styles.receivedmessage}> 
           <Text style = {styles.chatText}>{givenText}</Text>
           </View>
-
           <View style = {styles.help}> 
-            <View style = {styles.chatDetails}>
-              <Image style = {styles.profileImages} source = {image}/>
-              <Text style = {styles.peopleInChat}> {name} </Text>
-            </View>
           </View>
         </View>
       );
@@ -37,7 +32,7 @@ export default function WilderChristianChat({route, navigation}) {
   //let  {status}  = route.params;
   //console.log(status);
 
-  function sendChat(image, name, givenText){
+  function sendChat(givenText){
     console.log({isVisible})
     if ({isVisible} !== 0 ){
       console.log('got here');
@@ -46,18 +41,11 @@ export default function WilderChristianChat({route, navigation}) {
         <View style = {styles.sentmessage}> 
           <Text style = {styles.chatText}>{givenText}</Text>
         </View>
-
         <View style = {styles.helpSend}> 
-          <View style = {styles.chatDetails}>
-            <Image style = {styles.profileImages} source = {image}/>
-            
-          </View>
         </View>
-
       </View>
     );
     }
-    
   }
   
   function imageHeader (image1, image2, image3) {
@@ -124,9 +112,29 @@ export default function WilderChristianChat({route, navigation}) {
     <View style = {styles.container}>
     {imageHeader(Images.cat, Images.wilder, Images.christian)}
     <ScrollView>
-     {sendChat(Images.cat, "Me", "You both have absolutley incredible sisters, so I thought you guys should meet!")}
-     {chatBubble(Images.wilder, "Wilder", "Hey, nice to meet you!")}
-     {chatBubble(Images.christian, "Christian", "I've heard so much about you!")}
+     {sendChat("You both have absolutley incredible sisters, so I thought you guys should meet!")}
+     <View style = {styles.senderChatDetails}>
+              <Text style = {styles.peopleInChat}>Me</Text>
+              <Image style = {styles.profileImages} source = {Images.cat}/>
+            </View>
+     {chatBubble("Hey, nice to meet you!")}
+     <View style = {styles.chatDetails}>
+              <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.wilder , message: "", buttonMessage: ""})}
+              }>
+              <Image style = {styles.profileImages} source = {Images.wilder}/>
+              </TouchableOpacity>
+              <Text style = {styles.peopleInChat}>Wilder</Text>
+            </View>
+     {chatBubble( "I've heard so much about you!")}
+     <View style = {styles.chatDetails}>
+              <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.christian , message: "", buttonMessage: ""})}
+              }>
+              <Image style = {styles.profileImages} source = {Images.christian}/>
+              </TouchableOpacity>
+              <Text style = {styles.peopleInChat}>Christian</Text>
+            </View>
       {leftChat}
       </ScrollView>
       {inputText()}
@@ -224,10 +232,16 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end'
   },
   chatDetails:{
-    alignSelf: 'center', 
     alignItems: 'center',
     flexDirection: "row",
     marginBottom: 15,
+  },
+  senderChatDetails:{
+    alignSelf: "flex-end",
+    alignItems: 'center',
+    flexDirection: "row",
+    marginBottom: 15,
+    marginRight: 15,
   },
   iconcontainer: {
       backgroundColor: "#E5E5E5",

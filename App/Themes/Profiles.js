@@ -1,28 +1,25 @@
 
 const profilesList = [
-  {image: require('../Images/Profiles/harold.jpg'), name: "Harold", age:"65", occupation: "Internet meme"},
-  {image: require('../Images/Profiles/barbara.jpg'), name: "Barbara", age:"24", occupation: "Designer"},
-  {image: require('../Images/Profiles/james.jpg'), name: "James", age:"25", occupation: "MD Student"},
-  {image: require('../Images/Profiles/john.jpg'), name: "John", age:"23", occupation: "Engineer"},
-  {image: require('../Images/Profiles/linda.jpg'), name: "Linda", age:"23", occupation: "Software engineer"},
-  {image: require('../Images/Profiles/liz.jpg'), name: "Liz", age:"25", occupation: "Photographer"},
-  {image: require('../Images/Profiles/mary.jpg'), name: "Mary", age:"24", occupation: "High school teacher"},
-  {image: require('../Images/Profiles/michael.jpg'), name: "Michael", age:"27", occupation: "Freelancer"},
-  {image: require('../Images/Profiles/patricia.jpg'), name: "Patricia", age:"26", occupation: "Engineer"},
-  {image: require('../Images/Profiles/robert.jpg'), name: "Robert", age:"30", occupation: "Physician"},
+  {image: require('../Images/Profiles/cat.jpg'), name: "Cat D.", location:"Stanford, CA", pronouns: "she/her", interests: "music, coffee dogs", status: "asking"},
+  {image: require('../Images/kara.jpg'), name: "Kara E.", location:"Los Angeles, CA", pronouns: "she/her", interests: "knitting, dogs, reading", status: "open"},
+  {image: require('../Images/isabella.jpeg'), name: "Isa F.", location:"Newport Beach CA", pronouns: "she/her", interests: "travelling, running", status: "asking"},
+  {image: require('../Images/wilder.png'), name: "Wilder F.", location:"London", pronouns: "he/him", interests: "tennis, video games", status: "asking"},
+  {image: require('../Images/christian.jpg'), name: "Christian D.", location:"London", pronouns: "he/him", interests: "video games, basketball", status: "open"},
+  {image: require('../Images/cal.png'), name: "Cal T.", location:"Las Vegas, NV", pronouns: "he/him", interests: "surfing, music, rugby", status: "on hold"},
+  {image: require('../Images/eden.jpg'), name: "Eden M.", location:"Stanford, CA", pronouns: "she/her", interests: "music, film, volleyball", status: "asking"},
+  {image: require('../Images/marie.jpg'), name: "Marie B.", location:"Newport Beach, CA", pronouns: "she/her", interests: "running, cats", status: "asking"},
+
 ]
 
 const profiles = {
-  harold: profilesList[0],
-  barbara: profilesList[1],
-  james: profilesList[2],
-  john: profilesList[3],
-  linda: profilesList[4],
-  liz: profilesList[5],
-  mary: profilesList[6],
-  michael: profilesList[7],
-  patricia: profilesList[8],
-  robert: profilesList[9],
+  cat: profilesList[0],
+  kara: profilesList[1],
+  isa: profilesList[2],
+  wilder: profilesList[3],
+  christian: profilesList[4],
+  cal: profilesList[5],
+  eden: profilesList[6],
+  marie: profilesList[7],
 
   random: () => {
     return profilesList[Math.floor(Math.random() * 10)]

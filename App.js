@@ -36,22 +36,12 @@ import Ready from './App/Components/ready'
 import Profile from './App/Components/Profile'
 import FriendFeed from './App/Components/FriendFeed'
 import MapFeed from './App/Components/MapFeed'
-import KaraProfile from './App/Components/KaraProfile';
-import EdenProfile from './App/Components/EdenProfile';
-import MarieProfile from './App/Components/MarieProfile';
-import CalProfile from './App/Components/CalProfile';
-import WilderProfile from './App/Components/WilderProfile';
-import ChristianProfile from './App/Components/ChristianProfile';
 import Chat from './App/Components/Chat';
 import WilderChristianChat from './App/Components/WilderChristianChat';
 import KaraIsaChat from './App/Components/KaraIsaChat';
 import CatEdenChat from './App/Components/CatEdenChat';
 import Home from './App/Components/Home';
 import ConnectFriends from './App/Components/ConnectFriends';
-import EdenProfileSuggested from './App/Components/EdenProfileSuggested';
-import KaraProfileConnect from './App/Components/KaraProfileConnect';
-import MarieProfileConnect from './App/Components/MarieProfileConnect';
-import IsaProfileConnect from './App/Components/IsaProfileConnect';
 import CatEdenConnect from './App/Components/CatEdenConnect';
 import ConnectingIsaWithFriends from './App/Components/ConnectingIsaWithFriends';
 
@@ -333,7 +323,7 @@ export default function App() {
   function ProfileStackScreens () {
     return (
       <ProfileStack.Navigator>
-          <ProfileStack.Screen name="Profile" component={Profile}
+          <ProfileStack.Screen name="Profile" component={Profile} initialParams={{ user: Profiles.cat , message: "", buttonMessage: ""}}
         options={({navigation}) => ({
           headerStyle: {
             height: 110,
@@ -414,75 +404,6 @@ export default function App() {
         </View>
         ),
     })} />
-    <FriendsStack.Screen name="EdenProfile" component={EdenProfile}
-          options={{
-          title: '',
-          headerStyle: {
-            height: 110,
-          },
-          headerBackTitleVisible: false,
-            headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-        }} />
-
-        <FriendsStack.Screen name="KaraProfile" component={KaraProfile}
-          options={{
-          title: '',
-          headerStyle: {
-            height: 110,
-          },
-          headerBackTitleVisible: false,
-            headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-        }} />
-
-        <FriendsStack.Screen name="MarieProfile" component={MarieProfile}
-          options={{
-          title: '',
-          headerStyle: {
-            height: 110,
-          },
-          headerBackTitleVisible: false,
-            headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-        }} />
-        <FriendsStack.Screen name="WilderProfile" component={WilderProfile}
-          options={{
-          title: '',
-          headerStyle: {
-            height: 110,
-          },
-          headerBackTitleVisible: false,
-            headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-        }} />
-
-        <FriendsStack.Screen name="CalProfile" component={CalProfile}
-          options={{
-          title: '',
-          headerStyle: {
-            height: 110,
-          },
-          headerBackTitleVisible: false,
-            headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-        }} />
-        <FriendsStack.Screen name="ChristianProfile" component={ChristianProfile}
-          options={{
-          title: '',
-          headerStyle: {
-            height: 110,
-          },
-          headerBackTitleVisible: false,
-            headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-        }} />
    </FriendsStack.Navigator>
     );
   }
@@ -543,7 +464,7 @@ function HomeStackScreens () {
               ),
         })} />
 
-        <HomeStack.Screen name="EdenProfileSuggested" component={EdenProfileSuggested}
+        <HomeStack.Screen name="EdenProfileSuggested" component={Profile} initialParams={{ user: Profiles.eden , message: "Connection from Isa", buttonMessage: ""}}
           options={{
           title: '',
           headerStyle: {
@@ -555,7 +476,7 @@ function HomeStackScreens () {
              ),
         }} />
 
-        <HomeStack.Screen name="KaraProfileConnect" component={KaraProfileConnect}
+        <HomeStack.Screen name="KaraProfileConnect" component={Profile} initialParams={{ user: Profiles.kara , message: "Connecting Isa", buttonMessage: "create connection"}}
           options={{
           title: '',
           headerStyle: {
@@ -566,20 +487,7 @@ function HomeStackScreens () {
             <BackButton style = {styles.back}/>
              ),
         }} />
-
-        <HomeStack.Screen name="MarieProfileConnect" component={MarieProfileConnect}
-          options={{
-          title: '',
-          headerStyle: {
-            height: 110,
-          },
-          headerBackTitleVisible: false,
-            headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-        }} />
-
-        <HomeStack.Screen name="IsaProfileConnect" component={IsaProfileConnect}
+        <HomeStack.Screen name="IsaProfileConnect" component={Profile} initialParams={{ user: Profiles.isa , message: "Connecting Isa", buttonMessage: "search your circle"}}
           options={{
           title: '',
           headerStyle: {
@@ -815,7 +723,7 @@ return (
           color: '#4A4A4A',
         },
       }} />
-      <ChatStack.Screen name="WilderChristianChat" component={WilderChristianChat}
+      <RootStack.Screen name="WilderChristianChat" component={WilderChristianChat}
           options={({navigation}) => ({
             headerStyle: {
               height: 110,
@@ -834,7 +742,7 @@ return (
             leaveChatButton({navigation})
               ),
         })} />
-        <ChatStack.Screen name="KaraIsaChat" component={KaraIsaChat}
+        <RootStack.Screen name="KaraIsaChat" component={KaraIsaChat}
           options={{
             headerStyle: {
               height: 110,
@@ -850,7 +758,7 @@ return (
               color: '#4A4A4A',
             },
         }} />
-         <ChatStack.Screen name="CatEdenChat" component={CatEdenChat}
+         <RootStack.Screen name="CatEdenChat" component={CatEdenChat}
           options={{
             headerStyle: {
               height: 110,
@@ -866,6 +774,17 @@ return (
               color: '#4A4A4A',
             },
         }} />
+         <RootStack.Screen name="UserProfile" component={Profile}
+        options={({navigation}) => ({
+          headerStyle: {
+            height: 110,
+          },
+        title: '',
+        headerBackTitleVisible: false,
+        headerBackImage: () => (
+        <BackButton style = {styles.back}/>
+         ),
+        })}/>
     </RootStack.Navigator>
     </NavigationContainer>
 );

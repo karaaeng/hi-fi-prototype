@@ -1,5 +1,5 @@
 import ForwardButton from './ForwardButton';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   useFonts,
@@ -12,7 +12,7 @@ import {
 
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
-import { Images } from '../Themes';
+import { Images, Profiles } from '../Themes';
 
 export default function Ready({navigation}) {
   const [text, setText] = useState("");
@@ -24,7 +24,21 @@ export default function Ready({navigation}) {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
-  
+
+
+  const setStorage = async (newValue) => {
+    try {
+      await AsyncStorage.setItem('todos', JSON.stringify(newValue) )
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+
+
+//after array of user information is passed through the setup process, store info with async
+
+
     return(
       <View style={styles.container}>
         <View>
@@ -39,7 +53,9 @@ export default function Ready({navigation}) {
         <Text style = {styles.tagline}>social circles!</Text>
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+          <TouchableOpacity onPress={() => 
+            navigation.navigate('Main')
+            }>
           <View style = {styles.forwardready}>
                  <ForwardButton/>
               </View>

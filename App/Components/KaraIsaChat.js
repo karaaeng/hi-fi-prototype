@@ -13,26 +13,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 export default function KaraIsaChat({navigation}) {
   const [text, setText] = useState("");
 
-  function chatBubble(image, name, givenText){
+  function chatBubble(givenText){
       return(
         <View>
           <View style = {styles.receivedmessage}> 
           <Text style = {styles.chatText}>{givenText}</Text>
           </View>
-
           <View style = {styles.help}> 
-            <View style = {styles.chatDetails}>
-              <Image style = {styles.profileImages} source = {image}/>
-              <Text style = {styles.peopleInChat}> {name} </Text>
-            </View>
           </View>
-
         </View>
       );
     }
   
 
-  function sendChat(image, name, givenText){
+  function sendChat(givenText){
       console.log('got here');
       return(
       <View>
@@ -40,9 +34,6 @@ export default function KaraIsaChat({navigation}) {
           <Text style = {styles.chatText}>{givenText}</Text>
         </View>
         <View style = {styles.helpSend}> 
-          <View style = {styles.chatDetails}>
-            <Image style = {styles.profileImages} source = {image}/>
-          </View>
         </View>
       </View>
     );
@@ -75,9 +66,29 @@ export default function KaraIsaChat({navigation}) {
     <View style = {styles.container}>
     {imageHeader(Images.cat, Images.kara, Images.isa)}
     <ScrollView>
-     {sendChat(Images.cat, "Me", "If you get along well, Kara might knit you a custom sweater!")}
-     {chatBubble(Images.kara, "Kara", "Luckily I just bought more yarn!")}
-     {chatBubble(Images.isa, "Isa", "Wow, this friendship comes with great perks!")}
+     {sendChat("If you get along well, Kara might knit you a custom sweater!")}
+     <View style = {styles.senderChatDetails}>
+              <Text style = {styles.peopleInChat}>Me</Text>
+              <Image style = {styles.profileImages} source = {Images.cat}/>
+            </View>
+     {chatBubble("Luckily I just bought more yarn!")}
+     <View style = {styles.chatDetails}>
+              <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.kara, message: "", buttonMessage: ""})}
+              }>
+              <Image style = {styles.profileImages} source = {Images.kara}/>
+              </TouchableOpacity>
+              <Text style = {styles.peopleInChat}>Kara</Text>
+            </View>
+     {chatBubble("Wow, this friendship comes with great perks!")}
+     <View style = {styles.chatDetails}>
+              <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.isa , message: "", buttonMessage: ""})}
+              }>
+              <Image style = {styles.profileImages} source = {Images.isa}/>
+              </TouchableOpacity>
+              <Text style = {styles.peopleInChat}>Isa</Text>
+            </View>
      <Text style = {styles.notice}>you left the chat.</Text>
       </ScrollView>
     </View>
@@ -174,10 +185,16 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end'
       },
       chatDetails:{
-        alignSelf: 'center', 
         alignItems: 'center',
         flexDirection: "row",
         marginBottom: 15,
+      },
+      senderChatDetails:{
+        alignSelf: "flex-end",
+        alignItems: 'center',
+        flexDirection: "row",
+        marginBottom: 15,
+        marginRight: 15,
       },
       iconcontainer: {
           backgroundColor: "#E5E5E5",

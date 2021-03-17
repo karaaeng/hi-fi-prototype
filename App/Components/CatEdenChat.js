@@ -14,21 +14,15 @@ export default function CatEdenChat({navigation}) {
   const [text, setText] = useState("");
   const [isVisible, setIsVisible] = useState(0);
 
-  function chatBubble(image, name, givenText){
+  function chatBubble(givenText){
     if ({isVisible} !== 0){
       return(
         <View>
           <View style = {styles.receivedmessage}> 
           <Text style = {styles.chatText}>{givenText}</Text>
           </View>
-
           <View style = {styles.help}> 
-            <View style = {styles.chatDetails}>
-              <Image style = {styles.profileImages} source = {image}/>
-              <Text style = {styles.peopleInChat}> {name} </Text>
-            </View>
           </View>
-
         </View>
       );
     }
@@ -107,8 +101,24 @@ export default function CatEdenChat({navigation}) {
     <View style = {styles.container}>
     {imageHeader(Images.cat, Images.isa, Images.eden)}
     <ScrollView>
-     {chatBubble(Images.isa, "Isa", "Hey Cat & Eden! I love you both so much and know you'd make the cutest friends! Now go bond over your love for me :)")}
-     {chatBubble(Images.eden, "Eden", "FINALLY! So nice to meet you cat!")}
+     {chatBubble("Hey Cat & Eden! I love you both so much and know you'd make the cutest friends! Now go bond over your love for me :)")}
+     <View style = {styles.chatDetails}>
+              <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.isa , message: "", buttonMessage: ""})}
+              }>
+              <Image style = {styles.profileImages} source = {Images.isa}/>
+              </TouchableOpacity>
+              <Text style = {styles.peopleInChat}>Isa</Text>
+            </View>
+     {chatBubble("FINALLY! So nice to meet you cat!")}
+     <View style = {styles.chatDetails}>
+              <TouchableOpacity onPress={() => { 
+              navigation.navigate('UserProfile', { user: Profiles.eden , message: "", buttonMessage: ""})}
+              }>
+              <Image style = {styles.profileImages} source = {Images.eden}/>
+              </TouchableOpacity>
+              <Text style = {styles.peopleInChat}>Eden</Text>
+            </View>
       </ScrollView>
       {inputText()}
     </View>
@@ -197,7 +207,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end'
   },
   chatDetails:{
-    alignSelf: 'center', 
     alignItems: 'center',
     flexDirection: "row",
     marginBottom: 15,
