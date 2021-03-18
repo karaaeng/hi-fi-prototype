@@ -15,7 +15,7 @@ import {
     Comfortaa_400Regular,
     Comfortaa_500Medium,
     Comfortaa_600SemiBold,
-    Comfortaa_700Bold,
+    Comfortaa_400Bold,
   } from '@expo-google-fonts/comfortaa'; 
 
 
@@ -27,7 +27,7 @@ export default function Home({navigation}) {
     Comfortaa_400Regular,
     Comfortaa_500Medium,
     Comfortaa_600SemiBold,
-    Comfortaa_700Bold,
+    Comfortaa_400Bold,
   });
 
   function acceptOrRejct(connectionProfile, connectAccept){

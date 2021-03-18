@@ -15,7 +15,7 @@ import {
     Comfortaa_400Regular,
     Comfortaa_500Medium,
     Comfortaa_600SemiBold,
-    Comfortaa_700Bold,
+    Comfortaa_400Bold,
   } from '@expo-google-fonts/comfortaa'; 
 
 
@@ -27,7 +27,7 @@ export default function ConnectingIsaWithFriends({navigation}) {
     Comfortaa_400Regular,
     Comfortaa_500Medium,
     Comfortaa_600SemiBold,
-    Comfortaa_700Bold,
+    Comfortaa_400Bold,
   });
 
   
@@ -66,7 +66,7 @@ export default function ConnectingIsaWithFriends({navigation}) {
       {notification(true, 'Kara Eng', "KaraProfileConnect")}
       {notification(false, 'George Burnside')}
       {notification(false, 'Elina Thadhani')}
-      {notification(false, 'Marie')}
+      {notification(false, 'Marie Burnett')}
       {notification(false, 'Nat Hojel')}
       {notification(false, 'Cam Horton')}
       {notification(false, 'Pablo McDouglas')}
