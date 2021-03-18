@@ -7,11 +7,11 @@ import NotificationBar from './NotificationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { GiftedChat, Bubble, Send } from 'react-native-gifted-chat';
+import { GiftedChat, Bubble, Send, InputToolbar } from 'react-native-gifted-chat';
 
 
 
-export default function WilderChristianChat({route, navigation}) {
+export default function WilderChristianChat({navigation, route}) {
   const [text, setText] = useState("");
   const [isVisible, setIsVisible] = useState(0);
   const [didLeave, setDidLeave] = useState(false);
@@ -128,7 +128,22 @@ export default function WilderChristianChat({route, navigation}) {
 
     );
   }
-  
+
+  /*Stuff put in place to try to get rid of chat after you hit the button*/
+  function renderInputToolbar(props) {
+    if (1 === true) {
+      return(
+        <View>
+        </View>
+      );
+    } else {
+    return(
+      <InputToolbar
+      {...props}
+      />
+    ); 
+    }
+  }
   let leftChat = null;
 
     if (didLeave === true) {
@@ -156,6 +171,7 @@ export default function WilderChristianChat({route, navigation}) {
       showUserAvatar
       renderUsernameOnMessage
       renderSend={renderSend}
+      renderInputToolbar={renderInputToolbar}
       alwaysShowSend
       timeTextStyle={{ 
         left: { 

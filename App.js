@@ -729,6 +729,7 @@ return (
               height: 110,
             },
             title: 'chat',
+            didLeave: {didLeave},
             headerBackTitleVisible: false,
             headerBackImage: () => (
             <BackButton style = {styles.back}/>
@@ -741,7 +742,8 @@ return (
             headerRight: () => (
             leaveChatButton({navigation})
               ),
-        })} />
+        }
+        )} />
         <RootStack.Screen name="KaraIsaChat" component={KaraIsaChat}
           options={{
             headerStyle: {
@@ -852,7 +854,7 @@ const styles = StyleSheet.create({
   iconMain: {
     fontSize: Dimensions.get('window').width * .095,
     alignSelf: "center",
-    color: '#7E7E7E',
+    color: '#909090',
     marginTop: 10,
   },
 });

@@ -12,9 +12,12 @@ import {
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
+import * as ImagePicker from 'expo-image-picker';
+import {Asset} from 'expo-asset';
 
 export default function PhotoOptions({route, navigation}) {
   const [text, setText] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -27,20 +30,46 @@ export default function PhotoOptions({route, navigation}) {
   let { which } = route.params;
   console.log(which);
 
+  function imageRender(){
+    if (selectedImage === null ){
+      console.log("ah")
+      return (<Image style = {styles.image} source={Images.choose_photo_icon}/>);
+    }else{
+      return (<Image source={{ uri: selectedImage.localUri }} style = {styles.image}/>);
+    }
+  }
+
   function imageToSelect(goBackTo){
     if (goBackTo === 'profile') {
-   return (
-        <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+     return (
+          <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+              <Image style = {styles.photos} source={Images.cat}/>
+          </TouchableOpacity>
+     );
+      } else {
+        return (
+        <TouchableOpacity onPress={() => navigation.navigate('SelectedPhoto')}>
             <Image style = {styles.photos} source={Images.cat}/>
         </TouchableOpacity>
-   );
-    } else {
-      return (
-      <TouchableOpacity onPress={() => navigation.navigate('SelectedPhoto')}>
-          <Image style = {styles.photos} source={Images.cat}/>
-      </TouchableOpacity>
-      );
+        );
+      }
     }
+
+  let openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+     if (pickerResult.cancelled === true) {
+      return;
+    }
+
+    setSelectedImage({ localUri: pickerResult.uri });
+    console.log(selectedImage.localUri)
   }
 
   //profile information
@@ -52,22 +81,15 @@ export default function PhotoOptions({route, navigation}) {
         <Text style = {styles.prompt}>choose profile picture</Text>
         </View>
         <View>
-            <Image style = {styles.image} source={Images.choose_photo_icon}/>
+            {imageRender()}
         </View>
         <View>
+          <TouchableOpacity onPress={openImagePickerAsync}>
             <Image style = {styles.lib} source={Images.library}/>
+          </TouchableOpacity>
+            
         </View>
-        <View style = {styles.grid}>
-        {imageToSelect(which)}
-        <Image style = {styles.photos} source={Images.barbara}/>
-        <Image style = {styles.photos} source={Images.robert}/>
-        <Image style = {styles.photos} source={Images.liz}/>
-        <Image style = {styles.photos} source={Images.mary}/>
-        <Image style = {styles.photos} source={Images.linda}/>
-        <Image style = {styles.photos} source={Images.john}/>
-        <Image style = {styles.photos} source={Images.james}/>
-        <Image style = {styles.photos} source={Images.harold}/>
-        </View>
+        
     </View>
     );
 }
@@ -123,6 +145,7 @@ const styles = StyleSheet.create({
         width: 247,
         alignSelf: "center",
         marginTop: 10,
+        borderRadius: 124
       },
       lib:{
         height: 57,

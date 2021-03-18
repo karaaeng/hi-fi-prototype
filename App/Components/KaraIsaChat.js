@@ -116,6 +116,14 @@ export default function KaraIsaChat({route, navigation}) {
       />
     );
   }
+  function renderInputToolbar(props) {
+    
+    return(
+      <View>
+      </View>
+    ); 
+    
+  } 
   
   function imageHeader (image1, image2, image3) {
     return(
