@@ -587,28 +587,28 @@ function MainTabStack () {
           options={{
           title: '',
           tabBarIcon: () => (
-            <Icon name="home" style={styles.icon} />
+            <Icon name="home" style={styles.iconMain} />
            ),
         }} />
         <Tab.Screen name="ChatStack" component={ChatStackScreens}
           options={{
           title: '',
           tabBarIcon: () => (
-            <Icon name="comments" style={styles.icon} />
+            <Icon name="comments" style={styles.iconMain} />
            ),
         }} />
          <Tab.Screen name="FriendsStack" component={FriendsStackScreens}
           options={{
           title: '',
           tabBarIcon: () => (
-            <Icon name="users" style={styles.icon}/>
+            <Icon name="users" style={styles.iconMain}/>
            ),
         }} />
        <Tab.Screen name="ProfileStack" component={ProfileStackScreens}
           options={{
           title: '',
           tabBarIcon: () => (
-            <Icon name="user" style={styles.icon} />
+            <Icon name="user" style={styles.iconMain} />
            ),
         }} />
     </Tab.Navigator>
@@ -847,6 +847,12 @@ const styles = StyleSheet.create({
     fontSize: Dimensions.get('window').width * .095,
     alignSelf: "center",
     color: '#4A4A4A',
+    marginTop: 10,
+  },
+  iconMain: {
+    fontSize: Dimensions.get('window').width * .095,
+    alignSelf: "center",
+    color: '#7E7E7E',
     marginTop: 10,
   },
 });

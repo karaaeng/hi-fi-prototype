@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Keyboard, TextInput, Dimensions, ScrollView, TouchableOpacity, ImageBackground, TouchableWithoutFeedback } from 'react-native';
@@ -7,6 +7,7 @@ import NotificationBar from './NotificationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { GiftedChat, Bubble, Send } from 'react-native-gifted-chat';
 
 
 
@@ -14,38 +15,98 @@ export default function WilderChristianChat({route, navigation}) {
   const [text, setText] = useState("");
   const [isVisible, setIsVisible] = useState(0);
   const [didLeave, setDidLeave] = useState(false);
+  const [messages, setMessages] = useState([]);
 
-  function chatBubble(givenText){
-    if ({isVisible} !== 0){
-      return(
-        <View>
-          <View style = {styles.receivedmessage}> 
-          <Text style = {styles.chatText}>{givenText}</Text>
-          </View>
-          <View style = {styles.help}> 
-          </View>
-        </View>
-      );
-    }
-  }
 
-  //let  {status}  = route.params;
-  //console.log(status);
 
-  function sendChat(givenText){
-    console.log({isVisible})
-    if ({isVisible} !== 0 ){
-      console.log('got here');
-      return(
-      <View>
-        <View style = {styles.sentmessage}> 
-          <Text style = {styles.chatText}>{givenText}</Text>
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 2,
+        text: "Hey, nice to meet you!",
+        createdAt: new Date(),
+        user: {
+          _id: 3,
+          name: 'Wilder',
+          avatar: require('../Images/wilder.png'),
+        },
+      },
+      {
+        _id: 3,
+        text: "I've heard so much about you!",
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'Christian',
+          avatar: require('../Images/christian.jpg'),
+        },
+      },
+      {
+        _id: 1,
+        text: "You both have absolutely incredible sisters, so I thought you guys should meet!",
+        createdAt: new Date(),
+        user: {
+          _id: 1,
+          name: 'Cat',
+          avatar: require('../Images/Profiles/cat.jpg'),
+        },
+        
+      },
+      
+    ])
+  }, [])
+ const onSend = useCallback((messages = []) => {
+    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+  }, [])
+
+ const onPress = useCallback((user = {}) => {
+    console.log("NO");
+  }, [])
+
+ function renderSend(props) {
+    return (
+      <Send {...props}>
+        <View style={styles.sendingContainer}>
+          <Icon name="arrow-up" style={styles.icon} 
+              onPress={() => {
+                setIsVisible(1)   
+          }}
+        />
         </View>
-        <View style = {styles.helpSend}> 
-        </View>
-      </View>
+      </Send>
     );
-    }
+  }
+  function renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            // Here is the color change
+            backgroundColor: '#FFF0C1', 
+            borderRadius: 30,
+            padding: 10
+          },
+          left:{
+            backgroundColor: '#E5E5E5', 
+            borderRadius: 30,
+            padding: 10
+          }
+        }}
+        textStyle={{
+          right: {
+            color: '#4A4A4A',
+            fontFamily: 'Comfortaa_700Bold',
+            fontSize: 18,
+          },
+          left: {
+            color: '#4A4A4A',
+            fontFamily: 'Comfortaa_700Bold',
+            fontSize: 18,
+          }
+        }}
+      />
+    );
   }
   
   function imageHeader (image1, image2, image3) {
@@ -68,36 +129,6 @@ export default function WilderChristianChat({route, navigation}) {
     );
   }
   
-  function inputText() {
-    if (didLeave === false) {
-    return (
-      <View style={styles.inputBar}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <TextInput
-            placeholder= "message"
-            value={text}
-            onChangeText={(text) => {
-            setText(text)
-          }}
-          style={styles.textInput}
-          />
-        </TouchableWithoutFeedback>
-        <View style = {styles.iconcontainer}>
-        <Icon name="arrow-up" style={styles.icon} 
-              onPress={() => {
-                setIsVisible(1)   
-          }}
-        />
-        </View>
-        </View>
-    );
-        } else {
-          return (
-          <View></View>
-          );
-        }
-  }
-
   let leftChat = null;
 
     if (didLeave === true) {
@@ -108,38 +139,43 @@ export default function WilderChristianChat({route, navigation}) {
         <View></View>;
     }
 
+
   return (      
     <View style = {styles.container}>
-    {imageHeader(Images.cat, Images.wilder, Images.christian)}
-    <ScrollView>
-     {sendChat("You both have absolutley incredible sisters, so I thought you guys should meet!")}
-     <View style = {styles.senderChatDetails}>
-              <Text style = {styles.peopleInChat}>Me</Text>
-              <Image style = {styles.profileImages} source = {Images.cat}/>
-            </View>
-     {chatBubble("Hey, nice to meet you!")}
-     <View style = {styles.chatDetails}>
-              <TouchableOpacity onPress={() => { 
-              navigation.navigate('UserProfile', { user: Profiles.wilder , message: "", buttonMessage: ""})}
-              }>
-              <Image style = {styles.profileImages} source = {Images.wilder}/>
-              </TouchableOpacity>
-              <Text style = {styles.peopleInChat}>Wilder</Text>
-            </View>
-     {chatBubble( "I've heard so much about you!")}
-     <View style = {styles.chatDetails}>
-              <TouchableOpacity onPress={() => { 
-              navigation.navigate('UserProfile', { user: Profiles.christian , message: "", buttonMessage: ""})}
-              }>
-              <Image style = {styles.profileImages} source = {Images.christian}/>
-              </TouchableOpacity>
-              <Text style = {styles.peopleInChat}>Christian</Text>
-            </View>
-      {leftChat}
-      </ScrollView>
-      {inputText()}
+    {imageHeader(Images.wilder, Images.cat, Images.christian)}
+    
+    <GiftedChat 
+      messages={messages}
+      onSend={messages => onSend(messages)}
+      user={{
+        _id: 1,
+        name: 'Cat',
+        avatar: require('../Images/Profiles/cat.jpg'),
+      }}
+      renderBubble={renderBubble}
+      showUserAvatar
+      renderUsernameOnMessage
+      renderSend={renderSend}
+      alwaysShowSend
+      timeTextStyle={{ 
+        left: { 
+          color: '#4A4A4A', 
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 12, 
+        },
+        right: { 
+          color: '#4A4A4A', 
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 12, 
+        },
+      }}
+    />
     </View>
     );
+
+
+
+  
 
 }
 
