@@ -438,6 +438,7 @@ const styles = StyleSheet.create({
         width: 273,
         borderRadius: 35,
         marginTop: 25,
+        
       },
       button_text: {
         alignSelf: 'center',

@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * .5,
     height: Dimensions.get('window').width * .5,
     alignSelf: 'center', 
-    borderRadius: Dimensions.get('window').height * .5 * 0.5,
+    borderRadius: Dimensions.get('window').height * .5 * 0.75,
   }, 
   profileText: {
     //flex: 1, 

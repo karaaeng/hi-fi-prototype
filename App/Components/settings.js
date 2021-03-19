@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   arrowicon1: {
     fontSize: 25,
     color: '#4A4A4A',
-    marginLeft: 180,
+    marginLeft: 182,
   }, 
   arrowicon2: {
     fontSize: 25,
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   arrowicon3: {
     fontSize: 25,
     color: '#4A4A4A',
-    marginLeft: 230,
+    marginLeft: 226,
   }, 
   editprofilestuff: {
     flex: 1
@@ -181,12 +181,13 @@ const styles = StyleSheet.create({
   },
 
   options: {
-    margin: 20, 
+    marginTop: 20, 
+    marginBottom: 20, 
     flexDirection: 'row',
   },
   optionsTogether: {
     justifyContent: 'space-evenly', 
-    marginLeft: 15,
+    alignSelf: 'center',
     flex: 1,
     marginTop: 50,
   },
