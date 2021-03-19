@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   notification: {
     height: 210,
-    width: 336,
+    width: Dimensions.get('window').width * .8,
     borderBottomWidth: 2,
     borderColor: "#E5E5E5",
     alignSelf: 'center',
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   firstNotification: {
     height: 210,
-    width: 336,
+    width: Dimensions.get('window').width * .8,
     borderTopWidth: 2,
     borderColor: "#E5E5E5",
     alignSelf: 'center',
