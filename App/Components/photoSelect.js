@@ -11,7 +11,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images } from '../Themes';
 
 export default function PhotoSelect({navigation, route}) {
@@ -58,50 +58,23 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
       },
-      header: {
-        marginTop: 60,
-        height: 58,
-        width: 89,
-        alignSelf: 'center',
-      },
       prompt: {
-        marginTop: 40,
+        marginTop: Dimensions.get('window').height * 0.03,
         alignSelf: 'center',
         fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
-        color: '#4A4A4A',
-      },
-      inputBar: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderWidth: 3,
-        borderColor: '#E5E5E5',
-        height: 81,
-        width: 345,
-        borderRadius: 35,
-        marginTop: 30,
-      },
-      textInput: {
-        height: 81,
-        width: 270,
-      },
-      icon: {
-        fontSize: 35,
+        fontSize: Dimensions.get('window').height * 0.03,
         color: '#4A4A4A',
       },
       progressbar: {
-        height: 17,
-        width: 325,
+        height: Dimensions.get('window').height * 0.03,
+        width: Dimensions.get('window').width * 0.7,
         alignSelf: "center",
-        marginTop: 70,
+        marginTop: Dimensions.get('window').height * 0.065,
       },
       image: {
-        height: 220,
-        width: 243,
+        height: Dimensions.get('window').height * 0.28,
+        width: Dimensions.get('window').width * 0.55,
         alignSelf: "center",
-        marginTop: 70,
+        marginTop: Dimensions.get('window').height * 0.05,
       },
 });

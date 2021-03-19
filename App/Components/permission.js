@@ -10,7 +10,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images } from '../Themes';
 
 export default function Permission({navigation, route}) {
@@ -72,85 +72,56 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
       },
-      header: {
-        marginTop: 60,
-        height: 58,
-        width: 89,
-        alignSelf: 'center',
-      },
       prompt: {
-        marginTop: 150,
+        marginTop: Dimensions.get('window').height * 0.13,
         alignSelf: 'center',
         fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
-        color: '#4A4A4A',
-      },
-      inputBar: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderWidth: 3,
-        borderColor: '#E5E5E5',
-        height: 81,
-        width: 345,
-        borderRadius: 35,
-        marginTop: 30,
-      },
-      textInput: {
-        height: 81,
-        width: 270,
-      },
-      icon: {
-        fontSize: 35,
+        fontSize: Dimensions.get('window').height * 0.03,
         color: '#4A4A4A',
       },
       progressbar: {
-        height: 17,
-        width: 325,
+        height: Dimensions.get('window').height * 0.03,
+        width: Dimensions.get('window').width * 0.7,
         alignSelf: "center",
-        marginTop: 70,
+        marginTop: Dimensions.get('window').height * 0.065,
       },
       notification: {
           backgroundColor: '#FFF0C1',
           alignSelf: "center",
-          height: 268,
-          width: 354,
-          borderRadius: 40,
-          marginTop: 40,
+          height: Dimensions.get('window').height * 0.28,
+          width: Dimensions.get('window').width * 0.8,
+          borderRadius: Dimensions.get('window').height * 0.28 * .15,
+          marginTop: Dimensions.get('window').height * 0.03,
       },
       notification_prompt: {
         marginTop: 30,
-        marginLeft: 5,
-        marginRight: 5,
+        marginLeft: Dimensions.get('window').height * 0.01,
+        marginRight: Dimensions.get('window').height * 0.01,
         alignSelf: 'center',
         fontFamily: 'Comfortaa_400Regular',
-        fontSize: 28,
+        fontSize: Dimensions.get('window').height * 0.03,
         color: '#4A4A4A',
       },
       button: {
         backgroundColor: '#FFFFFF',
         alignSelf: "center",
         justifyContent:"center",
-        height: 72,
-        width: 320,
-        borderRadius: 27,
+        height: Dimensions.get('window').height * 0.07,
+        width: Dimensions.get('window').width * 0.7,
+        borderRadius: Dimensions.get('window').height * 0.07 * .4,
         marginTop: 20,
       },
       yes: {
-        marginLeft: 5,
-        marginRight: 5,
         alignSelf: 'center',
         fontFamily: 'Comfortaa_400Regular',
-        fontSize: 28,
+        fontSize: Dimensions.get('window').height * 0.03,
         color: '#4A4A4A',
       },
       skipbutton: {
         color: '#FED254',
         fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
+        fontSize: Dimensions.get('window').height * 0.03,
         alignSelf: "center",
-        marginTop: 25,
+        marginTop: Dimensions.get('window').height * 0.03,
       },
 });

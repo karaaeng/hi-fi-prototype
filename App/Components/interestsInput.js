@@ -11,7 +11,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images } from '../Themes';
 
 export default function InterestsInput({navigation, route}) {
@@ -86,24 +86,34 @@ export default function InterestsInput({navigation, route}) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'white',
-      },
-      header: {
-        marginTop: 60,
-        height: 58,
-        width: 89,
-        alignSelf: 'center',
-      },
-      prompt: {
-        marginTop: 150,
-        alignSelf: 'center',
-        fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
-        color: '#4A4A4A',
-      },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'white',
+  },
+  prompt: {
+    marginTop: Dimensions.get('window').height * 0.15,
+    alignSelf: 'center',
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: Dimensions.get('window').height * 0.03,
+    color: '#4A4A4A',
+  },
+  icon: {
+    fontSize: Dimensions.get('window').height * 0.035,
+    color: '#4A4A4A',
+  },
+  forwardwithskiplong: {
+    height: Dimensions.get('window').height * 0.31,
+    width: Dimensions.get('window').height * 0.31,
+    marginLeft: Dimensions.get('window').height * 0.31,
+    marginTop: Dimensions.get('window').height * 0.16,
+  },
+  progressbar: {
+    height: Dimensions.get('window').height * 0.03,
+    width: Dimensions.get('window').width * 0.7,
+    alignSelf: "center",
+    marginTop: Dimensions.get('window').height * 0.065,
+  },
       inputBarLong: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -112,37 +122,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderWidth: 3,
         borderColor: '#E5E5E5',
-        height: 150,
-        width: 345,
-        borderRadius: 35,
+        height: Dimensions.get('window').height * 0.15,
+        width: Dimensions.get('window').width * 0.8,
+        borderRadius:  Dimensions.get('window').height * 0.15 * .3,
         marginTop: 30,
       },
       textInputLong: {
-        marginTop: 20,
-        height: 150,
-        width: 270,
-      },
-      icon: {
-        fontSize: 35,
-        color: '#4A4A4A',
-      },
-      forwardwithskiplong: {
-        height: 80,
-        width: 80,
-        marginLeft: 310,
-        marginTop: 150,
-      },
-      progressbar: {
-        height: 17,
-        width: 325,
-        alignSelf: "center",
-        marginTop: 70,
+        marginTop: Dimensions.get('window').height * 0.04,
+        height: Dimensions.get('window').height * 0.15,
+        width: Dimensions.get('window').width * 0.64,
       },
       skipbutton: {
         color: '#FED254',
         fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
+        fontSize: Dimensions.get('window').height * 0.03,
         alignSelf: "center",
-        marginTop: 70,
+        marginTop: Dimensions.get('window').height * 0.065,
       },
 });

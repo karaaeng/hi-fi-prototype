@@ -11,7 +11,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images } from '../Themes';
 
 export default function ConfirmationCode({navigation, route}) {
@@ -70,69 +70,63 @@ export default function ConfirmationCode({navigation, route}) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'white',
-      },
-      header: {
-        marginTop: 60,
-        height: 58,
-        width: 89,
-        alignSelf: 'center',
-      },
-      prompt: {
-        marginTop: 150,
-        alignSelf: 'center',
-        fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
-        color: '#4A4A4A',
-      },
-      inputBar: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderWidth: 3,
-        borderColor: '#E5E5E5',
-        height: 81,
-        width: 345,
-        borderRadius: 35,
-        marginTop: 30,
-      },
-      textInput: {
-        height: 81,
-        width: 270,
-      },
-      icon: {
-        fontSize: 35,
-        color: '#4A4A4A',
-      },
-      forward: {
-        height: 80,
-        width: 80,
-        marginLeft: 310,
-        marginTop: 215,
-      },
-      progressbar: {
-        height: 17,
-        width: 325,
-        alignSelf: "center",
-        marginTop: 70,
-      },
-      info: {
-        color: '#939393',
-        fontFamily: 'Comfortaa_400Regular',
-        fontSize: 17,
-        alignSelf: "center",
-        marginTop: 20,
-      },
-      resendbutton: {
-        color: '#FED254',
-        fontFamily: 'Comfortaa_700Bold',
-        fontSize: 17,
-        alignSelf: "center",
-        marginTop: 50,
-      },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'white',
+  },
+  prompt: {
+    marginTop: Dimensions.get('window').height * 0.15,
+    alignSelf: 'center',
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: Dimensions.get('window').height * 0.03,
+    color: '#4A4A4A',
+  },
+  inputBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 3,
+    borderColor: '#E5E5E5',
+    height: Dimensions.get('window').height * 0.08,
+    width: Dimensions.get('window').width * 0.8,
+    borderRadius: Dimensions.get('window').height * 0.08 * .5,
+    marginTop: Dimensions.get('window').height * 0.03,
+  },
+  textInput: {
+    height: Dimensions.get('window').height * 0.08,
+    width: Dimensions.get('window').width * 0.65,
+  },
+  icon: {
+    fontSize: Dimensions.get('window').height * 0.035,
+    color: '#4A4A4A',
+  },
+  forward: {
+    height: Dimensions.get('window').height * 0.31,
+    width: Dimensions.get('window').height * 0.31,
+    marginLeft: Dimensions.get('window').height * 0.31,
+    marginTop: Dimensions.get('window').height * 0.24,
+  },
+  progressbar: {
+    height: Dimensions.get('window').height * 0.03,
+    width: Dimensions.get('window').width * 0.7,
+    alignSelf: "center",
+    marginTop: Dimensions.get('window').height * 0.065,
+  },
+  info: {
+    color: '#939393',
+    fontFamily: 'Comfortaa_400Regular',
+    fontSize: Dimensions.get('window').height * 0.017,
+    alignSelf: "center",
+    marginTop: Dimensions.get('window').height * 0.02,
+  },
+  resendbutton: {
+    color: '#FED254',
+    fontFamily: 'Comfortaa_700Bold',
+    fontSize: Dimensions.get('window').height * 0.02,
+    alignSelf: "center",
+    marginTop: Dimensions.get('window').height * 0.03,
+  },
 });

@@ -11,7 +11,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images } from '../Themes';
 
 export default function ConfirmAddFriends({navigation}) {
@@ -53,40 +53,39 @@ const styles = StyleSheet.create({
       iconcontainer: {
         alignSelf: "center",
         backgroundColor: "#FED254",
-        width: 80,
-        height: 80,
+        height: Dimensions.get('window').height * 0.08,
+        width: Dimensions.get('window').height * 0.08,
         justifyContent: "center",
-        borderRadius: 40,
+        borderRadius: Dimensions.get('window').height * 0.08 *.5,
       },
       icon: {
-        fontSize: 50,
+        fontSize: Dimensions.get('window').height * 0.05,
         color: '#4A4A4A',
         alignSelf: "center",
       },
       notification: {
           backgroundColor: '#FFF0C1',
           alignSelf: "center",
-          height: 290,
-          width: 354,
-          borderRadius: 40,
-          marginTop: 200,
+          height: Dimensions.get('window').height * 0.3,
+          width: Dimensions.get('window').height * 0.37,
+          borderRadius: Dimensions.get('window').height * 0.3 *.2,
+          marginTop: Dimensions.get('window').height * 0.2,
       },
       notification_prompt: {
-        marginTop: 30,
-        marginLeft: 50,
-        marginRight: 50,
-        marginBottom: 20,
+        marginTop: Dimensions.get('window').height * 0.04,
+        marginLeft: Dimensions.get('window').height * 0.02,
+        marginRight: Dimensions.get('window').height * 0.02,
+        marginBottom: Dimensions.get('window').height * 0.04,
         textAlign: "center",
         alignSelf: 'center',
         fontFamily: 'Comfortaa_400Regular',
-        fontSize: 28,
+        fontSize: Dimensions.get('window').height * 0.03,
         color: '#4A4A4A',
       },
       forward: {
-        height: 80,
-        width: 80,
-        marginLeft: 310,
-        marginBottom: 30,
-        marginTop: 210,
+        height: Dimensions.get('window').height * 0.31,
+        width: Dimensions.get('window').height * 0.31,
+        marginLeft: Dimensions.get('window').height * 0.31,
+        marginTop: Dimensions.get('window').height * 0.23,
       },
 });

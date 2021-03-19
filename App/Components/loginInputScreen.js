@@ -13,7 +13,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images } from '../Themes';
 
 export default function LoginInputScreen({navigation}) {
@@ -111,17 +111,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
       },
-      header: {
-        marginTop: 60,
-        height: 58,
-        width: 89,
-        alignSelf: 'center',
-      },
       prompt: {
-        marginTop: 80,
+        marginTop: Dimensions.get('window').height * 0.07,
         alignSelf: 'center',
         fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
+        fontSize: Dimensions.get('window').height * 0.03,
         color: '#4A4A4A',
       },
       inputBar: {
@@ -132,48 +126,44 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderWidth: 3,
         borderColor: '#E5E5E5',
-        height: 81,
-        width: 345,
-        borderRadius: 35,
-        marginTop: 30,
+        height: Dimensions.get('window').height * 0.08,
+        width: Dimensions.get('window').width * 0.8,
+        borderRadius: Dimensions.get('window').height * 0.08 * .5,
+        marginTop: Dimensions.get('window').height * 0.03,
       },
       textInput: {
-        height: 81,
-        width: 270,
-      },
-      icon: {
-        fontSize: 35,
-        color: '#4A4A4A',
+        height: Dimensions.get('window').height * 0.08,
+        width: Dimensions.get('window').width * 0.7,
       },
       forward: {
-        height: 80,
-        width: 80,
-        marginLeft: 310,
-        marginTop: 140,
+        height: Dimensions.get('window').height * 0.31,
+        width: Dimensions.get('window').height * 0.31,
+        marginLeft: Dimensions.get('window').height * 0.31,
+        marginTop: Dimensions.get('window').height * 0.2,
       },
       info: {
         color: '#939393',
         fontFamily: 'Comfortaa_400Regular',
-        fontSize: 17,
+        fontSize: Dimensions.get('window').height * 0.017,
         alignSelf: "center",
-        marginTop: 20,
+        marginTop: Dimensions.get('window').height * 0.02,
       },
       resendbutton: {
         color: '#FED254',
         fontFamily: 'Comfortaa_700Bold',
-        fontSize: 17,
+        fontSize: Dimensions.get('window').height * 0.02,
         alignSelf: "center",
-        marginTop: 50,
+        marginTop: Dimensions.get('window').height * 0.03,
       },
       messagecontainer: {
-        width: 350,
+        width: Dimensions.get('window').width,
         alignSelf: "center",
       },
       message: {
         color: 'red',
         fontFamily: 'Comfortaa_700Bold',
-        fontSize: 15,
+        fontSize: Dimensions.get('window').height * 0.02,
         textAlign: "center",
-        marginTop: -190,
+        marginTop: -Dimensions.get('window').height * 0.4,
       },
 });

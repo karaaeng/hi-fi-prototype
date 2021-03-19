@@ -10,7 +10,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ScrollView, Dimensions} from 'react-native';
 import { Images } from '../Themes';
 
 export default function PhotoOptions({route, navigation}) {
@@ -85,67 +85,34 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
       },
-      header: {
-        marginTop: 60,
-        height: 58,
-        width: 89,
-        alignSelf: 'center',
-      },
       prompt: {
-        marginTop: 50,
+        marginTop: Dimensions.get('window').height * 0.05,
         alignSelf: 'center',
         fontFamily: 'Comfortaa_700Bold',
-        fontSize: 28,
+        fontSize: Dimensions.get('window').height * 0.03,
         color: '#4A4A4A',
-      },
-      inputBar: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderWidth: 3,
-        borderColor: '#E5E5E5',
-        height: 81,
-        width: 345,
-        borderRadius: 35,
-        marginTop: 30,
-      },
-      textInput: {
-        height: 81,
-        width: 270,
-      },
-      icon: {
-        fontSize: 35,
-        color: '#4A4A4A',
-      },
-      progressbar: {
-        height: 17,
-        width: 325,
-        alignSelf: "center",
-        marginTop: 70,
       },
       image: {
-        height: 200,
-        width: 200,
+        height: Dimensions.get('window').width * 0.4,
+        width: Dimensions.get('window').width * 0.4,
         alignSelf: "center",
-        marginTop: 10,
+        marginTop: Dimensions.get('window').width * 0.02,
       },
       lib:{
-        height: 57,
-        width: 393,
+        height: Dimensions.get('window').height * 0.07,
+        width: Dimensions.get('window').width * 0.9,
         alignSelf: "center",
-        marginTop: 10,
+        marginTop: Dimensions.get('window').width * 0.02,
       },
       grid: {
         flexWrap: "wrap",
         flexDirection: "row",
       },
       photos: {
-        height: 112,
-        width: 112,
-        borderRadius: 14,
-        marginLeft: 23,
-        marginTop: 20,
+        height: Dimensions.get('window').width * 0.27,
+        width: Dimensions.get('window').width * 0.27,
+        borderRadius: Dimensions.get('window').width * 0.26 * .2,
+        marginLeft: Dimensions.get('window').width * 0.048,
+        marginTop: Dimensions.get('window').width * 0.048,
       },
 });

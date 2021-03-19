@@ -12,7 +12,7 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
 import { Images, Profiles } from '../Themes';
 
 export default function Ready({navigation, route}) {
@@ -102,34 +102,28 @@ export default function Ready({navigation, route}) {
       backgroundColor: 'white',
     },
     logo: {
-      height: 173,
-      width: 274,
+      height: Dimensions.get('window').height * 0.21,
+      width: Dimensions.get('window').height * 0.34,
       alignSelf: 'center',
-      marginTop: 120,
-      marginBottom: 40,
+      marginTop: Dimensions.get('window').height * 0.1,
+      marginBottom: Dimensions.get('window').height * 0.05,
     },
     tagline: {
       alignSelf: 'center',
       fontFamily: 'Comfortaa_700Bold',
-      fontSize: 28,
+      fontSize: Dimensions.get('window').height * 0.03,
       color: '#4A4A4A',
     },
-    header: {
-      marginTop: 60,
-      height: 58,
-      width: 89,
-      alignSelf: 'center',
-    },
     forwardready: {
-      height: 80,
-      width: 80,
-      marginLeft: 310,
-      marginTop: 185,
+      height: Dimensions.get('window').height * 0.31,
+      width: Dimensions.get('window').height * 0.31,
+      marginLeft: Dimensions.get('window').height * 0.31,
+      marginTop: Dimensions.get('window').height * 0.16,
     },
     progressbar: {
-      height: 17,
-      width: 325,
+      height: Dimensions.get('window').height * 0.03,
+      width: Dimensions.get('window').width * 0.7,
       alignSelf: "center",
-      marginTop: 70,
+      marginTop: Dimensions.get('window').height * 0.065,
     },
 });
