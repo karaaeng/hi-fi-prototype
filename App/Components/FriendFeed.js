@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   notification: {
     height: 150,
-    width: 336,
+    width: Dimensions.get('window').width * .8,
     borderTopWidth: 1,
     borderColor: "#E5E5E5",
     alignSelf: 'center',

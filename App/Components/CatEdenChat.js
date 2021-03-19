@@ -175,20 +175,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly', 
     backgroundColor: "#FFFF"
   },
-  inputBar: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderWidth: 3,
-    borderColor: '#E5E5E5',
-    height: 60,
-    width: 345,
-    borderRadius: 35,
-    marginBottom: 25,
-    marginTop: 10,
-  },
+  
   textInput: {
     height: 81,
     width: 270,

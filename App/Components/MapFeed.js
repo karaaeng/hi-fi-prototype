@@ -201,30 +201,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#939393',
   },
-  notification: {
-    marginTop: 20,
-    
-    borderRadius: 30,
-    padding: 20,
-    height: 150,
-    width: 336,
-    borderWidth: 2,
-    borderColor: "#FFF0C1",
-    alignSelf: 'center',
-  },
-  notificationInside: {
-    flexDirection: 'row', 
-    alignItems: 'baseline',
-    color: '#939393',
-  },
-  notificationText: {
-    fontFamily: 'Comfortaa_700Bold',
-    fontSize: 20,
-    color: '#939393',
-    marginLeft: 10,
-    marginRight: 15,
-    alignSelf: 'baseline'
-  },
+  
   titleText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 30,

@@ -825,7 +825,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   icon: {
-    fontSize: Dimensions.get('window').width * .095,
+    fontSize: 30,
     alignSelf: "center",
     color: '#4A4A4A',
     marginTop: 10,
