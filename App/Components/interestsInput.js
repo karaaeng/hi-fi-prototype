@@ -48,16 +48,15 @@ export default function InterestsInput({navigation, route}) {
         <View>
         <Text style = {styles.prompt}>what are your interests?</Text>
         </View>
-        <View style={styles.inputBarLong}>
+        <View style={styles.inputBar}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <TextInput
-        multiline={true}
-        placeholder= "What is your favorite food?  What do you like to do on the weekends? Do you like sports?"
+        placeholder= "e.g. music, travelling, politics, etc."
         value={userInterests}
         onChangeText={(userInterests) => {
           setuserInterests(userInterests)
         }}
-          style={styles.textInputLong}
+          style={styles.textInput}
           />
           </TouchableWithoutFeedback>
           <Icon name="pencil" style={styles.icon} 
@@ -98,6 +97,23 @@ const styles = StyleSheet.create({
     fontSize: Dimensions.get('window').height * 0.03,
     color: '#4A4A4A',
   },
+  inputBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 3,
+    borderColor: '#E5E5E5',
+    height: Dimensions.get('window').height * 0.08,
+    width: Dimensions.get('window').width * 0.8,
+    borderRadius: Dimensions.get('window').height * 0.08 * .5,
+    marginTop: Dimensions.get('window').height * 0.03,
+  },
+  textInput: {
+    height: Dimensions.get('window').height * 0.08,
+    width: Dimensions.get('window').width * 0.65,
+  },
   icon: {
     fontSize: Dimensions.get('window').height * 0.035,
     color: '#4A4A4A',
@@ -106,7 +122,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height * 0.31,
     width: Dimensions.get('window').height * 0.31,
     marginLeft: Dimensions.get('window').height * 0.31,
-    marginTop: Dimensions.get('window').height * 0.16,
+    marginTop: Dimensions.get('window').height * 0.23,
   },
   progressbar: {
     height: Dimensions.get('window').height * 0.03,
@@ -114,24 +130,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: Dimensions.get('window').height * 0.065,
   },
-      inputBarLong: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderWidth: 3,
-        borderColor: '#E5E5E5',
-        height: Dimensions.get('window').height * 0.15,
-        width: Dimensions.get('window').width * 0.8,
-        borderRadius:  Dimensions.get('window').height * 0.15 * .3,
-        marginTop: 30,
-      },
-      textInputLong: {
-        marginTop: Dimensions.get('window').height * 0.04,
-        height: Dimensions.get('window').height * 0.15,
-        width: Dimensions.get('window').width * 0.64,
-      },
       skipbutton: {
         color: '#FED254',
         fontFamily: 'Comfortaa_700Bold',

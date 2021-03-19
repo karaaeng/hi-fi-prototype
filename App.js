@@ -601,17 +601,17 @@ function MainTabStack () {
       activeBackgroundColor: "#FED254",
       inactiveBackgroundColor: "#FFF0C1",
       style: {
-        height: 120,
+        height: Dimensions.get('window').height * 0.13,
         alignItems: 'center',
         justifyContent: 'center',
       },
       tabStyle: {
-        height: 85,
-        width: 200,
-        borderRadius: 50,
-        marginTop: 10,
-        marginLeft: 11,
-        marginRight: 11,
+        height: Dimensions.get('window').height * 0.09,
+        width: Dimensions.get('window').height * 0.2,
+        borderRadius: Dimensions.get('window').height * 0.05,
+        marginTop: Dimensions.get('window').height * 0.01,
+        marginLeft: Dimensions.get('window').height * 0.011,
+        marginRight: Dimensions.get('window').height * 0.011,
       },
       }}>
        <Tab.Screen name="HomeStack" component={HomeStackScreens}
@@ -793,9 +793,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   header: {
-    marginTop: 60,
-    height: 58,
-    width: 89,
+    marginTop: Dimensions.get('window').width * .13,
+    height: Dimensions.get('window').width * .13,
+    width: Dimensions.get('window').width * .2,
     alignSelf: 'center',
   },
   navigationBar: {
@@ -825,9 +825,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   icon: {
-    fontSize: 30,
+    fontSize: Dimensions.get('window').width * .08,
     alignSelf: "center",
     color: '#4A4A4A',
-    marginTop: 10,
+    marginTop: Dimensions.get('window').width * .025,
   },
 });

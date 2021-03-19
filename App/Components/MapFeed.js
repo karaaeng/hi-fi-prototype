@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     color: '#4A4A4A',
     marginBottom: 5,
     marginTop: 20,
-    marginBottom: 15,
+    marginBottom: 10,
     alignSelf: 'center',
   },
   

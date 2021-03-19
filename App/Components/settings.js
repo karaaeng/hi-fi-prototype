@@ -128,7 +128,7 @@ var currUser = firestore.collection("users").doc("123-456-7890");
     </View>
     );
   }
-
+//styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -146,23 +146,23 @@ const styles = StyleSheet.create({
   arrowicon1: {
     fontSize: 25,
     color: '#4A4A4A',
-    marginLeft: 182,
+    marginLeft: Dimensions.get('window').width * .42,
   }, 
   arrowicon2: {
     fontSize: 25,
     color: '#4A4A4A',
-    marginLeft: 125,
+    marginLeft: Dimensions.get('window').width * .29,
   }, 
   arrowicon3: {
     fontSize: 25,
     color: '#4A4A4A',
-    marginLeft: 226,
+    marginLeft: Dimensions.get('window').width * .53,
   }, 
   editprofilestuff: {
     flex: 1
   },
   logoutButton: {
-    marginTop: 290,
+    marginTop: Dimensions.get('window').width * .6,
     alignItems: "center",
     backgroundColor: "#FFF0C1",
     borderRadius: 30,
@@ -179,7 +179,6 @@ const styles = StyleSheet.create({
   logout: {
     flex: 2
   },
-
   options: {
     marginTop: 20, 
     marginBottom: 20, 
