@@ -14,8 +14,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function PhotoSelect({navigation}) {
-  const [text, setText] = useState("");
+export default function PhotoSelect({navigation, route}) {
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -25,6 +24,16 @@ export default function PhotoSelect({navigation}) {
     Comfortaa_700Bold,
   });
 
+  console.log(route.params.Name);
+  console.log(route.params.Number);
+  console.log(route.params.Location);
+  console.log(route.params.Photo);
+
+  let userName = route.params.Name;
+  let userNumber = route.params.Number;
+  let userLocation = route.params.Location;
+  let userPhoto = route.params.Photo;
+
     return(
       <View style={styles.container}>
         <View>
@@ -33,10 +42,10 @@ export default function PhotoSelect({navigation}) {
         <View style = {styles.row}>
             <TouchableOpacity onPress={() => navigation.navigate('PhotoOptions')}>
                 <Icon name="pencil" style={styles.icon}/>
-                <Image style = {styles.image} source={Images.cat}/>
+                <Image style = {styles.image} source={userPhoto}/>
             </TouchableOpacity>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Pronouns')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Pronouns', {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto})}>
           <View style = {styles.forward}>
                  <ForwardButton/>
               </View>

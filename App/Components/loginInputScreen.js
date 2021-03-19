@@ -1,5 +1,7 @@
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ForwardButton from './ForwardButton';
+import firestore from '../../firebase';
+import firebase from 'firebase';
 
 import {
   useFonts,
@@ -15,7 +17,8 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWi
 import { Images } from '../Themes';
 
 export default function LoginInputScreen({navigation}) {
-  const [text, setText] = useState("");
+    const [userNumber, setuserNumber] = useState("");
+    const [Message, setMessage] = useState("");
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -25,8 +28,29 @@ export default function LoginInputScreen({navigation}) {
     Comfortaa_700Bold,
   });
 
-  //profile information
-  const [userNumber, setuserNumber] = useState("");
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  function checkForUser() {
+    if (userNumber === null || userNumber === undefined || userNumber === "") {
+      setMessage("please enter your phone number!");
+    } else {
+    //check if user is in database
+      var currUser = firestore.collection("users").doc(userNumber);
+      currUser.get().then((user) => {
+        if (user.exists) {
+          navigation.navigate('Main');
+        } else {
+          // doc.data() will be undefined in this case
+          setMessage("you have not made an account yet! please sign up to start connecting");
+          console.log("No such document");
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+  }
+}
 
   return(
     <View style={styles.container}>
@@ -67,11 +91,15 @@ export default function LoginInputScreen({navigation}) {
           </TouchableOpacity>
           </View>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+        <TouchableOpacity onPress={() => 
+          checkForUser()}>
         <View style = {styles.forward}>
                  <ForwardButton/>
               </View>
       </TouchableOpacity>
+      <View style={styles.messagecontainer}>
+        <Text style={styles.message}>{Message}</Text>
+      </View>
       </View>
   </View>
   );
@@ -136,5 +164,16 @@ const styles = StyleSheet.create({
         fontSize: 17,
         alignSelf: "center",
         marginTop: 50,
+      },
+      messagecontainer: {
+        width: 350,
+        alignSelf: "center",
+      },
+      message: {
+        color: 'red',
+        fontFamily: 'Comfortaa_700Bold',
+        fontSize: 15,
+        textAlign: "center",
+        marginTop: -190,
       },
 });

@@ -1,4 +1,5 @@
-import Icon from 'react-native-vector-icons/FontAwesome';
+import firestore from '../../firebase';
+import firebase from 'firebase';
 
 import {
   useFonts,
@@ -24,6 +25,14 @@ export default function Delete({navigation}) {
     Comfortaa_700Bold,
   });
 
+    function deleteProfile () {
+      firestore.collection("users").doc("123-456-7890").delete().then(() => {
+        console.log("Document successfully deleted!");
+      }).catch((error) => {
+        console.error("Error removing document: ", error);
+      });
+    }
+
     return(
       <View style={styles.container}>
         <View>
@@ -39,7 +48,7 @@ export default function Delete({navigation}) {
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {
-            console.log("need to clear profile data from storage")
+            deleteProfile(),
             navigation.navigate('Login')
           }}>
                 <Text style={styles.yesbutton}>yes. i'm done</Text>

@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function PronounsInput({navigation}) {
+export default function PronounsInput({navigation, route}) {
   const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
@@ -24,6 +24,16 @@ export default function PronounsInput({navigation}) {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
+
+  console.log(route.params.Name);
+  console.log(route.params.Number);
+  console.log(route.params.Location);
+  console.log(route.params.Photo);
+
+  let userName = route.params.Name;
+  let userNumber = route.params.Number;
+  let userLocation = route.params.Location;
+  let userPhoto = route.params.Photo;
 
   //profile information
   const [userPronouns, setuserPronouns] = useState("");
@@ -56,13 +66,13 @@ export default function PronounsInput({navigation}) {
           <View>
           <TouchableOpacity onPress={() => {
             setuserPronouns("")
-            navigation.navigate('Interests')
+            navigation.navigate('Interests', {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto, Pronouns: "none"})
           }}>
             <Text style={styles.skipbutton}>skip</Text>
           </TouchableOpacity>
           </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Interests')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Interests', {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto, Pronouns: userPronouns})}>
           <View style = {styles.forwardwithskip}>
                  <ForwardButton/>
               </View>

@@ -13,7 +13,7 @@ import {
 } from '@expo-google-fonts/comfortaa'; 
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions} from 'react-native';
 import { Images, Profiles } from './App/Themes';
 import BackButton from './App/Components/BackButton'
 
@@ -51,11 +51,8 @@ import About from './App/Components/about'
 import Delete from './App/Components/delete'
 import Privacy from './App/Components/privacy'
 import ConfirmAddFriends from './App/Components/ConfirmAddFriends'
-import { NavigationEvents } from 'react-navigation';
 
 export default function App() {
-
-  const [didLeave, setDidLeave] = useState(false);
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -65,32 +62,17 @@ export default function App() {
     Comfortaa_700Bold,
   });
 
-  function leaveChatButton({navigation}) {
-    if (didLeave === false) {
-      return (
-        <TouchableOpacity onPress = { () => {
-          setDidLeave(true);
-          navigation.navigate("WilderChristianChat", {status: {didLeave}});
-        }}>
-        <View style={styles.leavechatbutton}> 
-          <Text style={styles.leavechatbuttontext}>leave chat</Text>
-        </View>
-        </TouchableOpacity>
-      );
-      } else {
-        <View></View>
-      }
+  if (!fontsLoaded) {
+    return null;
   }
-
-  const Stack = createStackNavigator();
-  const RootStack = createStackNavigator();
-  const Tab = createBottomTabNavigator();
 
   const SignupStack = createStackNavigator();
   const ProfileStack = createStackNavigator();
   const FriendsStack = createStackNavigator();
   const ChatStack = createStackNavigator();
   const HomeStack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
+  const RootStack = createStackNavigator();
 
   function SignUpStackScreens() {
     return (
@@ -323,7 +305,7 @@ export default function App() {
   function ProfileStackScreens () {
     return (
       <ProfileStack.Navigator>
-          <ProfileStack.Screen name="Profile" component={Profile} initialParams={{ user: Profiles.cat , message: "", buttonMessage: ""}}
+          <ProfileStack.Screen name="Profile" component={Profile} initialParams={{ user: undefined, message: "", buttonMessage: ""}}
         options={({navigation}) => ({
           headerStyle: {
             height: 110,
@@ -336,6 +318,7 @@ export default function App() {
         },
         headerRight: () => (
           <TouchableOpacity onPress = { () => {
+            navigation.push("SettingsPage");
             navigation.navigate("SettingsPage");
           }}>
           <Icon name="gear" style={styles.navigationBarSettings}/>
@@ -364,6 +347,54 @@ export default function App() {
           fontSize: 30,
           color: '#4A4A4A',
         },
+      }} />
+      <ProfileStack.Screen name="Privacy" component={Privacy}
+        options={{
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+          headerStyle: {
+            height: 110,
+          },
+        title: 'privacy',
+        headerTitleStyle: {
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 30,
+          color: '#4A4A4A',
+        },
+      }} />
+      <ProfileStack.Screen name="EditProfile" component={EditProfile}
+        options={{
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <BackButton style = {styles.back}/>
+             ),
+          headerStyle: {
+            height: 110,
+          },
+        title: 'edit profile',
+        headerTitleStyle: {
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 30,
+          color: '#4A4A4A',
+        },
+      }} />
+      <ProfileStack.Screen name="PhotoOptions" component={PhotoOptions}
+        options={{
+          headerStyle: {
+            height: 110,
+          },
+        title: '',
+        headerBackTitleVisible: false,
+          headerBackImage: () => (
+          <BackButton style = {styles.back}/>
+           ),
+        headerBackground: () => (
+          <View style = {styles.headerContainer}>
+            <Image style = {styles.header} source={Images.logo}/>
+          </View>
+        )
       }} />
       </ProfileStack.Navigator>
     );
@@ -661,22 +692,6 @@ return (
          <View></View>
           ),
       }} />
-      <ProfileStack.Screen name="EditProfile" component={EditProfile}
-        options={{
-          headerBackTitleVisible: false,
-          headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-          headerStyle: {
-            height: 110,
-          },
-        title: 'edit profile',
-        headerTitleStyle: {
-          fontFamily: 'Comfortaa_700Bold',
-          fontSize: 30,
-          color: '#4A4A4A',
-        },
-      }} />
       <RootStack.Screen name="About" component={About}
         options={{
           headerBackTitleVisible: false,
@@ -704,24 +719,10 @@ return (
           },
         title: '',
         headerBackground: () => (
+          <View style = {styles.headerContainer}>
           <Image style = {styles.header} source={Images.logo}/>
+          </View>
         )
-      }} />
-      <RootStack.Screen name="Privacy" component={Privacy}
-        options={{
-          headerBackTitleVisible: false,
-          headerBackImage: () => (
-            <BackButton style = {styles.back}/>
-             ),
-          headerStyle: {
-            height: 110,
-          },
-        title: 'privacy',
-        headerTitleStyle: {
-          fontFamily: 'Comfortaa_700Bold',
-          fontSize: 30,
-          color: '#4A4A4A',
-        },
       }} />
       <RootStack.Screen name="WilderChristianChat" component={WilderChristianChat}
           options={({navigation}) => ({
@@ -738,9 +739,6 @@ return (
               fontSize: 30,
               color: '#4A4A4A',
             },
-            headerRight: () => (
-            leaveChatButton({navigation})
-              ),
         })} />
         <RootStack.Screen name="KaraIsaChat" component={KaraIsaChat}
           options={{
@@ -825,23 +823,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * .5,
     height: Dimensions.get('window').height * 0.05,
     resizeMode: 'contain',
-  },
-  leavechatbutton: {
-    backgroundColor: "#FED254",
-    height: 55,
-    width: 90,
-    borderRadius: 24,
-    marginRight: 15,
-    justifyContent: "center",
-  },
-  leavechatbuttontext: { 
-    fontFamily: 'Comfortaa_700Bold',
-    fontSize: 18,
-    color: '#4A4A4A',
-    textAlign: "center",
-    textAlignVertical: "center",
-    marginLeft: 20,
-    marginRight: 20,
   },
   icon: {
     fontSize: Dimensions.get('window').width * .095,

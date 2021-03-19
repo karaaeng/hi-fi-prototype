@@ -1,4 +1,6 @@
 import Icon from 'react-native-vector-icons/FontAwesome';
+import firestore from '../../firebase';
+import firebase from 'firebase';
 
 import {
   useFonts,
@@ -9,12 +11,11 @@ import {
   Comfortaa_700Bold,
 } from '@expo-google-fonts/comfortaa';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
 import { Images } from '../Themes';
 
-export default function EditProfile({navigation}) {
-  const [text, setText] = useState("");
+export default function EditProfile({navigation, route}) {
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -25,17 +26,52 @@ export default function EditProfile({navigation}) {
   });
 
   //profile information
-  const [userPhoto, setuserPhoto] = useState("");
-  const [userName, setuserName] = useState("Cat D.");
-  const [userInterests, setuserInterests] = useState("music, coffee, dogs");
-  const [userLocation, setuserLocation] = useState("Stanford, CA");
-  const [userNumber, setuserNumber] = useState("123-456-7890");
-  const [userPronouns, setuserPronouns] = useState("she/her");
-  const [userStatus, setuserStatus] = useState("");
+  const [userPhoto, setuserPhoto] = useState(route.params.Photo);
+  const [userName, setuserName] = useState(route.params.Name);
+  const [userInterests, setuserInterests] = useState(route.params.Interests);
+  const [userLocation, setuserLocation] = useState(route.params.Location);
+  const [userNumber, setuserNumber] = useState(route.params.Number);
+  const [userPronouns, setuserPronouns] = useState(route.params.Pronouns);
+  const [userStatus, setuserStatus] = useState(route.params.Status);
 
   let askingButtonDisplayed = null;
   let openButtonDisplayed = null;
   let holdButtonDisplayed = null;
+
+  let isEnabledPronouns = route.params.ShowPronouns;
+  let isEnabledInterests = route.params.ShowInterests;
+
+function update() {
+//check if user want to show pronouns/interests
+if (userPronouns !== "none" && userPronouns !== "") {
+    isEnabledPronouns = true;
+} else {
+  isEnabledPronouns = false;
+}
+if (userInterests !== "none" && userInterests !== "") {
+  isEnabledInterests = true;
+} else {
+  isEnabledInterests = false;
+}
+//override user info in firebase with any changes
+  firestore.collection("users").doc("123-456-7890").set({
+    name: userName,
+    location: userLocation, 
+    pronouns: userPronouns, 
+    interests: userInterests, 
+    status: userStatus, 
+    image: userPhoto, 
+    number: userNumber,
+    showPronouns: isEnabledPronouns , 
+    showInterests: isEnabledInterests
+  })
+  .then(() => {
+    console.log("New user successfully added!");
+  })
+  .catch((error) => {
+    console.error("Error adding user: ", error);
+  }); 
+}
 
   //if user has not set status yet, render unchosen buttons
     askingButtonDisplayed =  
@@ -84,7 +120,9 @@ export default function EditProfile({navigation}) {
     function save() {
       return (
         <TouchableOpacity style = {styles.saveButton} onPress = { () => {
-          navigation.navigate("Profile");
+          update(),
+          navigation.push("Profile");
+        navigation.navigate("Profile");
         }}>
           <Text style = {styles.buttonText}> save </Text>
         </TouchableOpacity>
@@ -96,9 +134,10 @@ export default function EditProfile({navigation}) {
           <ScrollView>
             
           <View style = {styles.row}>
-            <TouchableOpacity onPress={() => navigation.navigate('PhotoOptions', {which: 'profile'})}>
+            <TouchableOpacity onPress={() => 
+              navigation.navigate('PhotoOptions', {which: 'profile', source: userPhoto, Name: userName, Number: userNumber, Location: userLocation, Pronouns: userPronouns, Interests: userInterests, Status: userStatus, ShowInterests: isEnabledInterests, ShowPronouns: isEnabledPronouns})}>
                 <Icon name="pencil" style={styles.firsticon}/>
-                <Image style = {styles.image} source={Images.cat}/>
+                <Image style = {styles.image} source={userPhoto}/>
             </TouchableOpacity>
         </View>
 

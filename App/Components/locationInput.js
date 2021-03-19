@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function LocationInput({navigation}) {
+export default function LocationInput({navigation, route}) {
   const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
@@ -24,6 +24,12 @@ export default function LocationInput({navigation}) {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
+
+  console.log(route.params.Name);
+  console.log(route.params.Number);
+
+  let userName = route.params.Name;
+  let userNumber = route.params.Number;
 
   //profile information
   const [userLocation, setuserLocation] = useState("");
@@ -53,7 +59,7 @@ export default function LocationInput({navigation}) {
           />
           </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Photo')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Photo', {Name: userName, Number: userNumber, Location: userLocation})}>
           <View style = {styles.forward}>
                  <ForwardButton/>
               </View>

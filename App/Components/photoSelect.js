@@ -14,8 +14,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function PhotoSelect({navigation}) {
+export default function PhotoSelect({navigation, route}) {
   const [text, setText] = useState("");
+
+  let userPhoto = Images.cat;
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -25,13 +27,21 @@ export default function PhotoSelect({navigation}) {
     Comfortaa_700Bold,
   });
 
+  console.log(route.params.Name);
+  console.log(route.params.Number);
+  console.log(route.params.Location);
+
+  let userName = route.params.Name;
+  let userNumber = route.params.Number;
+  let userLocation = route.params.Location;
+
     return(
       <View style={styles.container}>
         <View>
         <Image style = {styles.progressbar} source={Images.progress_photo}/>
         </View>
         <View>
-            <TouchableOpacity onPress={() => navigation.navigate('PhotoOptions', {which: 'signup'})}>
+            <TouchableOpacity onPress={() => navigation.navigate('PhotoOptions', {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto, which: 'signup'})}>
                 <Image style = {styles.image} source={Images.photo_select}/>
             </TouchableOpacity>
         </View>
@@ -39,7 +49,7 @@ export default function PhotoSelect({navigation}) {
         <Text style = {styles.prompt}>add profile picture</Text>
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Pronouns')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Pronouns', {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto})}>
           <View style = {styles.forward}>
                  <ForwardButton/>
               </View>

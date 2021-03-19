@@ -14,8 +14,20 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function InterestsInput({navigation}) {
+export default function InterestsInput({navigation, route}) {
   const [text, setText] = useState("");
+
+  console.log(route.params.Name);
+  console.log(route.params.Number);
+  console.log(route.params.Location);
+  console.log(route.params.Photo);
+  console.log(route.params.Pronouns);
+
+  let userName = route.params.Name;
+  let userNumber = route.params.Number;
+  let userLocation = route.params.Location;
+  let userPhoto = route.params.Photo;
+  let userPronouns = route.params.Pronouns;
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -57,13 +69,13 @@ export default function InterestsInput({navigation}) {
           <View>
           <TouchableOpacity onPress={() => {
             setuserInterests("")
-            navigation.navigate('Status')
+            navigation.navigate('Status', {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto, Pronouns: userPronouns, Interests: "none"})
           }}>
             <Text style={styles.skipbutton}>skip</Text>
           </TouchableOpacity>
           </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Status')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Status', {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto, Pronouns: userPronouns, Interests: userInterests})}>
           <View style = {styles.forwardwithskiplong}>
                  <ForwardButton/>
               </View>

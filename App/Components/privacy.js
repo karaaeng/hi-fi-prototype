@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Dimensions, TouchableOpacity, Switch} from 'react-native';
-import NavigationBar from './NavigationBar';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import firestore from '../../firebase';
+import firebase from 'firebase';
 
 import {
     useFonts,
@@ -14,7 +14,7 @@ import {
     Comfortaa_700Bold,
   } from '@expo-google-fonts/comfortaa'; 
 
-export default function Privacy({navigation}) {
+export default function Privacy({navigation, route}) {
 
     let [fontsLoaded] = useFonts({
         Comfortaa_300Light,
@@ -26,7 +26,10 @@ export default function Privacy({navigation}) {
 
     const [isEnabledMap, setIsEnabledMap] = useState(true);
     const [isEnabledProfile, setIsEnabledProfile] = useState(true);
-    const [isEnabledPronouns, setIsEnabledPronouns] = useState(true);
+    const [isEnabledPronouns, setIsEnabledPronouns] = useState(route.params.ShowPronouns);
+    const [isEnabledInterests, setIsEnabledInterests] = useState(route.params.ShowInterests);
+    const [userInterests, setuserInterests] = useState(route.params.Interests);
+    const [userPronouns, setuserPronouns] = useState(route.params.Pronouns);
 
     const toggleMapSwitch = () => 
         setIsEnabledMap(previousState => !previousState);
@@ -36,6 +39,33 @@ export default function Privacy({navigation}) {
 
     const togglePronounsSwitch = () => 
         setIsEnabledPronouns(previousState => !previousState);
+
+    const toggleInterestsSwitch = () => 
+        setIsEnabledInterests(previousState => !previousState);
+
+  function update() {
+  //handle if one is switched off
+  if (isEnabledPronouns === false) {
+    setuserPronouns("none");
+  }
+  if (isEnabledInterests === false) {
+    setuserInterests("none");
+  }
+  
+  //override user info in firebase with any changes
+  firestore.collection("users").doc("123-456-7890").update({
+    showPronouns: isEnabledPronouns , 
+    showInterests: isEnabledInterests ,
+    pronouns: userPronouns, 
+    interests: userInterests, 
+  })
+  .then(() => {
+    console.log("New user successfully updated!");
+  })
+  .catch((error) => {
+    console.error("Error updating user: ", error);
+  }); 
+}
 
   function mapLocation() {
     return (
@@ -84,9 +114,26 @@ export default function Privacy({navigation}) {
     );
   }
 
+  function showInterests() {
+    return (
+        <View style = {styles.options}>
+        <Text style = {styles.informationText}>Show interests?                        </Text>
+        <Switch
+        trackColor={{ false: "#E5E5E5", true: "#89FF95" }}
+        thumbColor= "#FFFFFF"
+        ios_backgroundColor="#E5E5E5"
+        onValueChange={toggleInterestsSwitch}
+        value={isEnabledInterests}
+      />
+      </View>
+    );
+  }
+
   function save() {
     return (
       <TouchableOpacity style = {styles.saveButton} onPress = { () => {
+        update();
+        navigation.push("Profile");
         navigation.navigate("Profile");
       }}>
         <Text style = {styles.buttonText}> save </Text>
@@ -102,6 +149,7 @@ export default function Privacy({navigation}) {
         {mapLocation()}
         {showProfile()}
         {showPronouns()}
+        {showInterests()}
       </View>
 
       <View style = {styles.save}> 

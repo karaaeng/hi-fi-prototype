@@ -54,7 +54,7 @@ export default function NameInput({navigation}) {
             </View>
           <View>
             <TouchableOpacity onPress={() => { 
-              navigation.navigate('Number')}
+              navigation.navigate('Number', {Name: userName})}
               }>
               <View style = {styles.forward}>
                  <ForwardButton/>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Dimensions, TouchableOpacity } from 'react-native';
@@ -7,6 +7,8 @@ import NavigationBar from './NavigationBar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import firestore from '../../firebase';
+import firebase from 'firebase';
 
 import {
   useFonts,
@@ -17,8 +19,15 @@ import {
   Comfortaa_700Bold,
 } from '@expo-google-fonts/comfortaa';
 
-
 export default function Profile({navigation, route}) {
+  const [currUserName, setUserName] = useState(null);
+  const [currUserPronouns, setUserPronouns] = useState(null);
+  const [currUserStatus, setUserStatus] = useState(null);
+  const [currUserImage, setUserImage] = useState(null);
+  const [currUserLocation, setUserLocation] = useState(null);
+  const [currUserInterests, setUserInterests] = useState(null);
+  const [currShowPronouns, setShowPronouns] = useState(null);
+  const [currShowInterests, setShowInterests] = useState(null);
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -28,26 +37,44 @@ export default function Profile({navigation, route}) {
     Comfortaa_700Bold,
   });
 
-  let currUserName = null;
-  let currUserPronouns = null;
-  let currUserStatus = null;
-  let currUserImage = null;
-  let currUserLocation = null;
-  let currUserInterests = null;
   let Message = null;
   let ButtonMessage = null;
 
+  useEffect (() => {
   if (route.params.user !== undefined) {
-    let User = route.params.user;
-    console.log(User);
-
-    currUserName = User.name;
-    currUserPronouns = User.pronouns;
-    currUserStatus = User.status;
-    currUserImage = User.image;
-    currUserLocation = User.location;
-    currUserInterests = User.interests;
-  }
+    setUserName(route.params.user.name);
+    setUserImage(route.params.user.image);
+    setUserPronouns(route.params.user.pronouns);
+    setUserStatus(route.params.user.status);
+    setUserLocation(route.params.user.location);
+    setUserInterests(route.params.user.interests);
+    setShowInterests(route.params.user.showInterests);
+    setShowPronouns(route.params.user.showPronouns);
+  } else {
+    //get user info from firebase
+    var currUser = firestore.collection("users").doc("123-456-7890");
+    
+      currUser.get().then((user) => {
+          if (user.exists) {
+              console.log("Document data:", user.data());
+              const data = (user.data());
+              setUserName(data.name);
+              setUserImage(data.image);
+              setUserPronouns(data.pronouns);
+              setUserStatus(data.status);
+              setUserLocation(data.location);
+              setUserInterests(data.interests);
+              setShowInterests(data.showInterests);
+              setShowPronouns(data.showPronouns);
+          } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+          }
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+      });
+    }
+  });
 
   if (route.params.message !== undefined) {
     Message = route.params.message;
@@ -100,22 +127,31 @@ export default function Profile({navigation, route}) {
       </View>
      );
   }
-  function pronouns(pronouns){
+
+  function pronouns(pronouns) {
+    if (currShowPronouns === true) {
     return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>pronouns: </Text> 
       <Text style={ styles.theirInfo}>{pronouns} </Text> 
       </View>
      );
+    } else {
+      return null;
+    }
   }
 
   function interests(interests){
+    if (currShowInterests === true) {
       return (
       <View style = {styles.informationText}> 
       <Text style={ styles.category}>  interests: </Text> 
       <Text style={ styles.theirInfo}>{interests} </Text> 
       </View>
      );  
+    } else {
+      return null;
+    }
     }
 
     function acceptOrRejct(){
@@ -242,7 +278,6 @@ const styles = StyleSheet.create({
     height: 50,
     width: 150,
     borderRadius: 25,
-    resizeMode: 'contain', 
     alignContent: 'center',
     backgroundColor: "#89FF95",
     justifyContent: "center",
@@ -253,7 +288,6 @@ const styles = StyleSheet.create({
     height: 50,
     width: 150,
     borderRadius: 25,
-    resizeMode: 'contain', 
     alignContent: 'center',
     backgroundColor: "#FED254",
     justifyContent: "center",
@@ -323,7 +357,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: 'Comfortaa_700Bold',
     fontSize: 20,
-    resizeMode: 'contain',
     color: '#4A4A4A',
     alignSelf: 'center',
   },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useState, useCallback, useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Images, Profiles } from '../Themes';
 import { Keyboard, TextInput, Dimensions, ScrollView, TouchableOpacity, ImageBackground, TouchableWithoutFeedback } from 'react-native';
@@ -7,49 +7,111 @@ import NotificationBar from './NotificationBar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-
+import { GiftedChat, Bubble, Send } from 'react-native-gifted-chat';
+import firestore from '../../firebase';
+import firebase from 'firebase';
 
 export default function CatEdenChat({navigation}) {
   const [text, setText] = useState("");
   const [isVisible, setIsVisible] = useState(0);
+  const [messages, setMessages] = useState([]);
 
-  function chatBubble(givenText){
-    if ({isVisible} !== 0){
-      return(
-        <View>
-          <View style = {styles.receivedmessage}> 
-          <Text style = {styles.chatText}>{givenText}</Text>
-          </View>
-          <View style = {styles.help}> 
-          </View>
+  const [currUserImage, setUserImage] = useState(null);
+
+  useEffect (() => {
+      //get current user info from firebase
+      var currUser = firestore.collection("users").doc("123-456-7890");
+      
+        currUser.get().then((user) => {
+            if (user.exists) {
+                console.log("Document data:", user.data());
+                const data = (user.data());
+                setUserImage(data.image);
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+    });
+
+  useEffect(() => {
+    setMessages([
+      {
+        _id: 1,
+        text: "FINALLY! So nice to meet you!",
+        createdAt: new Date(),
+        user: {
+          _id: 3,
+          name: 'Eden',
+          avatar: require('../Images/eden.jpg'),
+        },
+
+      },
+      {
+        _id: 2,
+        text: "Hey guys! I love you both so much and know you'd make the cutest friends! Now go bond over your love for me :)",
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'Isa',
+          avatar: require('../Images/isabella.jpeg'),
+        },
+        
+      },
+      
+    ])
+  }, [])
+ const onSend = useCallback((messages = []) => {
+    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+  }, [])
+
+ function renderSend(props) {
+    return (
+      <Send {...props}>
+        <View style={styles.sendingContainer}  onPress={() => {
+                setIsVisible(1)   
+          }}>
+          <Icon name="arrow-up" style={styles.icon} 
+        />
         </View>
-      );
-    }
-  }
-
-  function sendChat(image, name, givenText){
-    console.log({isVisible})
-    if ({isVisible} !== 0 ){
-      console.log('got here');
-      return(
-      <View>
-        <View style = {styles.sentmessage}> 
-          <Text style = {styles.chatText}>{givenText}</Text>
-        </View>
-
-        <View style = {styles.helpSend}> 
-          <View style = {styles.chatDetails}>
-            <Image style = {styles.profileImages} source = {image}/>
-            
-          </View>
-        </View>
-
-      </View>
+      </Send>
     );
-    }
-    
   }
+  function renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            // Here is the color change
+            backgroundColor: '#FFF0C1', 
+            borderRadius: 30,
+            padding: 10
+          },
+          left:{
+            backgroundColor: '#E5E5E5', 
+            borderRadius: 30,
+            padding: 10
+          }
+        }}
+        textStyle={{
+          right: {
+            color: '#4A4A4A',
+            fontFamily: 'Comfortaa_700Bold',
+            fontSize: 18,
+          },
+          left: {
+            color: '#4A4A4A',
+            fontFamily: 'Comfortaa_700Bold',
+            fontSize: 18,
+          }
+        }}
+      />
+    );
+  }
+
   
   function imageHeader (image1, image2, image3) {
     return(
@@ -70,57 +132,36 @@ export default function CatEdenChat({navigation}) {
 
     );
   }
-  
-  function inputText() {
-    return (
-      <View style={styles.inputBar}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <TextInput
-            placeholder= "message"
-            value={text}
-            onChangeText={(text) => {
-            setText(text)
-          }}
-          style={styles.textInput}
-          />
-        </TouchableWithoutFeedback>
-        <View style = {styles.iconcontainer}>
-        <Icon name="arrow-up" style={styles.icon} 
-              onPress={() => {
-                setIsVisible(1)   
-          }}
-        />
-        </View>
-        </View>
-        
-
-    );
-  }
 
   return (      
     <View style = {styles.container}>
-    {imageHeader(Images.cat, Images.isa, Images.eden)}
-    <ScrollView>
-     {chatBubble("Hey Cat & Eden! I love you both so much and know you'd make the cutest friends! Now go bond over your love for me :)")}
-     <View style = {styles.chatDetails}>
-              <TouchableOpacity onPress={() => { 
-              navigation.navigate('UserProfile', { user: Profiles.isa , message: "", buttonMessage: ""})}
-              }>
-              <Image style = {styles.profileImages} source = {Images.isa}/>
-              </TouchableOpacity>
-              <Text style = {styles.peopleInChat}>Isa</Text>
-            </View>
-     {chatBubble("FINALLY! So nice to meet you cat!")}
-     <View style = {styles.chatDetails}>
-              <TouchableOpacity onPress={() => { 
-              navigation.navigate('UserProfile', { user: Profiles.eden , message: "", buttonMessage: ""})}
-              }>
-              <Image style = {styles.profileImages} source = {Images.eden}/>
-              </TouchableOpacity>
-              <Text style = {styles.peopleInChat}>Eden</Text>
-            </View>
-      </ScrollView>
-      {inputText()}
+    {imageHeader(currUserImage, Images.isa, Images.eden)}
+    <GiftedChat 
+      messages={messages}
+      onSend={messages => onSend(messages)}
+      user={{
+        _id: 1,
+        name: 'Cat',
+        avatar: currUserImage,
+      }}
+      renderBubble={renderBubble}
+      showUserAvatar
+      renderUsernameOnMessage
+      renderSend={renderSend}
+      alwaysShowSend
+      timeTextStyle={{ 
+        left: { 
+          color: '#4A4A4A', 
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 12, 
+        },
+        right: { 
+          color: '#4A4A4A', 
+          fontFamily: 'Comfortaa_700Bold',
+          fontSize: 12, 
+        },
+      }}
+    />
     </View>
     );
 
@@ -216,7 +257,7 @@ const styles = StyleSheet.create({
       borderRadius: 22,
   },
   icon: {
-    fontSize: 25,
+    fontSize: 30,
     color: '#4A4A4A',
     marginBottom: 10,
     marginLeft: 10,

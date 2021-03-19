@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function NumberInput({navigation}) {
+export default function NumberInput({navigation, route}) {
   const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
@@ -26,7 +26,10 @@ export default function NumberInput({navigation}) {
   });
 
   //profile information
-  const [userNumber, setuserNumber] = useState("");
+  const [userNumber, setuserNumber] = useState("123-456-7890");
+
+  console.log(route.params.Name);
+  let userName = route.params.Name;
 
   return(
     <View style={styles.container}>
@@ -39,11 +42,9 @@ export default function NumberInput({navigation}) {
       <View style={styles.inputBar}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <TextInput
-      placeholder= "e.g. 123-456-7890"
+      editable = {false}
+      numberOfLines = {10}
       value={userNumber}
-      onChangeText={(userNumber) => {
-        setuserNumber(userNumber)
-      }}
         style={styles.textInput}
         />
         </TouchableWithoutFeedback>
@@ -54,7 +55,7 @@ export default function NumberInput({navigation}) {
         />
         </View>
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('Confirm')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Confirm', {Name: userName, Number: userNumber})}>
         <View style = {styles.forward}>
                  <ForwardButton/>
               </View>

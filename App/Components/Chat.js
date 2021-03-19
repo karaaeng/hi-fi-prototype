@@ -84,8 +84,8 @@ export default function Chat({navigation}) {
     <View style = {styles.container}>
     {searchBar()}
     <ScrollView>
-      {notification(Images.cat, Images.eden, "Isa", "Eden", 
-        "Hey Cat & Eden!  I love you both so much and know you’d make the cutest friends! Now go...", 
+      {notification(Images.isa, Images.eden, "Isa", "Eden", 
+        "Hey guys!  I love you both so much and know you’d make the cutest friends! Now go...", 
         true, "CatEdenChat")}
       {notification(Images.wilder, Images.christian, "Wilder", "Christian", 
         "You both have absolutley incredible sisters, so...", 

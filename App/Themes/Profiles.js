@@ -1,13 +1,13 @@
 
 const profilesList = [
-  {image: require('../Images/Profiles/cat.jpg'), name: "Cat D.", location:"Stanford, CA", pronouns: "she/her", interests: "music, coffee dogs", status: "asking"},
-  {image: require('../Images/kara.jpg'), name: "Kara E.", location:"Los Angeles, CA", pronouns: "she/her", interests: "knitting, dogs, reading", status: "open"},
-  {image: require('../Images/isabella.jpeg'), name: "Isa F.", location:"Newport Beach CA", pronouns: "she/her", interests: "travelling, running", status: "asking"},
-  {image: require('../Images/wilder.png'), name: "Wilder F.", location:"London", pronouns: "he/him", interests: "tennis, video games", status: "asking"},
-  {image: require('../Images/christian.jpg'), name: "Christian D.", location:"London", pronouns: "he/him", interests: "video games, basketball", status: "open"},
-  {image: require('../Images/cal.png'), name: "Cal T.", location:"Las Vegas, NV", pronouns: "he/him", interests: "surfing, music, rugby", status: "on hold"},
-  {image: require('../Images/eden.jpg'), name: "Eden M.", location:"Stanford, CA", pronouns: "she/her", interests: "music, film, volleyball", status: "asking"},
-  {image: require('../Images/marie.jpg'), name: "Marie B.", location:"Newport Beach, CA", pronouns: "she/her", interests: "running, cats", status: "asking"},
+  {image: require('../Images/Profiles/cat.jpg'), name: "Cat D.", location:"Stanford, CA", pronouns: "she/her", interests: "music, coffee dogs", status: "asking", showInterests: true, showPronouns: true},
+  {image: require('../Images/kara.jpg'), name: "Kara E.", location:"Los Angeles, CA", pronouns: "she/her", interests: "knitting, dogs, reading", status: "open", showInterests: true, showPronouns: true},
+  {image: require('../Images/isabella.jpeg'), name: "Isa F.", location:"Newport Beach CA", pronouns: "she/her", interests: "travelling, running", status: "asking", showInterests: true, showPronouns: true},
+  {image: require('../Images/wilder.png'), name: "Wilder F.", location:"London", pronouns: "he/him", interests: "tennis, video games", status: "asking", showInterests: true, showPronouns: true},
+  {image: require('../Images/christian.jpg'), name: "Christian D.", location:"London", pronouns: "he/him", interests: "video games, basketball", status: "open", showInterests: true, showPronouns: true},
+  {image: require('../Images/cal.png'), name: "Cal T.", location:"Las Vegas, NV", pronouns: "he/him", interests: "surfing, music, rugby", status: "on hold", showInterests: true, showPronouns: true},
+  {image: require('../Images/eden.jpg'), name: "Eden M.", location:"Stanford, CA", pronouns: "she/her", interests: "music, film, volleyball", status: "asking", showInterests: true, showPronouns: true},
+  {image: require('../Images/marie.jpg'), name: "Marie B.", location:"Newport Beach, CA", pronouns: "she/her", interests: "running, cats", status: "asking", showInterests: true, showPronouns: true},
 
 ]
 

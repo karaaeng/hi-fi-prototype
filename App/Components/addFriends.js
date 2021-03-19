@@ -26,6 +26,22 @@ export default function AddFriends({route, navigation}) {
     Comfortaa_700Bold,
   });
 
+  console.log(route.params.Name);
+  console.log(route.params.Number);
+  console.log(route.params.Location);
+  console.log(route.params.Photo);
+  console.log(route.params.Pronouns);
+  console.log(route.params.Interests);
+  console.log(route.params.Status);
+
+  let userName = route.params.Name;
+  let userNumber = route.params.Number;
+  let userLocation = route.params.Location;
+  let userPhoto = route.params.Photo;
+  let userPronouns = route.params.Pronouns;
+  let userInterests = route.params.Interests;
+  let userStatus = route.params.Status;
+
   let { which } = route.params;
   console.log(which);
 
@@ -84,7 +100,7 @@ export default function AddFriends({route, navigation}) {
   if (which === "signup") {
     forwardButton = 
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Ready")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Ready", {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto, Pronouns: userPronouns, Interests: userInterests, Status: userStatus})}>
         <View style = {styles.forward}>
                  <ForwardButton/>
               </View>

@@ -10,11 +10,10 @@ import {
 } from '@expo-google-fonts/comfortaa';
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
 import { Images } from '../Themes';
 
 export default function PhotoOptions({route, navigation}) {
-  const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
     Comfortaa_300Light,
@@ -24,27 +23,32 @@ export default function PhotoOptions({route, navigation}) {
     Comfortaa_700Bold,
   });
 
+    //profile information
+    const [userName, setuserName] = useState(route.params.Name);
+    const [userLocation, setuserLocation] = useState(route.params.Location);
+    const [userNumber, setuserNumber] = useState(route.params.Number);
+
+
   let { which } = route.params;
   console.log(which);
 
-  function imageToSelect(goBackTo){
+  function imageToSelect(goBackTo, source){
     if (goBackTo === 'profile') {
    return (
-        <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-            <Image style = {styles.photos} source={Images.cat}/>
+        <TouchableOpacity onPress={() => 
+        navigation.push('EditProfile', {Name: userName, Number: userNumber, Location: userLocation, Photo: source, Pronouns: route.params.Pronouns, Interests: route.params.Interests, Status: route.params.Status, ShowInterests: route.params.ShowInterests, ShowPronouns: route.params.ShowPronouns})
+        }>
+            <Image style = {styles.photos} source={source}/>
         </TouchableOpacity>
    );
     } else {
       return (
-      <TouchableOpacity onPress={() => navigation.navigate('SelectedPhoto')}>
-          <Image style = {styles.photos} source={Images.cat}/>
+      <TouchableOpacity onPress={() => navigation.navigate('SelectedPhoto', {Name: userName, Number: userNumber, Location: userLocation, Photo: source})}>
+          <Image style = {styles.photos} source={source}/>
       </TouchableOpacity>
       );
     }
   }
-
-  //profile information
-  const [userPhoto, setuserPhoto] = useState("");
 
     return(
       <View style={styles.container}>
@@ -57,17 +61,20 @@ export default function PhotoOptions({route, navigation}) {
         <View>
             <Image style = {styles.lib} source={Images.library}/>
         </View>
-        <View style = {styles.grid}>
-        {imageToSelect(which)}
-        <Image style = {styles.photos} source={Images.barbara}/>
-        <Image style = {styles.photos} source={Images.robert}/>
-        <Image style = {styles.photos} source={Images.liz}/>
-        <Image style = {styles.photos} source={Images.mary}/>
-        <Image style = {styles.photos} source={Images.linda}/>
-        <Image style = {styles.photos} source={Images.john}/>
-        <Image style = {styles.photos} source={Images.james}/>
-        <Image style = {styles.photos} source={Images.harold}/>
-        </View>
+        <ScrollView contentContainerStyle = {styles.grid}>
+        {imageToSelect(which, Images.cat)}
+        {imageToSelect(which, Images.james)}
+        {imageToSelect(which, Images.vincent)}
+        {imageToSelect(which, Images.victoria)}
+        {imageToSelect(which, Images.tzu)}
+        {imageToSelect(which, Images.misbah)}
+        {imageToSelect(which, Images.kristina)}
+        {imageToSelect(which, Images.kally)}
+        {imageToSelect(which, Images.gloria)}
+        {imageToSelect(which, Images.clara)}
+        {imageToSelect(which, Images.abdallah)}
+
+        </ScrollView>
     </View>
     );
 }
@@ -119,8 +126,8 @@ const styles = StyleSheet.create({
         marginTop: 70,
       },
       image: {
-        height: 247,
-        width: 247,
+        height: 200,
+        width: 200,
         alignSelf: "center",
         marginTop: 10,
       },
@@ -132,7 +139,7 @@ const styles = StyleSheet.create({
       },
       grid: {
         flexWrap: "wrap",
-        flex: 3,  
+        flexDirection: "row",
       },
       photos: {
         height: 112,

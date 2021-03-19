@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function ConfirmationCode({navigation}) {
+export default function ConfirmationCode({navigation, route}) {
   const [text, setText] = useState("");
 
   let [fontsLoaded] = useFonts({
@@ -24,6 +24,12 @@ export default function ConfirmationCode({navigation}) {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
+
+  console.log(route.params.Name);
+  console.log(route.params.Number);
+
+  let userName = route.params.Name;
+  let userNumber = route.params.Number;
 
     return(
       <View style={styles.container}>
@@ -53,7 +59,7 @@ export default function ConfirmationCode({navigation}) {
           </TouchableOpacity>
           </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Location')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Location', {Name: userName, Number: userNumber})}>
           <View style = {styles.forward}>
                  <ForwardButton/>
               </View>

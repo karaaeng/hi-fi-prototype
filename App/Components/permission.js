@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { Images } from '../Themes';
 
-export default function Permission({navigation}) {
+export default function Permission({navigation, route}) {
   const [userFriends, setuserFriends] = useState("");
 
   let [fontsLoaded] = useFonts({
@@ -23,6 +23,22 @@ export default function Permission({navigation}) {
     Comfortaa_600SemiBold,
     Comfortaa_700Bold,
   });
+
+  console.log(route.params.Name);
+  console.log(route.params.Number);
+  console.log(route.params.Location);
+  console.log(route.params.Photo);
+  console.log(route.params.Pronouns);
+  console.log(route.params.Interests);
+  console.log(route.params.Status);
+
+  let userName = route.params.Name;
+  let userNumber = route.params.Number;
+  let userLocation = route.params.Location;
+  let userPhoto = route.params.Photo;
+  let userPronouns = route.params.Pronouns;
+  let userInterests = route.params.Interests;
+  let userStatus = route.params.Status;
 
     return(
       <View style={styles.container}>
@@ -34,14 +50,14 @@ export default function Permission({navigation}) {
         </View>
         <View style={styles.notification}>
             <Text style = {styles.notification_prompt}>allow ven to access your contacts?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("AddFriends", {which: 'signup'})}>
+            <TouchableOpacity onPress={() => navigation.navigate("AddFriends", {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto, Pronouns: userPronouns, Interests: userInterests, Status: userStatus, which: 'signup'})}>
                 <View style={styles.button}>
                     <Text style = {styles.yes}>yes!</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {
             setuserFriends("")
-            navigation.navigate("Ready")
+            navigation.navigate("Ready", {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto, Pronouns: userPronouns, Interests: userInterests, Status: userStatus})
           }}>
                 <Text style={styles.skipbutton}>skip</Text>
             </TouchableOpacity>
