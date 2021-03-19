@@ -169,71 +169,43 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
   },
-  icon: {
-    fontSize: 25,
-    color: '#4A4A4A',
-    marginRight: 5,
-    marginLeft: 5,
-  }, 
-  arrowicon1: {
-    fontSize: 25,
-    color: '#4A4A4A',
-    marginLeft: 180,
-  }, 
-  arrowicon2: {
-    fontSize: 25,
-    color: '#4A4A4A',
-    marginLeft: 125,
-  }, 
-  arrowicon3: {
-    fontSize: 25,
-    color: '#4A4A4A',
-    marginLeft: 230,
-  }, 
   maplocationstuff: {
     flex: 1
   },
   saveButton: {
-    marginTop: 290,
+    marginTop: Dimensions.get('window').height * .32,
     alignItems: "center",
     backgroundColor: "#FFF0C1",
-    borderRadius: 30,
-    padding: 20,
-    height: 73,
-    width: 336,
+    borderRadius: Dimensions.get('window').height * .08 * .5,
+    justifyContent: "center",
+    height: Dimensions.get('window').height * .08,
+    width: Dimensions.get('window').width * .8,
     alignSelf: 'center',
   },
   buttonText: {
     fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
+    fontSize: Dimensions.get('window').height * .033,
     color: '#4A4A4A',
   },
   save: {
     flex: 2
   },
   options: {
-    margin: 20, 
+    margin: Dimensions.get('window').height * .025,
     flexDirection: 'row',
   },
   optionsProfile: {
-    width: 300,
+    width: Dimensions.get('window').width * .69,
   },
   optionsTogether: {
     justifyContent: 'space-evenly', 
-    marginLeft: 15,
+    marginLeft: Dimensions.get('window').height * .015,
     flex: 1,
-    marginTop: 50,
-  },
-  butttonBar: {
-    alignSelf: 'flex-end'
-  },
-  category: {
-    color: '#FED254', 
-    fontSize: 15
+    marginTop: Dimensions.get('window').height * .04,
   },
   informationText: {
     fontFamily: 'Comfortaa_400Regular',
-    fontSize: 20,
+    fontSize: Dimensions.get('window').width * .046,
   },
   
 });

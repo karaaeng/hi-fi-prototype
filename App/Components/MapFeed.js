@@ -185,31 +185,26 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   icon: {
-    fontSize: 30,
+    fontSize: Dimensions.get('window').height * .04,
     color: '#4A4A4A'
   }, 
   myMarker: {
-    fontSize: 30,
+    fontSize: Dimensions.get('window').height * .04,
     color: '#FED254'
   },
   map:{
     alignSelf: 'center',
     width: Dimensions.get('window').width * .9,
     height: Dimensions.get('window').height * .65,
+    marginBottom: Dimensions.get('window').height * .025,
   },
-  addText: {
-    fontSize: 20,
-    color: '#939393',
-  },
-  
   titleText: {
     fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
+    fontSize: Dimensions.get('window').height * 0.035,
     color: '#4A4A4A',
-    marginBottom: 5,
-    marginTop: 20,
-    marginBottom: 10,
+    marginBottom: Dimensions.get('window').height * 0.005,
+    marginTop: Dimensions.get('window').height * 0.02,
+    marginBottom: Dimensions.get('window').height * 0.025,
     alignSelf: 'center',
   },
-  
 });

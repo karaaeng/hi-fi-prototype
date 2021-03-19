@@ -84,56 +84,49 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-
   button: {
-    marginTop: 15,
+    marginTop: Dimensions.get('window').height * 0.015,
     alignItems: "center",
     backgroundColor: "#FED254",
-    borderRadius: 30,
-    height: 55,
-    width: 254,
+    borderRadius: Dimensions.get('window').height * 0.065 * .5,
+    width: Dimensions.get('window').width* 0.6, 
+    height: Dimensions.get('window').height * 0.065,
     alignSelf: 'center',
     justifyContent: 'center'
   },
   buttonText: {
     fontFamily: 'Comfortaa_700Bold',
-    fontSize: 18,
+    fontSize: Dimensions.get('window').height * 0.02,
     color: '#4A4A4A',
-
   },
-  icon: {
-    fontSize: 25,
-    tintColor: '#939393'
-  }, 
   profileImages:{
-    width: 60, 
-    height: 60,
-    borderRadius: 30,
+    width: Dimensions.get('window').height * 0.065, 
+    height: Dimensions.get('window').height * 0.065,
+    borderRadius: Dimensions.get('window').height * 0.065 * .5,
   },
   secondImage:{
-    width: 60, 
-    height: 60,
-    borderRadius: 30,
-    marginLeft: -15
+    width: Dimensions.get('window').height * 0.065, 
+    height: Dimensions.get('window').height * 0.065,
+    borderRadius: Dimensions.get('window').height * 0.065 * .5,
+    marginLeft: -Dimensions.get('window').height * 0.01,
   },
   notification: {
-    height: 210,
+    height: Dimensions.get('window').height * 0.21,
     width: Dimensions.get('window').width * .8,
     borderBottomWidth: 2,
     borderColor: "#E5E5E5",
     alignSelf: 'center',
     justifyContent: "center",
-    padding: 10
+    padding: Dimensions.get('window').height * 0.01,
   },
   firstNotification: {
-    height: 210,
+    height: Dimensions.get('window').height * 0.21,
     width: Dimensions.get('window').width * .8,
-    borderTopWidth: 2,
+    borderTopWidth: Dimensions.get('window').height * 0.002,
     borderColor: "#E5E5E5",
     alignSelf: 'center',
     justifyContent: "center",
-    borderBottomWidth: 2,
-
+    borderBottomWidth: Dimensions.get('window').height * 0.002,
   },
   navigationBar: {
     alignSelf: 'center',
@@ -148,20 +141,20 @@ const styles = StyleSheet.create({
   },
   notificationText: {
     fontFamily: 'Comfortaa_400Regular',
-    fontSize: 23,
+    fontSize: Dimensions.get('window').height * 0.025,
     color: '#4A4A4A',
-    marginLeft: 20,
-    marginRight: 50,
+    marginLeft: Dimensions.get('window').height * 0.02,
+    marginRight: Dimensions.get('window').height * 0.05,
     textAlignVertical: "center",
-    padding: 10
+    padding: Dimensions.get('window').height * 0.01,
   },
 titleText: {
     fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
+    fontSize: Dimensions.get('window').height * 0.035,
     color: '#4A4A4A',
-    marginBottom: 5,
-    marginTop: 20,
-    marginBottom: 25,
+    marginBottom: Dimensions.get('window').height * 0.005,
+    marginTop: Dimensions.get('window').height * 0.02,
+    marginBottom: Dimensions.get('window').height * 0.025,
     alignSelf: 'center',
   },
   

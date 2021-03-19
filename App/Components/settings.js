@@ -138,25 +138,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   icon: {
-    fontSize: 25,
+    fontSize: Dimensions.get('window').height * .03,
     color: '#4A4A4A',
-    marginRight: 5,
-    marginLeft: 5,
+    marginRight: Dimensions.get('window').height * .005,
+    marginLeft: Dimensions.get('window').height * .005,
   }, 
   arrowicon1: {
-    fontSize: 25,
+    fontSize: Dimensions.get('window').height * .03,
     color: '#4A4A4A',
     marginLeft: Dimensions.get('window').width * .42,
   }, 
   arrowicon2: {
-    fontSize: 25,
+    fontSize: Dimensions.get('window').height * .03,
     color: '#4A4A4A',
-    marginLeft: Dimensions.get('window').width * .29,
+    marginLeft: Dimensions.get('window').width * .28,
   }, 
   arrowicon3: {
-    fontSize: 25,
+    fontSize: Dimensions.get('window').height * .03,
     color: '#4A4A4A',
-    marginLeft: Dimensions.get('window').width * .53,
+    marginLeft: Dimensions.get('window').width * .54,
   }, 
   editprofilestuff: {
     flex: 1
@@ -165,41 +165,37 @@ const styles = StyleSheet.create({
     marginTop: Dimensions.get('window').width * .6,
     alignItems: "center",
     backgroundColor: "#FFF0C1",
-    borderRadius: 30,
-    padding: 20,
-    height: 73,
-    width: 336,
+    borderRadius: Dimensions.get('window').height * .08 * .5,
+    justifyContent: "center",
+    height: Dimensions.get('window').height * .08,
+    width: Dimensions.get('window').width * .8,
     alignSelf: 'center',
   },
   buttonText: {
     fontFamily: 'Comfortaa_700Bold',
-    fontSize: 30,
+    fontSize: Dimensions.get('window').width * .07,
     color: '#4A4A4A',
   },
   logout: {
     flex: 2
   },
   options: {
-    marginTop: 20, 
-    marginBottom: 20, 
+    marginTop: Dimensions.get('window').width * .025, 
+    marginBottom: Dimensions.get('window').width * .025, 
     flexDirection: 'row',
   },
   optionsTogether: {
     justifyContent: 'space-evenly', 
     alignSelf: 'center',
     flex: 1,
-    marginTop: 50,
+    marginTop: Dimensions.get('window').width * .1,
   },
   butttonBar: {
     alignSelf: 'flex-end'
   },
-  category: {
-    color: '#FED254', 
-    fontSize: 15
-  },
   informationText: {
     fontFamily: 'Comfortaa_400Regular',
-    fontSize: 20,
+    fontSize: Dimensions.get('window').width * .05,
   },
   
 });

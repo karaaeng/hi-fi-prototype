@@ -808,19 +808,19 @@ const styles = StyleSheet.create({
     margin: Dimensions.get('window').width * .025
   },
   navigationBarSettings: {
-    fontSize: 40,
+    fontSize: Dimensions.get('window').height * 0.045,
     color: '#4A4A4A',
-    marginRight: 15,
+    marginRight: Dimensions.get('window').height * 0.015,
   }, 
   navigationBarAddress: {
-    fontSize: 40,
+    fontSize: Dimensions.get('window').height * 0.05,
     color: '#4A4A4A',
-    marginLeft: 15,
+    marginLeft: Dimensions.get('window').height * 0.015,
   }, 
   navigationBar: {
     marginTop: 50,
     alignSelf: 'center',
-    width: Dimensions.get('window').width * .5,
+    width: Dimensions.get('window').width * .45,
     height: Dimensions.get('window').height * 0.05,
     resizeMode: 'contain',
   },
