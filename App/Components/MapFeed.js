@@ -40,7 +40,7 @@ export default function MapFeed({navigation}) {
 
   return (      
     <View style = {styles.container}>
-    <Text style = {styles.titleText} > Map </Text>
+    <Text style = {styles.titleText} > map </Text>
         <MapView style = {styles.map} initialRegion={{latitude: 37.4275, longitude: -122.2, 
           latitudeDelta: 0.005,longitudeDelta: 0.21}}>
             
