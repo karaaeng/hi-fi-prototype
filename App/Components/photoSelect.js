@@ -48,13 +48,6 @@ export default function PhotoSelect({navigation, route}) {
         <View>
         <Text style = {styles.prompt}>add profile picture</Text>
         </View>
-        <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Pronouns', {Name: userName, Number: userNumber, Location: userLocation, Photo: userPhoto})}>
-          <View style = {styles.forward}>
-                 <ForwardButton/>
-              </View>
-        </TouchableOpacity>
-        </View>
     </View>
     );
 }
@@ -98,12 +91,6 @@ const styles = StyleSheet.create({
       icon: {
         fontSize: 35,
         color: '#4A4A4A',
-      },
-      forward: {
-        height: 80,
-        width: 80,
-        marginLeft: 320,
-        marginTop: 270,
       },
       progressbar: {
         height: 17,

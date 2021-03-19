@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
       forward: {
         height: 80,
         width: 80,
-        marginLeft: 320,
+        marginLeft: 310,
         marginBottom: 30,
-        marginTop: 230,
+        marginTop: 210,
       },
 });

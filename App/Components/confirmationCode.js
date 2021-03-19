@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
       forward: {
         height: 80,
         width: 80,
-        marginLeft: 320,
-        marginTop: 230,
+        marginLeft: 310,
+        marginTop: 215,
       },
       progressbar: {
         height: 17,

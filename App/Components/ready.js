@@ -123,8 +123,8 @@ export default function Ready({navigation, route}) {
     forwardready: {
       height: 80,
       width: 80,
-      marginLeft: 320,
-      marginTop: 210,
+      marginLeft: 310,
+      marginTop: 185,
     },
     progressbar: {
       height: 17,

@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
       forward: {
         height: 80,
         width: 80,
-        marginLeft: 320,
-        marginTop: 170,
+        marginLeft: 310,
+        marginTop: 150,
       },
       progressbar: {
         height: 17,

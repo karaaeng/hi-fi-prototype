@@ -112,14 +112,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderWidth: 3,
         borderColor: '#E5E5E5',
-        height: 200,
+        height: 150,
         width: 345,
         borderRadius: 35,
         marginTop: 30,
       },
       textInputLong: {
         marginTop: 20,
-        height: 200,
+        height: 150,
         width: 270,
       },
       icon: {
@@ -129,8 +129,8 @@ const styles = StyleSheet.create({
       forwardwithskiplong: {
         height: 80,
         width: 80,
-        marginLeft: 320,
-        marginTop: 120,
+        marginLeft: 310,
+        marginTop: 150,
       },
       progressbar: {
         height: 17,

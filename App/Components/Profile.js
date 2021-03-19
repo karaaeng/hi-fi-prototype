@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
     color: '#FED254',
     textAlign: 'center',
     textAlignVertical: "center",
-    marginTop: 20,
+    marginTop: 5,
   },
   buttonText: {
     fontFamily: 'Comfortaa_700Bold',

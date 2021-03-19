@@ -245,8 +245,8 @@ const styles = StyleSheet.create({
       forward: {
         height: 80,
         width: 80,
-        marginLeft: 320,
-        marginBottom: 10,
+        marginLeft: 310,
+        marginBottom: 40,
       },
       addAllbutton: {
         color: '#FED254',

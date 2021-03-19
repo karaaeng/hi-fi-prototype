@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
       forward: {
         height: 80,
         width: 80,
-        marginLeft: 320,
-        marginTop: 160,
+        marginLeft: 310,
+        marginTop: 140,
       },
       info: {
         color: '#939393',
